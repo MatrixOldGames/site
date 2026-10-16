@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Shenmue em Português · Matrix Old Games</title>
+<meta name="description" content="Tradução de fãs de Shenmue (Dreamcast) para português do Brasil: status por disco, downloads do patch e como aplicar.">
+<meta property="og:title" content="Shenmue em Português · Matrix Old Games">
+<meta property="og:description" content="Tradução de fãs de Shenmue (Dreamcast) para português do Brasil: status por disco, downloads do patch e como aplicar.">
+<meta property="og:image" content="https://www.matrixoldgames.com.br/assets/mog-avatar.png">
+<meta name="theme-color" content="#0D1020">
+<link rel="icon" type="image/svg+xml" href="assets/mog-icone.svg">
+<link rel="icon" type="image/png" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/favicon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Pixelify+Sans:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body data-jogo="shenmue">
+<header class="topo"><div class="wrap">
+  <a class="marca" href="index.html" aria-label="Matrix Old Games, início"><img src="assets/mog-horizontal-escuro.svg" alt="Matrix Old Games" width="300" height="80"></a>
+  <nav class="menu" aria-label="Principal"><a href="index.html">Início</a><a href="traducoes.html">Traduções</a><a href="sobre.html">Sobre</a><a href="apoie.html" class="menu-apoie">Apoie</a></nav>
+</div></header>
+<main>
+
+<section class="hero" style="padding-bottom:2.5rem"><div class="wrap duas-col">
+  <div class="stack" style="gap:1.25rem">
+    <a class="mono muted" href="traducoes.html" style="font-size:var(--s-0);text-decoration:none">← Traduções</a>
+    <div class="jogo-meta"><span class="tag tag--plat">Dreamcast</span><span class="tag">1999</span><span class="tag" data-resumo></span></div>
+    <h1>Shenmue em <em>português</em></h1>
+    <p class="lead">Tradução completa de menus, itens, legendas e diálogos de Yokosuka, 1986. Cada tela é refeita respeitando a fonte, o contorno e a sombra do texto original.</p>
+    <div class="btns"><a class="btn" href="#downloads">Baixar</a><a class="btn btn--ghost" href="#como-aplicar">Como aplicar</a></div>
+  </div>
+  <div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Ficha</strong><dl class="ficha" data-ficha></dl></div>
+</div></section>
+
+<section class="band band--panel"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Progresso</span><h2>Status por disco</h2></div><p class="muted" style="max-width:40ch;font-size:var(--s-1)">Cada disco passa por três etapas antes de ser lançado.</p></div>
+  <div class="slots" data-slots></div>
+</div></section>
+
+<section class="band" id="downloads"><div class="wrap duas-col">
+  <div class="stack">
+    <span class="eyebrow">Downloads</span>
+    <h2>Patches de tradução</h2>
+    <p class="muted prose">Os arquivos são patches no formato .dcp. Eles não contêm o jogo: você aplica sobre o seu próprio GDI da versão <strong style="color:var(--fg)" data-versao-base></strong>. Com outra versão do jogo, o patch não funciona.</p>
+    <div class="downloads" data-downloads></div>
+  </div>
+  <div class="stack">
+    <span class="eyebrow">Antes e depois</span>
+    <div class="stack" data-prints></div>
+  </div>
+</div></section>
+
+<section class="band band--panel" id="como-aplicar"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Passo a passo</span><h2>Como aplicar o patch</h2></div></div>
+  <ol class="passos">
+    <li><h3>Confira sua versão</h3><p class="muted">O patch foi feito sobre o GDI da versão <span data-versao-base></span>. Confira a ficha acima antes de começar.</p></li>
+    <li><h3>Baixe o patcher</h3><p class="muted">Instale o <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a>, um programa gratuito para Windows.</p></li>
+    <li><h3>Aplique o .dcp</h3><p class="muted">Abra o patcher, escolha o arquivo .gdi do seu jogo e o patch .dcp do disco. Ele cria uma pasta nova com o jogo traduzido.</p></li>
+    <li><h3>Jogue</h3><p class="muted">Copie a pasta gerada para o GDEMU ou abra no emulador. Para CD-R, converta a imagem para CDI antes de gravar.</p></li>
+  </ol>
+</div></section>
+
+<section class="band"><div class="wrap duas-col">
+  <div class="stack">
+    <span class="eyebrow">Histórico</span>
+    <h2>Versões</h2>
+    <ul class="changelog" data-changelog></ul>
+  </div>
+  <div class="stack">
+    <span class="eyebrow">Créditos</span>
+    <dl class="ficha">
+      <dt>Tradução e arte</dt><dd>MatrixHK</dd>
+      <dt>Ferramentas</dt><dd>Shenmue Translation Pack, <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a></dd>
+      <dt>Testes</dt><dd>Dreamcast com GDEMU, Dreamcast original com CD-R e emulador</dd>
+    </dl>
+    <p class="aviso-legal">Encontrou um erro de texto ou um travamento? Mande um print com o disco, a versão do patch e onde aconteceu para <a data-email href="#"></a> ou pelo <a data-instagram href="#">Instagram</a>.</p>
+  </div>
+</div></section>
+
+</main>
+<footer class="rodape"><div class="wrap">
+  <div class="stack" style="gap:1rem">
+    <img src="assets/mog-horizontal-escuro.svg" alt="Matrix Old Games" width="210" height="56" style="width:210px;height:auto">
+    <p class="aviso">Matrix Old Games é um projeto de fãs, sem fins lucrativos e sem afiliação com as empresas donas dos jogos. Todas as marcas pertencem aos seus donos. Distribuímos apenas patches de tradução: para jogar, você precisa da sua própria cópia do jogo original.</p>
+  </div>
+  <nav class="rodape-links" aria-label="Contato">
+    <a data-instagram href="#">Instagram</a>
+    <a data-youtube href="#">YouTube</a>
+    <a data-discord href="#">Discord</a>
+    <a href="apoie.html">Apoie</a>
+    <span data-email class="mono"></span>
+  </nav>
+</div></footer>
+<script src="js/dados.js"></script>
+<script src="js/site.js"></script>
+</body>
+</html>
