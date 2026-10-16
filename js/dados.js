@@ -29,7 +29,7 @@ window.MOG = {
       plataforma: "Dreamcast",
       ano: 1999,
       tradutor: "MatrixHK",
-      capa: "assets/jogos/shenmue-capa.png",          // ex.: "assets/jogos/shenmue-capa.jpg" (arte sua, sem logo oficial)
+      capa: "assets/jogos/shenmue/shenmue-capa.png",          // ex.: "assets/jogos/shenmue-capa.jpg" (arte sua, sem logo oficial)
       resumo: "Tradução completa para português do Brasil: menus, itens, legendas e diálogos, mantendo fontes, cores e o visual originais.",
       base: { regiao: "USA (NTSC-U)", versao: "v1.003", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
