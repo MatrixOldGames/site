@@ -141,6 +141,15 @@
 
     if (J.ferramenta) $$("[data-ferramenta]").forEach(function (fe) { fe.textContent = J.ferramenta.nome; fe.href = J.ferramenta.url; });
     $$("[data-versao-base]").forEach(function (x) { x.textContent = J.base.regiao + " " + J.base.versao; });
+    if (J.guia) $$("[data-guia]").forEach(function (g) { g.textContent = J.guia.nome; g.href = J.guia.url; });
+    $$("[data-compativel]").forEach(function (x) { x.textContent = J.compativel || ""; });
+    var lista = function (itens, cls) { return '<ul class="lista-check' + (cls ? " " + cls : "") + '">' + itens.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>"; };
+    var tr = $("[data-traduzido]");
+    if (tr && J.traduzido) tr.innerHTML = Object.keys(J.traduzido).map(function (k) {
+      return '<div class="stack" style="gap:.75rem"><h3>' + esc(k) + "</h3>" + lista(J.traduzido[k]) + "</div>";
+    }).join("");
+    var ob = $("[data-observacoes]");
+    if (ob && J.observacoes) ob.innerHTML = lista(J.observacoes, "lista-obs");
 
     var pr = $("[data-prints]");
     if (pr) {
