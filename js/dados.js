@@ -13,8 +13,8 @@ window.MOG = {
   },
 
   apoio: {
-    pixChave: "",        // sua chave Pix (e-mail, aleatória ou CNPJ/MEI)
-    pixNome: "",         // nome que aparece no app do banco, para conferência
+    pixChave: "matrixoldgames@gmail.com",        // sua chave Pix (e-mail, aleatória ou CNPJ/MEI)
+    pixNome: "Leandro de Almeida Alonso Garcia",         // nome que aparece no app do banco, para conferência
     apoiase: "",         // ex.: "https://apoia.se/matrixoldgames"
     livepix: "",         // ex.: "https://livepix.gg/matrixoldgames"
     kofi: ""             // ex.: "https://ko-fi.com/matrixoldgames"
