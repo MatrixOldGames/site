@@ -41,11 +41,16 @@
   <div class="slots" data-slots></div>
 </div></section>
 
-<section class="band" id="downloads"><div class="wrap duas-col">
+<section class="band"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Conteúdo</span><h2>O que já está traduzido</h2></div></div>
+  <div class="traduzido" data-traduzido></div>
+</div></section>
+
+<section class="band band--panel" id="downloads"><div class="wrap duas-col">
   <div class="stack">
     <span class="eyebrow">Downloads</span>
     <h2>Patches de tradução</h2>
-    <p class="muted prose">Os arquivos são patches no formato .dcp. Eles não contêm o jogo: você aplica sobre o seu próprio GDI da versão <strong style="color:var(--fg)" data-versao-base></strong>. Com outra versão do jogo, o patch não funciona.</p>
+    <p class="muted prose">Os arquivos são patches no formato .dcp. Eles não contêm o jogo: você aplica sobre a sua própria imagem do disco, versão <strong style="color:var(--fg)" data-versao-base></strong>, em GDI ou CUE/BIN (Redump), original e sem modificações. Com outra versão do jogo, o patch não funciona.</p>
     <div class="downloads" data-downloads></div>
   </div>
   <div class="stack">
@@ -54,14 +59,19 @@
   </div>
 </div></section>
 
-<section class="band band--panel" id="como-aplicar"><div class="wrap">
-  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Passo a passo</span><h2>Como aplicar o patch</h2></div></div>
+<section class="band" id="como-aplicar"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Passo a passo</span><h2>Como aplicar o patch</h2></div><p class="muted" style="max-width:44ch;font-size:var(--s-1)">Dúvidas sobre o processo? Veja também o <a data-guia href="#" target="_blank" rel="noopener">guia</a>.</p></div>
   <ol class="passos">
-    <li><h3>Confira sua versão</h3><p class="muted">O patch foi feito sobre o GDI da versão <span data-versao-base></span>. Confira a ficha acima antes de começar.</p></li>
-    <li><h3>Baixe o patcher</h3><p class="muted">Instale o <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a>, um programa gratuito para Windows.</p></li>
-    <li><h3>Aplique o .dcp</h3><p class="muted">Abra o patcher, escolha o arquivo .gdi do seu jogo e o patch .dcp do disco. Ele cria uma pasta nova com o jogo traduzido.</p></li>
-    <li><h3>Jogue</h3><p class="muted">Copie a pasta gerada para o GDEMU ou abra no emulador. Para CD-R, converta a imagem para CDI antes de gravar.</p></li>
+    <li><h3>Baixe o patcher</h3><p class="muted">Instale o <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a>, que é gratuito, e abra o programa.</p></li>
+    <li><h3>Escolha o jogo original</h3><p class="muted">Em <span class="mono">Source Disc Image</span>, selecione o arquivo .gdi (ou .cue) do disco original, versão <span data-versao-base></span>.</p></li>
+    <li><h3>Escolha o patch</h3><p class="muted">Em <span class="mono">Patch File</span>, selecione o .dcp do disco, por exemplo <span class="mono">Shenmue_Disc_1_PTBR.dcp</span>.</p></li>
+    <li><h3>Aplique e jogue</h3><p class="muted">Clique em <span class="mono">Apply Patch</span>. A imagem traduzida aparece na pasta de saída do programa. Funciona em <span data-compativel></span></p></li>
   </ol>
+</div></section>
+
+<section class="band band--panel"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Antes de jogar</span><h2>Observações</h2></div></div>
+  <div class="prose" data-observacoes></div>
 </div></section>
 
 <section class="band"><div class="wrap duas-col">
