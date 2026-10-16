@@ -57,8 +57,8 @@ window.MOG = {
         {
           nome: "Disco 1", versao: "1.1",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "",     // link do patch .dcp (GitHub Releases ou Google Drive)
-          espelho: ""       // link alternativo (opcional)
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_disco1_v1.1/Shenmue_Disc_1_PTBR_1.1.dcp",     // link do patch .dcp (GitHub Releases ou Google Drive)
+          espelho: "https://drive.google.com/file/d/1Qlrk5KUwO2yJpB4Z791vPCfiNH-aqfsc/view?usp=drive_link"       // link alternativo (opcional)
         },
         {
           nome: "Disco 2", versao: "",
