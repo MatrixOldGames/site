@@ -63,6 +63,79 @@
     return l;
   }
 
+  /* ---------- carrossel antes/depois ----------
+     Cada cena mostra o original e depois a tradução; em seguida passa para a próxima.
+     Qualquer clique do visitante pausa a troca automática. */
+  function galeria(el, prints) {
+    var n = prints.length, i = 0, pt = false, auto = true, timer = null, visivel = false;
+    var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var dois = function (x) { return (x < 10 ? "0" : "") + x; };
+    el.innerHTML =
+      '<div class="galeria">' +
+      '<div class="tv"><div class="tela tela--foto">' +
+      '<img class="g-img g-en" alt=""><img class="g-img g-pt" alt="">' +
+      '<span class="g-selo" aria-hidden="true"></span></div>' +
+      '<div class="tv-base"><span class="mono g-cont"></span><span class="led"></span></div></div>' +
+      '<div class="g-controles">' +
+      '<button type="button" class="g-seta" data-g="ant" aria-label="Cena anterior">◀</button>' +
+      '<div class="g-idioma" role="group" aria-label="Idioma da tela">' +
+      '<button type="button" data-g="en">Original</button><button type="button" data-g="pt">PT-BR</button></div>' +
+      '<button type="button" class="g-seta" data-g="prox" aria-label="Próxima cena">▶</button>' +
+      '<button type="button" class="g-play" data-g="play"></button></div>' +
+      '<p class="g-legenda" aria-live="polite"></p>' +
+      '<div class="g-minis">' + prints.map(function (p, k) {
+        return '<button type="button" data-g="ir" data-k="' + k + '" aria-label="Cena ' + (k + 1) + ": " + esc(p.legenda || "") + '">' +
+          (p.mini ? '<img src="' + esc(p.mini) + '" alt="" loading="lazy">' : "<span>" + dois(k + 1) + "</span>") + "</button>";
+      }).join("") + "</div></div>";
+    var en = $(".g-en", el), ptb = $(".g-pt", el), selo = $(".g-selo", el), cont = $(".g-cont", el), leg = $(".g-legenda", el), tela = $(".tela", el);
+    function preload(k) { var p = prints[(k + n) % n]; [p.antes, p.depois].forEach(function (s) { var im = new Image(); im.src = s; }); }
+    function mostrar() {
+      var p = prints[i];
+      if (en.getAttribute("src") !== p.antes) { en.src = p.antes; ptb.src = p.depois; }
+      en.alt = "Tela original em inglês: " + (p.legenda || ""); ptb.alt = "Mesma tela traduzida: " + (p.legenda || "");
+      tela.classList.toggle("tela--vmu", !!p.vmu);
+      ptb.classList.toggle("ativa", pt);
+      selo.textContent = pt ? "PT-BR" : "ORIGINAL"; selo.classList.toggle("pt", pt);
+      cont.textContent = "CENA " + dois(i + 1) + "/" + dois(n);
+      leg.textContent = p.legenda || "";
+      $$(".g-idioma button", el).forEach(function (b) { b.setAttribute("aria-pressed", String((b.getAttribute("data-g") === "pt") === pt)); });
+      $$(".g-minis button", el).forEach(function (b, k) { b.classList.toggle("atual", k === i); if (k === i) b.setAttribute("aria-current", "true"); else b.removeAttribute("aria-current"); });
+      var play = $(".g-play", el); play.textContent = auto ? "❚❚ Pausar" : "▶ Automático"; play.setAttribute("aria-pressed", String(auto));
+      preload(i + 1);
+    }
+    function passo() {
+      if (!pt) { pt = true; } else { pt = false; i = (i + 1) % n; }
+      mostrar(); agendar();
+    }
+    function agendar() {
+      clearTimeout(timer);
+      if (auto && visivel && !calmo) timer = setTimeout(passo, pt ? 3200 : 1800);
+    }
+    function parar() { auto = false; clearTimeout(timer); }
+    el.addEventListener("click", function (ev) {
+      var b = ev.target.closest("[data-g]"); if (!b) return;
+      var a = b.getAttribute("data-g");
+      if (a === "play") { auto = !auto; mostrar(); agendar(); return; }
+      parar();
+      if (a === "ant") { i = (i - 1 + n) % n; pt = true; }
+      if (a === "prox") { i = (i + 1) % n; pt = true; }
+      if (a === "en") pt = false;
+      if (a === "pt") pt = true;
+      if (a === "ir") { i = +b.getAttribute("data-k"); pt = true; }
+      mostrar();
+    });
+    tela.addEventListener("click", function () { parar(); pt = !pt; mostrar(); });
+    el.addEventListener("keydown", function (ev) {
+      if (ev.key === "ArrowLeft") { parar(); i = (i - 1 + n) % n; pt = true; mostrar(); }
+      if (ev.key === "ArrowRight") { parar(); i = (i + 1) % n; pt = true; mostrar(); }
+    });
+    if (calmo) { auto = false; pt = true; }
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) { visivel = es[0].isIntersecting; agendar(); }, { threshold: .35 }).observe(el);
+    } else { visivel = true; }
+    mostrar(); agendar();
+  }
+
   /* ---------- destaque da home ---------- */
   $$("[data-destaque]").forEach(function (el) {
     var j = D.traducoes.filter(function (t) { return estadoJogo(t) === "andamento"; })[0] || D.traducoes[0];
@@ -156,17 +229,7 @@
       if (!J.prints.length) {
         pr.innerHTML = '<div class="sem-prints">Comparações de antes e depois chegam em breve.</div>';
       } else {
-        pr.innerHTML = J.prints.map(function (p, i) {
-          return '<figure class="stack" style="gap:.5rem;margin:0"><div class="compara" style="--corte:50%">' +
-            '<img src="' + esc(p.antes) + '" alt="Tela original em inglês" loading="lazy">' +
-            '<img class="depois" src="' + esc(p.depois) + '" alt="Mesma tela traduzida" loading="lazy">' +
-            '<span class="linha"></span><span class="rot rot--a">ORIGINAL</span><span class="rot rot--d">PT-BR</span>' +
-            '<input type="range" min="0" max="100" value="50" id="compara-' + i + '" aria-label="Arraste para comparar">' +
-            '</div>' + (p.legenda ? '<figcaption class="muted mono" style="font-size:var(--s-0)">' + esc(p.legenda) + "</figcaption>" : "") + "</figure>";
-        }).join("");
-        $$(".compara input", pr).forEach(function (inp) {
-          inp.addEventListener("input", function () { inp.parentNode.style.setProperty("--corte", inp.value + "%"); });
-        });
+        galeria(pr, J.prints);
       }
     }
 

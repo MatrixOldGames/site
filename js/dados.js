@@ -72,8 +72,22 @@ window.MOG = {
           download: "", espelho: ""
         }
       ],
-      // prints: pares antes/depois. Ex.: { antes: "assets/jogos/shenmue-01-en.png", depois: "assets/jogos/shenmue-01-pt.png", legenda: "Menu de itens" }
-      prints: [],
+      // prints: pares antes/depois do carrossel. "mini" é a miniatura (opcional); vmu: true deixa os pixels nítidos.
+      prints: [
+        { antes: "assets/jogos/shenmue/shenmue-01-en.jpg", depois: "assets/jogos/shenmue/shenmue-01-pt.jpg", mini: "assets/jogos/shenmue/shenmue-01-mini.jpg", legenda: "Tela de título" },
+        { antes: "assets/jogos/shenmue/shenmue-02-en.jpg", depois: "assets/jogos/shenmue/shenmue-02-pt.jpg", mini: "assets/jogos/shenmue/shenmue-02-mini.jpg", legenda: "Menu inicial" },
+        { antes: "assets/jogos/shenmue/shenmue-03-en.jpg", depois: "assets/jogos/shenmue/shenmue-03-pt.jpg", mini: "assets/jogos/shenmue/shenmue-03-mini.jpg", legenda: "Aviso do cartão de memória" },
+        { antes: "assets/jogos/shenmue/shenmue-04-en.jpg", depois: "assets/jogos/shenmue/shenmue-04-pt.jpg", mini: "assets/jogos/shenmue/shenmue-04-mini.jpg", legenda: "Legendas das cutscenes" },
+        { antes: "assets/jogos/shenmue/shenmue-05-en.jpg", depois: "assets/jogos/shenmue/shenmue-05-pt.jpg", mini: "assets/jogos/shenmue/shenmue-05-mini.jpg", legenda: "Passagem de tempo" },
+        { antes: "assets/jogos/shenmue/shenmue-06-en.jpg", depois: "assets/jogos/shenmue/shenmue-06-pt.jpg", mini: "assets/jogos/shenmue/shenmue-06-mini.jpg", legenda: "Caderno do Ryo" },
+        { antes: "assets/jogos/shenmue/shenmue-07-en.jpg", depois: "assets/jogos/shenmue/shenmue-07-pt.jpg", mini: "assets/jogos/shenmue/shenmue-07-mini.jpg", legenda: "Ajuda do caderno" },
+        { antes: "assets/jogos/shenmue/shenmue-08-en.jpg", depois: "assets/jogos/shenmue/shenmue-08-pt.jpg", mini: "assets/jogos/shenmue/shenmue-08-mini.jpg", legenda: "Menu de opções" },
+        { antes: "assets/jogos/shenmue/shenmue-09-en.jpg", depois: "assets/jogos/shenmue/shenmue-09-pt.jpg", mini: "assets/jogos/shenmue/shenmue-09-mini.jpg", legenda: "Textos de cena" },
+        { antes: "assets/jogos/shenmue/shenmue-10-en.jpg", depois: "assets/jogos/shenmue/shenmue-10-pt.jpg", mini: "assets/jogos/shenmue/shenmue-10-mini.jpg", legenda: "Conversas com moradores" },
+        { antes: "assets/jogos/shenmue/shenmue-11-en.jpg", depois: "assets/jogos/shenmue/shenmue-11-pt.jpg", mini: "assets/jogos/shenmue/shenmue-11-mini.jpg", legenda: "Perguntas da investigação" },
+        { antes: "assets/jogos/shenmue/shenmue-12-en.png", depois: "assets/jogos/shenmue/shenmue-12-pt.png", mini: "assets/jogos/shenmue/shenmue-12-mini.jpg", legenda: "Logo no VMU com o selo PT-BR", vmu: true },
+        { antes: "assets/jogos/shenmue/shenmue-13-en.png", depois: "assets/jogos/shenmue/shenmue-13-pt.png", mini: "assets/jogos/shenmue/shenmue-13-mini.jpg", legenda: "Tela de salvamento no VMU", vmu: true }
+      ],
       changelog: [
         { versao: "1.1", data: "", notas: [
           "Telas do VMU traduzidas: \"Salvando / Não remova o VM\", \"Carregando\", \"Aguarde\", \"Concluído\", \"Falhou!\" e as telas da batalha",
