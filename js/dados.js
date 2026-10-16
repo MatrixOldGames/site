@@ -7,14 +7,15 @@
 window.MOG = {
   contato: {
     email: "matrixoldgames@gmail.com",
-    instagram: "matrixoldgames",
-    discord: "",   // link de convite, ex.: "https://discord.gg/xxxx"
-    youtube: ""    // link do canal
+    instagram: "MatrixOldGames",
+    facebook: "https://www.facebook.com/MatrixOldGames",
+    youtube: "https://www.youtube.com/@MatrixOldGames",
+    discord: ""    // link de convite, ex.: "https://discord.gg/xxxx"
   },
 
   apoio: {
     pixChave: "matrixoldgames@gmail.com",        // sua chave Pix (e-mail, aleatória ou CNPJ/MEI)
-    pixNome: "Leandro de Almeida Alonso Garcia",         // nome que aparece no app do banco, para conferência
+    pixNome: "Leandro de Almeida Alonso Garcia", // nome que aparece no app do banco, para conferência
     apoiase: "",         // ex.: "https://apoia.se/matrixoldgames"
     livepix: "",         // ex.: "https://livepix.gg/matrixoldgames"
     kofi: ""             // ex.: "https://ko-fi.com/matrixoldgames"
@@ -58,7 +59,7 @@ window.MOG = {
           nome: "Disco 1", versao: "1.1",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
           download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_disco1_v1.1/Shenmue_Disc_1_PTBR_1.1.dcp",     // link do patch .dcp (GitHub Releases ou Google Drive)
-          espelho: "https://drive.google.com/file/d/1Qlrk5KUwO2yJpB4Z791vPCfiNH-aqfsc/view?usp=drive_link"       // link alternativo (opcional)
+          espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link"       // link alternativo (opcional)
         },
         {
           nome: "Disco 2", versao: "",

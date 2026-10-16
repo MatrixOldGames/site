@@ -201,6 +201,7 @@
   $$("[data-email]").forEach(function (el) { el.textContent = C.email; if (el.tagName === "A") el.href = "mailto:" + C.email; });
   $$("[data-instagram]").forEach(function (el) { el.href = "https://instagram.com/" + C.instagram; if (!el.textContent.trim()) el.textContent = "@" + C.instagram; });
   $$("[data-discord]").forEach(function (el) { if (C.discord) el.href = C.discord; else el.hidden = true; });
+  $$("[data-facebook]").forEach(function (el) { if (C.facebook) el.href = C.facebook; else el.hidden = true; });
   $$("[data-youtube]").forEach(function (el) { if (C.youtube) el.href = C.youtube; else el.hidden = true; });
 
   /* ---------- copiar ---------- */
