@@ -316,7 +316,36 @@
     fim.hidden = false;
     fim.scrollIntoView({ behavior: "smooth", block: "start" });
   }
-  btnGerar.addEventListener("click", gerar);
+  /* ---------- janela de apoio antes de gerar (mesma do download; nunca bloqueia) ---------- */
+  var dlg = null;
+  function abrirApoio() {
+    var A = D.apoio || {}, J = atual().jogo, d = atual().disco, itch = J.itch || A.itchio;
+    if ((!A.pixChave && !itch) || typeof HTMLDialogElement !== "function") { gerar(); return; }
+    if (!dlg) {
+      dlg = document.createElement("dialog"); dlg.className = "doacao"; dlg.setAttribute("aria-labelledby", "apoio-p-titulo");
+      document.body.appendChild(dlg);
+      dlg.addEventListener("click", function (ev) {
+        if (ev.target === dlg) { dlg.close(); return; }
+        if (ev.target.closest("[data-p-continuar]")) { dlg.close(); gerar(); }
+      });
+    }
+    dlg.innerHTML =
+      '<form method="dialog" class="doacao-fechar"><button aria-label="Fechar">✕</button></form>' +
+      '<div class="stack" style="gap:.4rem"><span class="eyebrow">' + esc(J.titulo) + " · " + esc(d.nome) + " · v" + esc(d.versao) + "</span>" +
+      '<h2 id="apoio-p-titulo">Curtiu a tradução? Apoie o projeto</h2>' +
+      '<p class="muted">A tradução é e continua gratuita. Se quiser ajudar, escolha a forma que preferir. Qualquer valor ajuda a manter as próximas traduções.</p></div>' +
+      '<div class="doacao-opcoes">' +
+      (A.pixChave ? '<div class="doacao-op"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' +
+        '<div class="chave"><code id="chave-pix-gerar">' + esc(A.pixChave) + '</code><button type="button" class="btn btn--ghost" data-copiar="chave-pix-gerar">Copiar</button></div>' +
+        (A.pixNome ? '<small class="muted">Nome no banco: ' + esc(A.pixNome) + "</small>" : "") + "</div>" : "") +
+      (itch ? '<div class="doacao-op"><strong>itch.io</strong><span class="muted">Cartão ou PayPal, em dólar. Bom para quem já usa o itch.io.</span>' +
+        '<a class="btn btn--ghost" href="' + esc(itch) + '" target="_blank" rel="noopener">Doar pelo itch.io</a></div>' : "") +
+      "</div>" +
+      '<div class="doacao-baixar"><button type="button" class="btn" data-p-continuar autofocus>Continuar e gerar</button>' +
+      '<span class="mono muted" style="font-size:var(--s-0)">' + (window.showDirectoryPicker ? "Em seguida, escolha a pasta onde salvar." : "Ao final, você baixa um .zip.") + "</span></div>";
+    dlg.showModal();
+  }
+  btnGerar.addEventListener("click", abrirApoio);
 
   /* ---------- entradas: botões e arrastar ---------- */
   var inZip = $("#p-zip"), inPasta = $("#p-pasta");
