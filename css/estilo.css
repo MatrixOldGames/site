@@ -96,6 +96,7 @@ div.prose { display: grid; gap: 1em; }
 .btn:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 #9A2A3A; }
 .btn--ghost { background: transparent; color: var(--fg); box-shadow: inset 0 0 0 2px var(--line); }
 .btn--ghost:hover { color: var(--fg); box-shadow: inset 0 0 0 2px var(--fg); transform: none; }
+.btn:disabled { background: var(--surface-2); color: var(--muted); box-shadow: none; cursor: not-allowed; transform: none; }
 .btn[aria-disabled="true"] { background: var(--surface-2); color: var(--muted); box-shadow: none; cursor: not-allowed; }
 
 /* ---------- hero ---------- */
@@ -235,7 +236,12 @@ div.prose { display: grid; gap: 1em; }
 .p-faixa--erro > span:last-child { color: var(--red); } .p-faixa--erro > span:last-child::before { background: var(--red); }
 .p-progresso { display: grid; gap: .35rem; }
 .p-trilho { height: 14px; background: #262C4E; overflow: hidden; }
-.p-barra { height: 100%; width: 0; background: repeating-linear-gradient(90deg, var(--green) 0 10px, color-mix(in srgb, var(--green) 75%, #000) 10px 12px); transition: width .2s; }
+.p-barra { height: 100%; width: 0; background-image: repeating-linear-gradient(90deg, var(--green) 0 10px, color-mix(in srgb, var(--green) 75%, #000) 10px 12px); transition: width .2s; }
+.p-trabalhando .p-barra { background-size: 24px 100%; animation: p-andar .6s linear infinite; }
+@keyframes p-andar { from { background-position: 0 0; } to { background-position: 24px 0; } }
+.p-faixa--andamento > span:last-child::before { animation: pisca 1s steps(1) infinite; }
+.p-girando { display: inline-block; width: .8em; height: .8em; margin-right: .55em; vertical-align: -.08em; background: var(--yellow); animation: p-gira 1.2s steps(4) infinite; }
+@keyframes p-gira { 0% { transform: rotate(0); background: var(--yellow); } 25% { background: var(--blue); } 50% { background: var(--green); } 75% { background: var(--red); } 100% { transform: rotate(360deg); } }
 .p-progresso .mono { font-size: var(--s-0); color: var(--muted); }
 .p-msg { padding: .7rem .9rem; font-size: var(--s-1); border-left: 3px solid var(--blue); background: var(--bg); }
 .p-msg--ok { border-left-color: var(--green); }

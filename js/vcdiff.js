@@ -93,7 +93,9 @@
       var near = [0, 0, 0, 0], prox = 0, same = new Float64Array(768);
       var si = { p: ip }, sa = { p: ap };
 
+      var passos = 0;
       while (si.p < fimInst) {
+        if (++passos === 20000) { passos = 0; aoProgredir(gerados + tpos); await new Promise(function (r) { setTimeout(r, 0); }); }
         var e = TABELA[d[si.p++]];
         for (var h = 0; h < 2; h++) {
           var tipo = e[h * 3], tam = e[h * 3 + 1], modo = e[h * 3 + 2];
@@ -116,7 +118,7 @@
             var resto = tam;
             if (end < srcLen) {
               var n = Math.min(resto, srcLen - end);
-              out.set(await fonte.read(srcPos + end, n), tpos);
+              out.set(fonte.readSync ? fonte.readSync(srcPos + end, n) : await fonte.read(srcPos + end, n), tpos);
               tpos += n; resto -= n; end = srcLen;
             }
             if (resto > 0) {
@@ -138,14 +140,32 @@
     return gerados;
   }
 
-  /* Fonte que lê um File/Blob do navegador em blocos de 4 MB, com cache pequeno. */
-  function FonteBlob(blob) {
-    var BS = 4 * 1024 * 1024, cache = new Map(), ordem = [];
+  /* Fonte que carrega o arquivo original inteiro na memória (rápido para patches com cópias espalhadas).
+     Lê em partes para mostrar progresso. Se faltar memória, retorna null e quem chamou usa FonteBlob. */
+  async function FonteMemoria(blob, aoProgredir) {
+    var buf;
+    try { buf = new Uint8Array(blob.size); } catch (e) { return null; }
+    var PARTE = 64 * 1024 * 1024;
+    for (var o = 0; o < blob.size; o += PARTE) {
+      buf.set(new Uint8Array(await blob.slice(o, Math.min(blob.size, o + PARTE)).arrayBuffer()), o);
+      if (aoProgredir) aoProgredir(Math.min(blob.size, o + PARTE));
+    }
+    return {
+      size: blob.size,
+      readSync: function (off, len) { return buf.subarray(off, off + len); },
+      read: function (off, len) { return Promise.resolve(buf.subarray(off, off + len)); }
+    };
+  }
+
+  /* Fonte que lê um File/Blob do navegador em blocos de 1 MB, com cache LRU de até 384 MB. */
+  function FonteBlob(blob, maxBlocos) {
+    var BS = 1024 * 1024, cache = new Map(), MAX = maxBlocos || 384;
     async function bloco(i) {
-      if (cache.has(i)) return cache.get(i);
-      var b = new Uint8Array(await blob.slice(i * BS, Math.min(blob.size, (i + 1) * BS)).arrayBuffer());
-      cache.set(i, b); ordem.push(i);
-      if (ordem.length > 6) cache.delete(ordem.shift());
+      var b = cache.get(i);
+      if (b) { cache.delete(i); cache.set(i, b); return b; }
+      b = new Uint8Array(await blob.slice(i * BS, Math.min(blob.size, (i + 1) * BS)).arrayBuffer());
+      cache.set(i, b);
+      if (cache.size > MAX) cache.delete(cache.keys().next().value);
       return b;
     }
     return {
@@ -164,7 +184,7 @@
     };
   }
 
-  var api = { aplicar: aplicar, adler32: adler32, FonteBlob: FonteBlob };
+  var api = { aplicar: aplicar, adler32: adler32, FonteBlob: FonteBlob, FonteMemoria: FonteMemoria };
   if (typeof module === "object" && module.exports) module.exports = api;
   else raiz.MOGVcdiff = api;
 })(typeof self !== "undefined" ? self : this);

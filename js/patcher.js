@@ -39,7 +39,7 @@
 
   function mensagem(tipo, html) { msg.className = "p-msg p-msg--" + tipo; msg.innerHTML = html; msg.hidden = !html; }
   function progresso(frac, txt) {
-    barra.parentNode.hidden = frac == null;
+    barra.closest(".p-progresso").hidden = frac == null;
     if (frac != null) { barra.style.width = Math.max(0, Math.min(100, frac * 100)).toFixed(1) + "%"; barraTxt.textContent = txt || ""; }
   }
   function listaFaixas(linhas) {
@@ -155,6 +155,25 @@
     btnGerar.focus();
   }
 
+  /* ---------- relógio: tempo decorrido e estimativa ---------- */
+  var relogio = { inicio: 0 };
+  function mmss(seg) { seg = Math.max(0, Math.round(seg)); return Math.floor(seg / 60) + ":" + String(seg % 60).padStart(2, "0"); }
+  function tempo(frac) {
+    var dec = (Date.now() - relogio.inicio) / 1000;
+    var txt = " · " + mmss(dec);
+    if (frac > 0.04 && frac < 1) txt += " · faltam ~" + mmss(dec / frac - dec);
+    return txt;
+  }
+
+  /* Carrega a trilha original na memória (muito mais rápido); se faltar memória, lê do disco aos pedaços. */
+  async function fonteDe(nome, origem, base0, total) {
+    progresso(base0 / total, "Lendo " + nome + "…" + tempo(base0 / total));
+    var f = await V.FonteMemoria(origem, function (n) {
+      progresso(base0 / total, "Lendo " + nome + "… " + fmt(n) + " de " + fmt(origem.size) + tempo(base0 / total));
+    });
+    return f || V.FonteBlob(origem);
+  }
+
   /* ---------- geração ---------- */
   async function gerar() {
     if (!estado.faixas || estado.ocupado) return;
@@ -163,7 +182,9 @@
       try { pasta = await window.showDirectoryPicker({ id: "mog-patcher", mode: "readwrite" }); }
       catch (e) { if (e && e.name === "AbortError") return; pasta = null; }
     }
-    estado.ocupado = true; btnGerar.disabled = true; fim.hidden = true;
+    estado.ocupado = true; btnGerar.disabled = true; fim.hidden = true; relogio.inicio = Date.now();
+    raiz.classList.add("p-trabalhando");
+    progresso(0, "Preparando…");
     window.addEventListener("beforeunload", segurar);
     var total = cfg.faixas.reduce(function (s, f) { return s + (f.tamanhoFinal || f.tamanho); }, 0), feito = 0;
     var linhas = cfg.faixas.map(function (f) { return { nome: f.nome, estado: "fila", txt: f.patch ? "traduzir" : "copiar" }; });
@@ -172,25 +193,25 @@
     var resultados = [];
     try {
       var destinoPasta = pasta ? await pasta.getDirectoryHandle(cfg.pasta, { create: true }) : null;
-      mensagem("info", "Gerando… Não feche esta página. " + (destinoPasta ? "Os arquivos vão para a pasta <strong>" + esc(cfg.pasta) + "</strong>." : ""));
+      mensagem("info", '<span class="p-girando" aria-hidden="true"></span>Gerando a versão traduzida. Isso leva alguns minutos, não feche esta página. ' + (destinoPasta ? "Os arquivos vão para a pasta <strong>" + esc(cfg.pasta) + "</strong>." : ""));
       for (var i = 0; i < cfg.faixas.length; i++) {
         var f = cfg.faixas[i], origem = estado.faixas[f.nome], base0 = feito;
         marcar(i, "andamento", f.patch ? "traduzindo…" : "copiando…");
         if (destinoPasta) {
           var fh = await destinoPasta.getFileHandle(f.nome, { create: true }), w = await fh.createWritable();
           if (f.patch) {
-            await V.aplicar(estado.patches[f.nome], V.FonteBlob(origem), { write: function (u) { return w.write(u); } },
-              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total)); } });
+            await V.aplicar(estado.patches[f.nome], await fonteDe(f.nome, origem, base0, total), { write: function (u) { return w.write(u); } },
+              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total) + tempo((base0 + n) / total)); } });
           } else {
-            progresso(feito / total, "Copiando " + f.nome + "…");
+            progresso(feito / total, "Copiando " + f.nome + "…" + tempo(feito / total));
             await w.write(origem);
           }
           await w.close();
         } else {
           if (f.patch) {
             var col = new Coletor();
-            await V.aplicar(estado.patches[f.nome], V.FonteBlob(origem), { write: function (u) { col.add(u); return pausa(); } },
-              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total)); } });
+            await V.aplicar(estado.patches[f.nome], await fonteDe(f.nome, origem, base0, total), { write: function (u) { col.add(u); return pausa(); } },
+              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total) + tempo((base0 + n) / total)); } });
             resultados.push({ nome: f.nome, blob: col.blob() });
           } else resultados.push({ nome: f.nome, blob: origem });
         }
@@ -202,7 +223,7 @@
       if (destinoPasta) { var gh = await destinoPasta.getFileHandle("disc.gdi", { create: true }), gw = await gh.createWritable(); await gw.write(gdi); await gw.close(); }
       else resultados.push({ nome: "disc.gdi", blob: gdi });
       marcar(linhas.length - 1, "ok", "criado");
-      progresso(1, "Pronto");
+      progresso(1, "Pronto em " + mmss((Date.now() - relogio.inicio) / 1000));
       mensagem("", "");
       concluir(cfg, destinoPasta ? null : resultados);
     } catch (e) {
@@ -210,7 +231,7 @@
       mensagem("erro", esc(e && e.message ? e.message : String(e)) + (e && e.codigo === "checksum" ? "" : " Se o problema continuar, use o patch .dcp na página do jogo."));
       btnGerar.disabled = false;
     } finally {
-      estado.ocupado = false;
+      estado.ocupado = false; raiz.classList.remove("p-trabalhando");
       window.removeEventListener("beforeunload", segurar);
     }
   }
