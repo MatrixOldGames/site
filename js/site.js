@@ -224,6 +224,14 @@
     var r = $("[data-resumo]"); if (r) r.textContent = resumoJogo(J);
 
     var f = $("[data-ficha]");
+    if (f && J.capa) {
+      var painelFicha = f.closest(".painel");
+      if (painelFicha && !painelFicha.querySelector(".capa-jogo")) {
+        var img = document.createElement("img");
+        img.className = "capa-jogo"; img.src = J.capa; img.alt = "Capa da tradução de " + J.titulo; img.width = 1200; img.height = 750;
+        painelFicha.insertBefore(img, painelFicha.firstChild);
+      }
+    }
     if (f) f.innerHTML =
       "<dt>Plataforma</dt><dd>" + esc(J.plataforma) + "</dd>" +
       "<dt>Lançamento</dt><dd>" + esc(J.ano) + "</dd>" +

@@ -190,6 +190,7 @@ div.prose { display: grid; gap: 1em; }
 .passos h3 { font-size: var(--s-2); font-family: var(--f-body); font-weight: 600; }
 
 /* ---------- página de jogo ---------- */
+.capa-jogo { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); box-shadow: 6px 6px 0 #000; }
 .ficha { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: .45rem 1.25rem; margin: 0; font-size: var(--s-1); }
 .ficha dt { color: var(--muted); font-family: var(--f-mono); }
 .ficha dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
