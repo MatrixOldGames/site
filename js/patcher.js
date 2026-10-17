@@ -223,9 +223,15 @@
       if (destinoPasta) { var gh = await destinoPasta.getFileHandle("disc.gdi", { create: true }), gw = await gh.createWritable(); await gw.write(gdi); await gw.close(); }
       else resultados.push({ nome: "disc.gdi", blob: gdi });
       marcar(linhas.length - 1, "ok", "criado");
+      var pacote = null;
+      if (!destinoPasta) {
+        try {
+          pacote = await montarZip(resultados, cfg.pasta, function (n, t) { progresso(n / t, "Montando o .zip… " + fmt(n) + " de " + fmt(t) + tempo(n / t)); });
+        } catch (ez) { pacote = null; }
+      }
       progresso(1, "Pronto em " + mmss((Date.now() - relogio.inicio) / 1000));
       mensagem("", "");
-      concluir(cfg, destinoPasta ? null : resultados);
+      concluir(cfg, destinoPasta ? null : resultados, pacote);
     } catch (e) {
       progresso(null);
       mensagem("erro", esc(e && e.message ? e.message : String(e)) + (e && e.codigo === "checksum" ? "" : " Se o problema continuar, use o patch .dcp na página do jogo."));
@@ -237,14 +243,64 @@
   }
   function segurar(ev) { ev.preventDefault(); ev.returnValue = ""; }
 
-  function concluir(cfg, arquivos) {
+  /* ---------- .zip de saída (sem compressão: rápido, e as trilhas quase não comprimem) ---------- */
+  var TABELA_CRC = (function () {
+    var t = new Int32Array(256);
+    for (var n = 0; n < 256; n++) { var c = n; for (var k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c; }
+    return t;
+  })();
+  function crcParcial(crc, u8) {
+    for (var i = 0, n = u8.length; i < n; i++) crc = TABELA_CRC[(crc ^ u8[i]) & 255] ^ (crc >>> 8);
+    return crc;
+  }
+  async function montarZip(arquivos, pasta, aoProgredir) {
+    var total = arquivos.reduce(function (s, a) { return s + a.blob.size; }, 0), lido = 0;
+    if (total + arquivos.length * 200 >= 0xFFFFFFFF) throw new Error("grande demais para .zip simples");
+    var agora = new Date();
+    var hora = (agora.getHours() << 11) | (agora.getMinutes() << 5) | (agora.getSeconds() >> 1);
+    var data = ((agora.getFullYear() - 1980) << 9) | ((agora.getMonth() + 1) << 5) | agora.getDate();
+    var enc = new TextEncoder(), partes = [], central = [], pos = 0;
+    for (var i = 0; i < arquivos.length; i++) {
+      var a = arquivos[i], crc = -1, PARTE = 16 * MB;
+      for (var o = 0; o < a.blob.size; o += PARTE) {
+        crc = crcParcial(crc, new Uint8Array(await a.blob.slice(o, Math.min(a.blob.size, o + PARTE)).arrayBuffer()));
+        lido += Math.min(PARTE, a.blob.size - o);
+        aoProgredir(lido, total);
+      }
+      crc = (crc ^ -1) >>> 0;
+      var nome = enc.encode(pasta + "/" + a.nome), tam = a.blob.size;
+      var lh = new DataView(new ArrayBuffer(30));
+      lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true); lh.setUint16(8, 0, true);
+      lh.setUint16(10, hora, true); lh.setUint16(12, data, true); lh.setUint32(14, crc, true);
+      lh.setUint32(18, tam, true); lh.setUint32(22, tam, true); lh.setUint16(26, nome.length, true); lh.setUint16(28, 0, true);
+      partes.push(lh.buffer, nome, a.blob);
+      var ch = new DataView(new ArrayBuffer(46));
+      ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+      ch.setUint16(10, 0, true); ch.setUint16(12, hora, true); ch.setUint16(14, data, true); ch.setUint32(16, crc, true);
+      ch.setUint32(20, tam, true); ch.setUint32(24, tam, true); ch.setUint16(28, nome.length, true);
+      ch.setUint32(42, pos, true);
+      central.push(ch.buffer, nome);
+      pos += 30 + nome.length + tam;
+    }
+    var tamCentral = central.reduce(function (s, b) { return s + b.byteLength; }, 0);
+    var fimZip = new DataView(new ArrayBuffer(22));
+    fimZip.setUint32(0, 0x06054b50, true); fimZip.setUint16(8, arquivos.length, true); fimZip.setUint16(10, arquivos.length, true);
+    fimZip.setUint32(12, tamCentral, true); fimZip.setUint32(16, pos, true);
+    return new Blob(partes.concat(central, [fimZip.buffer]), { type: "application/zip" });
+  }
+
+  function concluir(cfg, arquivos, pacote) {
     var A = D.apoio || {}, J = atual().jogo, itch = J.itch || A.itchio;
-    var onde = arquivos
-      ? '<p>Seu navegador não grava pastas direto. Baixe os arquivos abaixo e coloque <strong>todos na mesma pasta</strong>, com o nome <strong>' + esc(cfg.pasta) + "</strong>.</p>" +
-        '<div class="p-baixar">' + arquivos.map(function (a) {
-          return '<a class="btn btn--ghost" href="' + URL.createObjectURL(a.blob) + '" download="' + esc(a.nome) + '">' + esc(a.nome) + " <small>" + fmt(a.blob.size) + "</small></a>";
-        }).join("") + "</div>"
-      : "<p>Os arquivos estão na pasta <strong>" + esc(cfg.pasta) + "</strong>, dentro da pasta que você escolheu.</p>";
+    var separados = arquivos ? '<div class="p-baixar">' + arquivos.map(function (a) {
+      return '<a class="btn btn--ghost" href="' + URL.createObjectURL(a.blob) + '" download="' + esc(a.nome) + '">' + esc(a.nome) + " <small>" + fmt(a.blob.size) + "</small></a>";
+    }).join("") + "</div>" : "";
+    var onde = !arquivos
+      ? "<p>Os arquivos estão na pasta <strong>" + esc(cfg.pasta) + "</strong>, dentro da pasta que você escolheu.</p>"
+      : pacote
+        ? '<p>Baixe o .zip e descompacte. Dentro dele está a pasta <strong>' + esc(cfg.pasta) + "</strong>, pronta para usar.</p>" +
+          '<div class="btns"><a class="btn" href="' + URL.createObjectURL(pacote) + '" download="' + esc(cfg.pasta) + '.zip">Baixar .zip <small style="opacity:.75">' + fmt(pacote.size) + "</small></a></div>" +
+          '<details class="p-separados"><summary class="mono muted">Prefere baixar os arquivos separados?</summary>' + separados + "</details>"
+        : '<p>Baixe os arquivos abaixo e coloque <strong>todos na mesma pasta</strong>, com o nome <strong>' + esc(cfg.pasta) + "</strong>.</p>" + separados;
     fim.innerHTML = '<div class="wrap stack" style="gap:1.75rem">' +
       '<div class="stack" style="gap:.6rem"><span class="eyebrow">Pronto</span><h2>' + esc(J.titulo) + " em português está pronto!</h2>" + onde + "</div>" +
       '<div class="duas-col" style="gap:1.25rem">' +
