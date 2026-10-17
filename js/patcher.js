@@ -310,7 +310,7 @@
       "<li>Na tela de título deve aparecer <strong>Versão " + esc(atual().disco.versao) + "</strong> no canto.</li></ul></div>" +
       '<div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Curtiu? Apoie o projeto</strong>' +
       '<p class="muted" style="font-size:var(--s-1)">A tradução é gratuita. Se quiser ajudar nas próximas, qualquer valor ajuda.</p>' +
-      (A.pixChave ? '<div class="chave"><code id="chave-pix-p">' + esc(A.pixChave) + '</code><button type="button" class="btn" data-copiar="chave-pix-p">Copiar Pix</button></div>' : "") +
+      (A.pixChave ? window.MOGPix.bloco(A, "fim") : "") +
       (itch ? '<a class="btn btn--ghost" href="' + esc(itch) + '" target="_blank" rel="noopener" style="justify-self:start">Doar pelo itch.io</a>' : "") +
       "</div></div></div>";
     fim.hidden = false;
@@ -335,9 +335,7 @@
       '<h2 id="apoio-p-titulo">Curtiu a tradução? Apoie o projeto</h2>' +
       '<p class="muted">A tradução é e continua gratuita. Se quiser ajudar, escolha a forma que preferir. Qualquer valor ajuda a manter as próximas traduções.</p></div>' +
       '<div class="doacao-opcoes">' +
-      (A.pixChave ? '<div class="doacao-op"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' +
-        '<div class="chave"><code id="chave-pix-gerar">' + esc(A.pixChave) + '</code><button type="button" class="btn btn--ghost" data-copiar="chave-pix-gerar">Copiar</button></div>' +
-        (A.pixNome ? '<small class="muted">Nome no banco: ' + esc(A.pixNome) + "</small>" : "") + "</div>" : "") +
+      (A.pixChave ? '<div class="doacao-op doacao-op--pix"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' + window.MOGPix.bloco(A, "gerar") + "</div>" : "") +
       (itch ? '<div class="doacao-op"><strong>itch.io</strong><span class="muted">Cartão ou PayPal, em dólar. Bom para quem já usa o itch.io.</span>' +
         '<a class="btn btn--ghost" href="' + esc(itch) + '" target="_blank" rel="noopener">Doar pelo itch.io</a></div>' : "") +
       "</div>" +

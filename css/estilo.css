@@ -302,6 +302,17 @@ div.prose { display: grid; gap: 1em; }
 .pix { display: grid; gap: .75rem; }
 .chave { display: flex; gap: .5rem; flex-wrap: wrap; align-items: stretch; }
 .chave code { flex: 1 1 14rem; min-width: 0; overflow-wrap: anywhere; font-family: var(--f-mono); font-size: var(--s-1); background: var(--bg); border: 1px solid var(--line); padding: .6em .8em; user-select: all; }
+.pix-bloco { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: start; }
+.pix-qr { width: 152px; max-width: 100%; aspect-ratio: 1; background: #fff; padding: 4px; border: 1px solid var(--line); }
+.pix-qr svg { display: block; width: 100%; height: 100%; }
+.pix-dados { display: grid; gap: .55rem; min-width: 0; }
+.pix-dica { font-size: var(--s-0); color: var(--muted); }
+.pix-dados .btn { font-size: var(--s-0); padding: .55em .8em; }
+.pix-cc { flex: 1 1 8rem; min-width: 0; font-family: var(--f-mono); font-size: var(--s-0); color: var(--muted); background: var(--bg); border: 1px solid var(--line); padding: .55em .7em; text-overflow: ellipsis; }
+.doacao-op--pix .pix-bloco { grid-template-columns: minmax(0, 1fr); }
+.doacao-op--pix .pix-qr { width: 132px; }
+.doacao-op--pix .chave code { flex-basis: 8rem; }
+@media (max-width: 520px) { .pix-bloco { grid-template-columns: minmax(0, 1fr); } }
 .lista-check { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
 .lista-check li { padding-left: 1.6rem; position: relative; }
 .lista-check li::before { content: ""; position: absolute; left: 0; top: .5em; width: .7em; height: .7em; background: var(--green); }

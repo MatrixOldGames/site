@@ -16,6 +16,7 @@ window.MOG = {
   apoio: {
     pixChave: "matrixoldgames@gmail.com",        // sua chave Pix (e-mail, aleatória ou CNPJ/MEI)
     pixNome: "Leandro de Almeida Alonso Garcia", // nome que aparece no app do banco, para conferência
+    pixCidade: "",       // cidade do recebedor para o QR Code do Pix (opcional; vazio = "BRASIL")
     itchio: "https://matrixoldgames.itch.io",          // seu perfil no itch.io, ex.: "https://matrixoldgames.itch.io"
     apoiase: "",         // ex.: "https://apoia.se/matrixoldgames"
     livepix: "",         // ex.: "https://livepix.gg/matrixoldgames"

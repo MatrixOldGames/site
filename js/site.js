@@ -7,6 +7,51 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
 
+  /* ---------- Pix: QR Code e "copia e cola" (padrão BR Code do Banco Central) ---------- */
+  var Pix = (function () {
+    function campo(id, v) { return id + String(v.length).padStart(2, "0") + v; }
+    function limpar(t, max) {
+      return String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9 ]/g, "").replace(/\s+/g, " ").toUpperCase().trim().slice(0, max).trim();
+    }
+    function crc16(s) {
+      var c = 0xFFFF;
+      for (var i = 0; i < s.length; i++) {
+        c ^= s.charCodeAt(i) << 8;
+        for (var k = 0; k < 8; k++) c = c & 0x8000 ? ((c << 1) ^ 0x1021) & 0xFFFF : (c << 1) & 0xFFFF;
+      }
+      return c.toString(16).toUpperCase().padStart(4, "0");
+    }
+    function payload(A) {
+      if (!A || !A.pixChave) return "";
+      var p = campo("00", "01") +
+        campo("26", campo("00", "br.gov.bcb.pix") + campo("01", A.pixChave)) +
+        campo("52", "0000") + campo("53", "986") + campo("58", "BR") +
+        campo("59", limpar(A.pixNome, 25) || "MATRIX OLD GAMES") +
+        campo("60", limpar(A.pixCidade, 15) || "BRASIL") +
+        campo("62", campo("05", "***")) + "6304";
+      return p + crc16(p);
+    }
+    function svg(texto) {
+      if (!window.qrcode || !texto) return "";
+      var q = window.qrcode(0, "M"); q.addData(texto); q.make();
+      return q.createSvgTag({ cellSize: 4, margin: 2, scalable: true, alt: "QR Code do Pix" });
+    }
+    /* bloco completo: QR + chave + copia e cola. "id" deixa os campos únicos na página */
+    function bloco(A, id) {
+      var cod = payload(A), qr = svg(cod);
+      return '<div class="pix-bloco">' +
+        (qr ? '<div class="pix-qr" title="Aponte a câmera do app do banco">' + qr + "</div>" : "") +
+        '<div class="pix-dados">' +
+        (qr ? '<span class="pix-dica">Aponte a câmera do app do seu banco para o QR Code, ou copie:</span>' : "") +
+        '<div class="chave"><code id="pix-chave-' + id + '">' + esc(A.pixChave) + '</code><button type="button" class="btn btn--ghost" data-copiar="pix-chave-' + id + '" data-aviso="Chave copiada">Copiar chave</button></div>' +
+        (cod ? '<div class="chave"><input class="pix-cc" id="pix-cc-' + id + '" value="' + esc(cod) + '" readonly aria-label="Pix copia e cola"><button type="button" class="btn btn--ghost" data-copiar="pix-cc-' + id + '" data-aviso="Código Pix copiado">Copia e cola</button></div>' : "") +
+        (A.pixNome ? '<small class="muted">Nome no banco: ' + esc(A.pixNome) + "</small>" : "") +
+        "</div></div>";
+    }
+    return { payload: payload, svg: svg, bloco: bloco };
+  })();
+  window.MOGPix = Pix;
+
   var ETAPAS = [["menus", "Menus e imagens"], ["dialogos", "Diálogos e legendas"], ["testes", "Testes no console"]];
   var NOME_ESTADO = { ok: "concluído", andamento: "em andamento", pendente: "na fila" };
 
@@ -155,9 +200,7 @@
         '<h2 id="doacao-titulo">Curtiu a tradução? Apoie o projeto</h2>' +
         '<p class="muted">O patch é e continua gratuito. Se quiser ajudar, escolha a forma que preferir. Qualquer valor ajuda a manter as próximas traduções.</p></div>' +
         '<div class="doacao-opcoes">' +
-        (A.pixChave ? '<div class="doacao-op"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' +
-          '<div class="chave"><code id="chave-pix-dlg">' + esc(A.pixChave) + '</code><button type="button" class="btn btn--ghost" data-copiar="chave-pix-dlg">Copiar</button></div>' +
-          (A.pixNome ? '<small class="muted">Nome no banco: ' + esc(A.pixNome) + "</small>" : "") + "</div>" : "") +
+        (A.pixChave ? '<div class="doacao-op doacao-op--pix"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' + Pix.bloco(A, "dlg") + "</div>" : "") +
         (itch ? '<div class="doacao-op"><strong>itch.io</strong><span class="muted">Cartão ou PayPal, em dólar. Bom para quem já usa o itch.io.</span>' +
           '<a class="btn btn--ghost" href="' + esc(itch) + '" target="_blank" rel="noopener">Doar pelo itch.io</a></div>' : "") +
         "</div>" +
@@ -288,8 +331,7 @@
   var A = D.apoio || {};
   $$("[data-pix]").forEach(function (el) {
     if (A.pixChave) {
-      el.innerHTML = '<div class="chave"><code id="chave-pix">' + esc(A.pixChave) + '</code><button type="button" class="btn" data-copiar="chave-pix">Copiar chave</button></div>' +
-        (A.pixNome ? '<p class="muted" style="font-size:var(--s-1)">Confira no app do banco: <strong style="color:var(--fg)">' + esc(A.pixNome) + "</strong></p>" : "");
+      el.innerHTML = Pix.bloco(A, "apoie");
     } else {
       el.innerHTML = '<p class="muted">A chave Pix será publicada aqui em breve.</p>';
     }
@@ -315,11 +357,15 @@
   document.addEventListener("click", function (ev) {
     var b = ev.target.closest("[data-copiar]"); if (!b) return;
     var alvo = document.getElementById(b.getAttribute("data-copiar")); if (!alvo) return;
-    var txt = alvo.textContent.trim();
+    var txt = (alvo.value != null ? alvo.value : alvo.textContent).trim(), msgOk = b.getAttribute("data-aviso") || "Copiado";
     var aviso = function (m) { var t = document.createElement("div"); t.className = "toast"; t.textContent = m; document.body.appendChild(t); setTimeout(function () { t.remove(); }, 1800); };
-    var selecionar = function () { var r = document.createRange(); r.selectNodeContents(alvo); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); aviso("Chave selecionada, copie com Ctrl+C"); };
+    var selecionar = function () {
+      if (alvo.select) { alvo.focus(); alvo.select(); }
+      else { var r = document.createRange(); r.selectNodeContents(alvo); var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r); }
+      aviso("Selecionado: copie com Ctrl+C (Cmd+C no Mac)");
+    };
     try {
-      navigator.clipboard.writeText(txt).then(function () { aviso("Chave copiada"); }, selecionar);
+      navigator.clipboard.writeText(txt).then(function () { aviso(msgOk); }, selecionar);
     } catch (e) { selecionar(); }
   });
 
