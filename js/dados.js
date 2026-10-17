@@ -16,6 +16,7 @@ window.MOG = {
   apoio: {
     pixChave: "matrixoldgames@gmail.com",        // sua chave Pix (e-mail, aleatória ou CNPJ/MEI)
     pixNome: "Leandro de Almeida Alonso Garcia", // nome que aparece no app do banco, para conferência
+    itchio: "https://matrixoldgames.itch.io",          // seu perfil no itch.io, ex.: "https://matrixoldgames.itch.io"
     apoiase: "",         // ex.: "https://apoia.se/matrixoldgames"
     livepix: "",         // ex.: "https://livepix.gg/matrixoldgames"
     kofi: ""             // ex.: "https://ko-fi.com/matrixoldgames"
@@ -32,6 +33,7 @@ window.MOG = {
       capa: "assets/jogos/shenmue/shenmue-capa.jpg",
       resumo: "Tradução completa para português do Brasil: menus, itens, legendas e diálogos, mantendo fontes, cores e o visual originais.",
       base: { regiao: "USA (NTSC-U)", versao: "v1.003", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
+      itch: "",          // página deste jogo no itch.io (com preço mínimo US$ 0), ex.: "https://matrixoldgames.itch.io/shenmue-ptbr"
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
       compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
@@ -58,12 +60,26 @@ window.MOG = {
         {
           nome: "Disco 1", versao: "1.1",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "",     // link do patch .dcp (GitHub Releases ou Google Drive)
-          espelho: ""       // link alternativo (opcional)
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_disco1_v1.1/Shenmue_Disc_1_PTBR_1.1.dcp",
+          // patcher online: arquivos do jogo identificados pelo tamanho; "patch" = xdelta gerado com -S none
+          // (patch acima de 25 MB: divida em partes e liste na ordem, o site junta sozinho)
+          patcher: {
+            pasta: "Shenmue PT-BR - Disco 1",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 195290 0 2352 track04.raw 0\n5 195890 0 2352 track05.raw 0\n6 196731 4 2352 track06.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 705600, md5: "91f5df82824ebd3ad7e9cf563be0d52d" },
+              { nome: "track02.raw", tamanho: 1733424 },
+              { nome: "track03.bin", tamanho: 355079088, patch: "patches/shenmue/disco1-v1.1/track03.xdelta", tamanhoFinal: 353129280 },
+              { nome: "track04.raw", tamanho: 1411200 },
+              { nome: "track05.raw", tamanho: 1625232 },
+              { nome: "track06.bin", tamanho: 826939680, patch: ["patches/shenmue/disco1-v1.1/track06.xdelta.parte1", "patches/shenmue/disco1-v1.1/track06.xdelta.parte2"], tamanhoFinal: 828889488 }
+            ]
+          },     // link do patch .dcp (GitHub Releases ou Google Drive)
+          espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link"       // link alternativo (opcional)
         },
         {
           nome: "Disco 2", versao: "",
-          etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" },
+          etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" },
           download: "", espelho: ""
         },
         {

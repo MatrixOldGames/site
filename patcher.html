@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Patcher online · Matrix Old Games</title>
+<meta name="description" content="Traduza seu jogo direto no navegador: escolha o .zip ou a pasta do jogo original e receba a versão em português pronta para jogar.">
+<meta property="og:title" content="Patcher online · Matrix Old Games">
+<meta property="og:description" content="Traduza seu jogo direto no navegador: escolha o .zip ou a pasta do jogo original e receba a versão em português pronta para jogar.">
+<meta property="og:image" content="https://www.matrixoldgames.com.br/assets/mog-avatar.png">
+<meta name="theme-color" content="#0D1020">
+<link rel="icon" type="image/svg+xml" href="assets/mog-icone.svg">
+<link rel="icon" type="image/png" href="assets/favicon-512.png">
+<link rel="apple-touch-icon" href="assets/favicon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Pixelify+Sans:wght@500;600&display=swap">
+<link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+<header class="topo"><div class="wrap">
+  <a class="marca" href="index.html" aria-label="Matrix Old Games, início"><img src="assets/mog-horizontal-escuro.svg" alt="Matrix Old Games" width="300" height="80"></a>
+  <nav class="menu" aria-label="Principal"><a href="index.html">Início</a><a href="traducoes.html">Traduções</a><a href="patcher.html" aria-current="page">Patcher</a><a href="sobre.html">Sobre</a><a href="apoie.html" class="menu-apoie">Apoie</a></nav>
+</div></header>
+<main>
+
+<section class="hero" style="padding-bottom:1.5rem"><div class="wrap" style="grid-template-columns:minmax(0,1fr)">
+  <div class="stack" style="gap:1.1rem">
+    <span class="eyebrow">Patcher online</span>
+    <h1>Seu jogo em <em>português</em>, direto no navegador</h1>
+    <p class="lead" style="max-width:60ch">Escolha o arquivo do seu jogo original e o site gera a versão traduzida pronta para jogar. Sem instalar programas. Tudo acontece aqui no seu computador, e nenhum arquivo é enviado para a internet.</p>
+  </div>
+</div></section>
+
+<section class="band" style="border-top:0;padding-top:1rem"><div class="wrap duas-col">
+  <div class="painel p-painel" data-patcher>
+    <div class="p-passo"><span class="p-num">1</span><div class="stack" style="gap:.5rem;min-width:0">
+      <label for="p-disco"><strong>Escolha o disco</strong></label>
+      <select id="p-disco" class="p-select" data-p-disco></select>
+    </div></div>
+
+    <div class="p-passo"><span class="p-num">2</span><div class="stack" style="gap:.6rem;min-width:0">
+      <strong>Escolha o seu jogo original</strong>
+      <div class="p-zona" data-p-zona>
+        <p>Arraste aqui o <strong>.zip</strong> ou a <strong>pasta</strong> do jogo</p>
+        <div class="btns" style="justify-content:center">
+          <label class="btn btn--ghost" for="p-zip">Escolher .zip</label>
+          <label class="btn btn--ghost" for="p-pasta" data-p-btn-pasta>Escolher pasta</label>
+        </div>
+        <input type="file" id="p-zip" accept=".zip,.gdi,.bin,.raw" multiple hidden>
+        <input type="file" id="p-pasta" webkitdirectory multiple hidden>
+      </div>
+      <ul class="p-faixas" data-p-etapas hidden></ul>
+      <div class="p-progresso" hidden><div class="p-trilho"><div class="p-barra" data-p-barra></div></div><span class="mono" data-p-barra-txt></span></div>
+      <div class="p-msg" data-p-msg hidden aria-live="polite"></div>
+    </div></div>
+
+    <div class="p-passo"><span class="p-num">3</span><div class="stack" style="gap:.6rem;min-width:0">
+      <strong>Gere a versão traduzida</strong>
+      <button type="button" class="btn" data-p-gerar disabled style="justify-self:start">Gerar versão em português</button>
+      <p class="muted" style="font-size:var(--s-0)">No Chrome e no Edge você escolhe uma pasta e os arquivos são salvos direto nela. Nos outros navegadores, eles aparecem para baixar.</p>
+    </div></div>
+  </div>
+
+  <div class="stack" style="gap:1.5rem">
+    <div class="stack" style="gap:.6rem">
+      <h3>O que você precisa</h3>
+      <ul class="lista-check">
+        <li>A sua cópia original do jogo, na versão indicada na página da tradução, em formato <strong>GDI</strong> (.zip ou pasta).</li>
+        <li>Um computador com Chrome, Edge ou Firefox. No celular não funciona.</li>
+        <li>Uns 2 GB livres no disco e alguns minutos.</li>
+      </ul>
+    </div>
+    <div class="stack" style="gap:.6rem">
+      <h3>Privacidade</h3>
+      <p class="muted">O jogo é lido e traduzido dentro do seu navegador. O site só baixa o arquivo de tradução, que é pequeno, e nunca recebe nada do seu computador.</p>
+    </div>
+    <p class="aviso-legal">O site não fornece jogos. Use apenas a sua própria cópia. Prefere o jeito tradicional? Baixe o patch .dcp na <a href="shenmue.html#downloads">página da tradução</a>.</p>
+  </div>
+</div></section>
+
+<section class="band band--panel" data-p-fim hidden></section>
+
+</main>
+<footer class="rodape"><div class="wrap">
+  <div class="stack" style="gap:1rem">
+    <img src="assets/mog-horizontal-escuro.svg" alt="Matrix Old Games" width="210" height="56" style="width:210px;height:auto">
+    <p class="aviso">Matrix Old Games é um projeto de fãs, sem fins lucrativos e sem afiliação com as empresas donas dos jogos. Todas as marcas pertencem aos seus donos. Distribuímos apenas patches de tradução: para jogar, você precisa da sua própria cópia do jogo original.</p>
+  </div>
+  <nav class="rodape-links" aria-label="Contato">
+    <a data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
+    <a data-facebook href="#" target="_blank" rel="noopener">Facebook</a>
+    <a data-youtube href="#" target="_blank" rel="noopener">YouTube</a>
+    <a data-discord href="#" target="_blank" rel="noopener">Discord</a>
+    <a href="apoie.html">Apoie</a>
+    <span data-email class="mono"></span>
+  </nav>
+</div></footer>
+<script src="js/dados.js"></script>
+<script src="js/site.js"></script>
+<script src="js/lib/fflate-0.8.2.js"></script>
+<script src="js/lib/spark-md5-3.0.2.js"></script>
+<script src="js/vcdiff.js"></script>
+<script src="js/patcher.js"></script>
+</body>
+</html>

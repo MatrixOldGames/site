@@ -136,6 +136,38 @@
     mostrar(); agendar();
   }
 
+  /* ---------- janela de doação antes do download ----------
+     O download nunca é bloqueado: a janela só sugere Pix ou itch.io e oferece "Baixar sem doar". */
+  function janelaDoacao(J) {
+    var A = D.apoio || {}, itch = J.itch || A.itchio;
+    if (!A.pixChave && !itch) return;
+    var dlg = document.createElement("dialog");
+    dlg.className = "doacao";
+    dlg.setAttribute("aria-labelledby", "doacao-titulo");
+    document.body.appendChild(dlg);
+    document.addEventListener("click", function (ev) {
+      var a = ev.target.closest("a[data-baixar]"); if (!a || typeof dlg.showModal !== "function") return;
+      ev.preventDefault();
+      var d = J.discos[+a.getAttribute("data-baixar")];
+      dlg.innerHTML =
+        '<form method="dialog" class="doacao-fechar"><button aria-label="Fechar">✕</button></form>' +
+        '<div class="stack" style="gap:.4rem"><span class="eyebrow">' + esc(J.titulo) + " · " + esc(d.nome) + " · v" + esc(d.versao) + "</span>" +
+        '<h2 id="doacao-titulo">Curtiu a tradução? Apoie o projeto</h2>' +
+        '<p class="muted">O patch é e continua gratuito. Se quiser ajudar, escolha a forma que preferir. Qualquer valor ajuda a manter as próximas traduções.</p></div>' +
+        '<div class="doacao-opcoes">' +
+        (A.pixChave ? '<div class="doacao-op"><strong>Pix</strong><span class="muted">Em reais, na hora, sem taxa.</span>' +
+          '<div class="chave"><code id="chave-pix-dlg">' + esc(A.pixChave) + '</code><button type="button" class="btn btn--ghost" data-copiar="chave-pix-dlg">Copiar</button></div>' +
+          (A.pixNome ? '<small class="muted">Nome no banco: ' + esc(A.pixNome) + "</small>" : "") + "</div>" : "") +
+        (itch ? '<div class="doacao-op"><strong>itch.io</strong><span class="muted">Cartão ou PayPal, em dólar. Bom para quem já usa o itch.io.</span>' +
+          '<a class="btn btn--ghost" href="' + esc(itch) + '" target="_blank" rel="noopener">Doar pelo itch.io</a></div>' : "") +
+        "</div>" +
+        '<div class="doacao-baixar"><a class="btn" href="' + esc(d.download) + '" target="_blank" rel="noopener">Baixar o patch</a>' +
+        (d.espelho ? '<a class="mono muted" href="' + esc(d.espelho) + '" target="_blank" rel="noopener">ou baixar pelo espelho</a>' : "") + "</div>";
+      dlg.showModal();
+    });
+    dlg.addEventListener("click", function (ev) { if (ev.target === dlg) dlg.close(); });
+  }
+
   /* ---------- destaque da home ---------- */
   $$("[data-destaque]").forEach(function (el) {
     var j = D.traducoes.filter(function (t) { return estadoJogo(t) === "andamento"; })[0] || D.traducoes[0];
@@ -203,14 +235,18 @@
     var dl = $("[data-downloads]");
     if (dl) dl.innerHTML = J.discos.map(function (d) {
       var ok = estadoDisco(d) === "ok";
+      var aplicar = ok && d.patcher
+        ? '<a class="btn" href="patcher.html?jogo=' + encodeURIComponent(J.id) + '&amp;disco=' + (J.discos.indexOf(d) + 1) + '">Aplicar o patch</a>' : "";
       var botao = ok && d.download
-        ? '<a class="btn" href="' + esc(d.download) + '" target="_blank" rel="noopener">Baixar</a>'
+        ? '<div class="dl-botoes">' + aplicar + '<a class="btn' + (aplicar ? " btn--ghost" : "") + '" href="' + esc(d.download) + '" target="_blank" rel="noopener" data-baixar="' + J.discos.indexOf(d) + '">Baixar .dcp</a></div>'
         : '<span class="btn" aria-disabled="true">' + (ok ? "Em breve" : "Aguarde") + "</span>";
       var sub = ok
         ? "patch .dcp · v" + esc(d.versao) + (d.espelho ? ' · <a href="' + esc(d.espelho) + '" target="_blank" rel="noopener">espelho</a>' : "")
         : NOME_ESTADO[estadoDisco(d)];
       return '<div class="download"><div><strong>' + esc(d.nome) + "</strong><br><small>" + sub + "</small></div>" + botao + "</div>";
     }).join("");
+
+    janelaDoacao(J);
 
     if (J.ferramenta) $$("[data-ferramenta]").forEach(function (fe) { fe.textContent = J.ferramenta.nome; fe.href = J.ferramenta.url; });
     $$("[data-versao-base]").forEach(function (x) { x.textContent = J.base.regiao + " " + J.base.versao; });
@@ -251,7 +287,7 @@
     }
   });
   $$("[data-plataformas-apoio]").forEach(function (el) {
-    var p = [["apoiase", "Apoia.se", "apoio mensal"], ["livepix", "LivePix", "doação avulsa com mensagem"], ["kofi", "Ko-fi", "para quem está fora do Brasil"]]
+    var p = [["itchio", "itch.io", "doe em dólar, por cartão ou PayPal"], ["apoiase", "Apoia.se", "apoio mensal"], ["livepix", "LivePix", "doação avulsa com mensagem"], ["kofi", "Ko-fi", "para quem está fora do Brasil"]]
       .filter(function (x) { return A[x[0]]; });
     if (!p.length) { el.hidden = true; return; }
     el.innerHTML = p.map(function (x) {
