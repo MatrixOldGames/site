@@ -99,8 +99,9 @@
     return '<div class="capa">' + (j.capa ? '<img src="' + esc(j.capa) + '" alt="" loading="lazy">' : '<span class="titulo-capa">' + esc(j.titulo) + "</span>") + "</div>";
   }
   function resumoJogo(j) {
-    var feitos = j.discos.filter(function (d) { return estadoDisco(d) === "ok"; }).length;
-    return feitos + " de " + j.discos.length + (j.discos.length > 1 ? " discos lançados" : " disco lançado");
+    var feitos = j.discos.filter(function (d) { return estadoDisco(d) === "ok"; }).length, n = j.discos.length;
+    if (feitos === n) return n > 1 ? "completa · " + n + " discos" : "completa";
+    return feitos + " de " + n + (n > 1 ? " discos lançados" : " disco lançado");
   }
   function ultimoLancado(j) {
     var l = null;
@@ -213,13 +214,23 @@
 
   /* ---------- destaque da home ---------- */
   $$("[data-destaque]").forEach(function (el) {
-    var j = D.traducoes.filter(function (t) { return estadoJogo(t) === "andamento"; })[0] || D.traducoes[0];
+    var j = D.traducoes.filter(function (t) { return t.destaque; })[0] ||
+      D.traducoes.filter(function (t) { return estadoJogo(t) === "andamento"; })[0] || D.traducoes[0];
     if (!j) return;
+    var completa = estadoJogo(j) === "ok";
+    var proximos = D.traducoes.filter(function (t) { return t !== j && estadoJogo(t) !== "ok"; });
     el.innerHTML =
-      '<div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Tradução em destaque</span>' +
-      "<h2>" + esc(j.titulo) + '</h2><div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + resumoJogo(j) + "</span></div></div>" +
-      '<a class="btn btn--ghost" href="' + esc(j.pagina) + '">Página da tradução</a></div>' +
-      '<div class="slots">' + j.discos.map(slot).join("") + "</div>";
+      '<div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">' + (completa ? "Tradução completa" : "Tradução em destaque") + "</span>" +
+      "<h2>" + esc(j.titulo) + (completa ? ' <span class="selo-completo">100% em português</span>' : "") + '</h2><div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + resumoJogo(j) + "</span></div></div>" +
+      '<a class="btn' + (completa ? "" : " btn--ghost") + '" href="' + esc(j.pagina) + '">' + (completa ? "Jogar em português" : "Página da tradução") + "</a></div>" +
+      '<div class="slots">' + j.discos.map(slot).join("") + "</div>" +
+      proximos.map(function (t) {
+        var d = t.discos.filter(function (x) { return estadoDisco(x) === "andamento"; })[0] || t.discos[0];
+        return '<a class="proximo" href="' + esc(t.pagina) + '">' + (t.capa ? '<img src="' + esc(t.capa) + '" alt="" loading="lazy">' : "") +
+          '<div class="stack" style="gap:.35rem;min-width:0"><span class="eyebrow">Em produção</span><strong>' + esc(t.titulo) + "</strong>" +
+          '<span class="muted" style="font-size:var(--s-1)">' + esc(t.plataforma) + " · " + esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila") + "</span></div>" +
+          '<span class="mono proximo-seta" aria-hidden="true">→</span></a>';
+      }).join("");
   });
 
   /* ---------- botão "baixar" do hero ---------- */
@@ -278,7 +289,7 @@
     if (f) f.innerHTML =
       "<dt>Plataforma</dt><dd>" + esc(J.plataforma) + "</dd>" +
       "<dt>Lançamento</dt><dd>" + esc(J.ano) + "</dd>" +
-      "<dt>Versão base</dt><dd>" + esc(J.base.regiao) + " · " + esc(J.base.versao) + "</dd>" +
+      "<dt>Versão base</dt><dd>" + esc(J.base.regiao) + (J.base.versao ? " · " + esc(J.base.versao) : "") + "</dd>" +
       "<dt>Formato</dt><dd>" + esc(J.base.formato) + "</dd>" +
       (J.base.hash ? '<dt>MD5 esperado</dt><dd class="mono">' + esc(J.base.hash) + "</dd>" : "") +
       "<dt>Tradução</dt><dd>" + esc(J.tradutor) + "</dd>";
@@ -300,7 +311,7 @@
     janelaDoacao(J);
 
     if (J.ferramenta) $$("[data-ferramenta]").forEach(function (fe) { fe.textContent = J.ferramenta.nome; fe.href = J.ferramenta.url; });
-    $$("[data-versao-base]").forEach(function (x) { x.textContent = J.base.regiao + " " + J.base.versao; });
+    $$("[data-versao-base]").forEach(function (x) { x.textContent = (J.base.regiao + " " + (J.base.versao || "")).trim(); });
     if (J.guia) $$("[data-guia]").forEach(function (g) { g.textContent = J.guia.nome; g.href = J.guia.url; });
     $$("[data-compativel]").forEach(function (x) { x.textContent = J.compativel || ""; });
     var lista = function (itens, cls) { return '<ul class="lista-check' + (cls ? " " + cls : "") + '">' + itens.map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + "</ul>"; };
@@ -320,12 +331,28 @@
       }
     }
 
+    $$("[data-esconder-vazio]").forEach(function (sec) {
+      var campo = sec.getAttribute("data-esconder-vazio"), v = J[campo];
+      if (!v || (Array.isArray(v) ? !v.length : !Object.keys(v).length)) sec.hidden = true;
+    });
     var ch = $("[data-changelog]");
     if (ch) ch.innerHTML = J.changelog.map(function (c) {
       return '<li><span class="v">v' + esc(c.versao) + "</span><div>" + (c.data ? '<span class="mono muted" style="font-size:var(--s-0)">' + esc(c.data) + "</span>" : "") +
         "<ul>" + c.notas.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul></div></li>";
     }).join("");
   }
+
+  /* ---------- apoiadores ---------- */
+  $$("[data-apoiadores]").forEach(function (el) {
+    var lista = D.apoiadores || [];
+    if (!lista.length) { el.innerHTML = '<p class="muted">Seja a primeira pessoa a apoiar o projeto.</p>'; return; }
+    var cores = ["var(--yellow)", "var(--blue)", "var(--green)", "var(--red)"];
+    el.innerHTML = lista.map(function (a, i) {
+      return '<li class="apoiador" style="--cor:' + cores[i % 4] + '"><span class="apoiador-nome">' + esc(a.nome) + "</span>" +
+        (a.nota ? '<span class="apoiador-nota">' + esc(a.nota) + "</span>" : "") + "</li>";
+    }).join("");
+  });
+  $$("[data-total-apoiadores]").forEach(function (el) { var n = (D.apoiadores || []).length; el.textContent = n + (n === 1 ? " apoiador" : " apoiadores"); });
 
   /* ---------- apoio ---------- */
   var A = D.apoio || {};
