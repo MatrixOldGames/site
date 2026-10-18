@@ -27,6 +27,7 @@ window.MOG = {
   apoiadores: [
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "André Oliveira da Cruz" },
+    { nome: "Marcelo Pereira da Silva" },
     { nome: "William da Silva Sampaio" }
   ],
 
