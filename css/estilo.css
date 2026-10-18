@@ -1,6 +1,9 @@
 /* Matrix Old Games — "Madrugada Retrô"
    Layout: coluna central de leitura (~72rem), faixas de largura total por seção,
    a TV de tubo como peça principal da home e "slots de save" como linguagem de status. */
+/* "2" redesenhado: o da Pixelify Sans é fechado e parece um 8. Só o dígito 2 vem desta fonte. */
+@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-500.woff2") format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0032; }
+@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-600.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0032; }
 :root {
   color-scheme: dark;
   --bg: #0D1020;          /* madrugada */
@@ -17,7 +20,7 @@
   --wip: var(--yellow);
   --todo: #5B6290;
 
-  --f-display: "Pixelify Sans", "Courier New", monospace;
+  --f-display: "MOG Dois", "Pixelify Sans", "Courier New", monospace;
   --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
   --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
