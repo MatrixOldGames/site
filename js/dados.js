@@ -45,43 +45,65 @@ window.MOG = {
           "Legenda da profecia da Shenhua na abertura (no original ela não tem texto)",
           "Todas as conversas com moradores de Yamanose, Sakuragaoka e Dobuita",
           "Menus, opções, telas de carregamento, salvar/carregar e cartão de memória",
-          "Telas do VMU (salvando, carregando, concluído e telas da batalha)",
+          "Telas do VMU (salvando, carregando, concluído e telas da batalha) e logo com selo PT-BR",
           "Caderno do Ryo, itens, golpes, bússola, avisos e textos do jogo",
           "Acentuação completa (á, é, ç, ã, õ etc.)",
-          "O jogo começa no Modo Jogo (voz + legendas) por padrão"
+          "O jogo começa no Modo Jogo (voz + legendas) por padrão",
+          "Capa própria do GDEMU"
+        ],
+        "Disco 2": [
+          "Todas as legendas das cutscenes: armazéns do porto, Mestre Chen, porão do dojo e o Espelho da Fênix, viagem para Hong Kong, Jimmy, Chai, Goro e mais",
+          "Todas as conversas com moradores, incluindo o porto (Novo e Antigo Distrito dos Armazéns)",
+          "Menus, telas do VMU, caderno, itens e textos do jogo, como no Disco 1",
+          "Capa própria do GDEMU"
         ]
       },
       observacoes: [
         "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
-        "Atualizando da 1.0: aplique o patch 1.1 sobre a imagem original, não sobre a imagem já traduzida. Os saves da 1.0 continuam funcionando.",
-        "Saves de outras versões funcionam, mas mantêm o modo de legenda gravado. Para trocar, vá em Opções > Diálogo e Texto e escolha Modo Jogo.",
+        "Não troque os discos: o patch do Disco 1 só funciona na imagem original do Disco 1, e o do Disco 2 na do Disco 2.",
+        "Atualizando da 1.0 ou 1.1: aplique a 1.2 sobre a imagem original, não sobre a já traduzida. Os saves das versões anteriores continuam funcionando.",
+        "Ao terminar o Disco 1, o jogo pede o Disco 2: troque para a imagem traduzida do Disco 2 e continue com o mesmo save.",
+        "Saves de outras versões mantêm o modo de legenda gravado. Para trocar, vá em Opções > Diálogo e Texto e escolha Modo Jogo.",
         "A tela \"Produced by or under license from SEGA\" é do console e fica em inglês em todas as versões oficiais."
       ],
       discos: [
         {
-          nome: "Disco 1", versao: "1.1",
+          nome: "Disco 1", versao: "1.2",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_disco1_v1.1/Shenmue_Disc_1_PTBR_1.1.dcp",
-          // patcher online: arquivos do jogo identificados pelo tamanho; "patch" = xdelta gerado com -S none
-          // (patch acima de 25 MB: divida em partes e liste na ordem, o site junta sozinho)
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.2/Shenmue_Disc_1_PTBR_1.2.dcp",  // link do patch .dcp
+          espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link",                     // link alternativo (opcional)
+          // patcher online: só a versão mais recente. Os arquivos do jogo são identificados pelo tamanho.
+          // Este bloco é gerado a partir do resumo.json do mog_gerar_patch.py.
           patcher: {
             pasta: "Shenmue PT-BR - Disco 1",
-            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 195290 0 2352 track04.raw 0\n5 195890 0 2352 track05.raw 0\n6 196731 4 2352 track06.bin 0\n",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 195293 0 2352 track04.raw 0\n5 195893 0 2352 track05.raw 0\n6 196734 4 2352 track06.bin 0\n",
             faixas: [
               { nome: "track01.bin", tamanho: 705600, md5: "91f5df82824ebd3ad7e9cf563be0d52d" },
               { nome: "track02.raw", tamanho: 1733424 },
-              { nome: "track03.bin", tamanho: 355079088, patch: "patches/shenmue/disco1-v1.1/track03.xdelta", tamanhoFinal: 353129280 },
+              { nome: "track03.bin", tamanho: 355079088, patch: "patches/shenmue/disco1-v1.2/track03.xdelta", tamanhoFinal: 353136336 },
               { nome: "track04.raw", tamanho: 1411200 },
               { nome: "track05.raw", tamanho: 1625232 },
-              { nome: "track06.bin", tamanho: 826939680, patch: ["patches/shenmue/disco1-v1.1/track06.xdelta.parte1", "patches/shenmue/disco1-v1.1/track06.xdelta.parte2"], tamanhoFinal: 828889488 }
+              { nome: "track06.bin", tamanho: 826939680, patch: ["patches/shenmue/disco1-v1.2/track06.xdelta.parte1", "patches/shenmue/disco1-v1.2/track06.xdelta.parte2"], tamanhoFinal: 828882432 }
             ]
-          },     // link do patch .dcp (GitHub Releases ou Google Drive)
-          espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link"       // link alternativo (opcional)
+          }
         },
         {
-          nome: "Disco 2", versao: "",
-          etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" },
-          download: "", espelho: ""
+          nome: "Disco 2", versao: "1.2",
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.2/Shenmue_Disc_2_PTBR_1.2.dcp",
+          espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link",
+          patcher: {
+            pasta: "Shenmue PT-BR - Disco 2",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 225159 0 2352 track04.raw 0\n5 225759 0 2352 track05.raw 0\n6 226600 4 2352 track06.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 705600, md5: "347ae87c7f1cf09020ccb81025790159" },
+              { nome: "track02.raw", tamanho: 1851024 },
+              { nome: "track03.bin", tamanho: 425328624, patch: "patches/shenmue/disco2-v1.2/track03.xdelta", tamanhoFinal: 423381168 },
+              { nome: "track04.raw", tamanho: 1411200 },
+              { nome: "track05.raw", tamanho: 1625232 },
+              { nome: "track06.bin", tamanho: 756690144, patch: ["patches/shenmue/disco2-v1.2/track06.xdelta.parte1", "patches/shenmue/disco2-v1.2/track06.xdelta.parte2"], tamanhoFinal: 758637600 }
+            ]
+          }
         },
         {
           nome: "Disco 3", versao: "",
@@ -106,6 +128,12 @@ window.MOG = {
         { antes: "assets/jogos/shenmue/shenmue-13-en.png", depois: "assets/jogos/shenmue/shenmue-13-pt.png", mini: "assets/jogos/shenmue/shenmue-13-mini.jpg", legenda: "Tela de salvamento no VMU", vmu: true }
       ],
       changelog: [
+        { versao: "1.2", data: "18/10/2026", notas: [
+          "Disco 2 traduzido: cutscenes (armazéns do porto, Mestre Chen, porão do dojo e o Espelho da Fênix, viagem para Hong Kong, Jimmy, Chai, Goro…) e todas as conversas com os moradores",
+          "Disco 1: perguntas do Ryo agora neutras no tratamento (antes ele podia perguntar \"A senhora conhece…?\" para um senhor)",
+          "Capa própria do GDEMU para cada disco",
+          "Tela de título e opções mostram \"Versão 1.2\""
+        ] },
         { versao: "1.1", data: "", notas: [
           "Telas do VMU traduzidas: \"Salvando / Não remova o VM\", \"Carregando\", \"Aguarde\", \"Concluído\", \"Falhou!\" e as telas da batalha",
           "Logo do Shenmue no VMU com o selo PT-BR",

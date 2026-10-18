@@ -123,6 +123,20 @@
     });
     listaFaixas(linhas);
     var J = atual().jogo, base = J.base ? J.base.regiao + " " + J.base.versao : "";
+    if (faltam.length || erradas.length) {
+      // os arquivos podem ser de outro disco: troca sozinho para o disco certo
+      var outro = -1;
+      opcoes.forEach(function (o, i) {
+        if (i === +sel.value || outro >= 0) return;
+        var todos = o.disco.patcher.faixas.every(function (f) { return lista.some(function (a) { return a.blob.size === f.tamanho; }); });
+        if (todos) outro = i;
+      });
+      if (outro >= 0) {
+        sel.value = String(outro);
+        mensagem("info", "Esses arquivos são do <strong>" + esc(opcoes[outro].jogo.titulo) + " · " + esc(opcoes[outro].disco.nome) + "</strong>. Troquei o disco no passo 1 para você.");
+        return identificar(lista);
+      }
+    }
     if (erradas.length) throw new Error("Os arquivos são de outra versão do jogo. Este patch precisa do " + esc(J.titulo) + " " + esc(base) + " em formato GDI.");
     if (faltam.length) throw new Error("Faltam arquivos do jogo: " + faltam.join(", ") + ". Escolha a pasta inteira do " + esc(atual().disco.nome) + " ou o .zip completo. O patcher online aceita o formato GDI; para CUE/BIN use o Universal Dreamcast Patcher.");
 
@@ -150,7 +164,8 @@
     }
     estado.faixas = achadas; estado.patches = patches;
     progresso(null);
-    mensagem("ok", "<strong>Tudo certo:</strong> " + esc(J.titulo) + " · " + esc(atual().disco.nome) + ", versão " + esc(base) + ". Agora é só gerar a versão traduzida.");
+    var trocou = msg.className.indexOf("p-msg--info") >= 0 && !msg.hidden ? msg.innerHTML + "<br>" : "";
+    mensagem("ok", trocou + "<strong>Tudo certo:</strong> " + esc(J.titulo) + " · " + esc(atual().disco.nome) + ", versão " + esc(base) + ". Agora é só gerar a versão traduzida.");
     btnGerar.disabled = false;
     btnGerar.focus();
   }
