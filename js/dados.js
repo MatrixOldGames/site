@@ -107,7 +107,7 @@ window.MOG = {
         },
         {
           nome: "Disco 3", versao: "",
-          etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" },
+          etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" },
           download: "", espelho: ""
         }
       ],
