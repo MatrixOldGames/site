@@ -25,9 +25,10 @@ window.MOG = {
 
   // apoiadores: aparecem na página "Apoiadores". "nota" é opcional (canal, grupo, apelido)
   apoiadores: [
-    { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
+    { nome: "Adriano Andrade dos Santos" },
     { nome: "André Oliveira da Cruz" },
-    { nome: "Marcelo Pereira da Silva" },
+    { nome: "Davi Damasceno Vieira Rosa" },
+    { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "William da Silva Sampaio" }
   ],
 
