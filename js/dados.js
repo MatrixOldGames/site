@@ -28,6 +28,7 @@ window.MOG = {
     { nome: "Adriano Andrade dos Santos" },
     { nome: "André Oliveira da Cruz" },
     { nome: "Davi Damasceno Vieira Rosa" },
+    { nome: "Pablo Rodrigues Machado" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Wellinton Martins Correia" },
     { nome: "William da Silva Sampaio" }
