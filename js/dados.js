@@ -27,9 +27,11 @@ window.MOG = {
   apoiadores: [
     { nome: "Adriano Andrade dos Santos" },
     { nome: "André Oliveira da Cruz" },
+    { nome: "Daniel Medeiros Carvalho" },
     { nome: "Davi Damasceno Vieira Rosa" },
     { nome: "Pablo Rodrigues Machado" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
+    { nome: "Thiago Usley Silva de Oliveira" },
     { nome: "Wellinton Martins Correia" },
     { nome: "William da Silva Sampaio" }
   ],
