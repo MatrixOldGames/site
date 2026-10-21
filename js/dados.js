@@ -59,6 +59,7 @@ window.MOG = {
           "Legenda da profecia da Shenhua na abertura (no original ela não tem texto)",
           "Todas as conversas com moradores de Yamanose, Sakuragaoka e Dobuita",
           "Menus, opções, telas de carregamento, salvar/carregar e cartão de memória",
+          "Menu de \"ir rápido\" no portão de casa (\"Para onde você quer ir?\")",
           "Telas do VMU (salvando, carregando, concluído e telas da batalha) e logo com selo PT-BR",
           "Caderno do Ryo, itens, golpes, bússola, avisos e textos do jogo",
           "Acentuação completa (á, é, ç, ã, õ etc.)",
@@ -81,8 +82,8 @@ window.MOG = {
       observacoes: [
         "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
         "Não troque os discos: cada patch só funciona na imagem original do mesmo disco.",
-        "Atualizando de uma versão anterior (1.0, 1.1 ou 1.2): aplique a 1.3 sobre a imagem original, não sobre a já traduzida. Os saves das versões anteriores continuam funcionando.",
-        "Atualize os três discos para a 1.3, para manter o mesmo texto e a mesma versão nos menus do começo ao fim.",
+        "Atualizando de uma versão anterior (1.0 a 1.3): aplique a 1.4 sobre a imagem original, não sobre a já traduzida. Os saves das versões anteriores continuam funcionando.",
+        "Atualize os três discos para a 1.4, para manter o mesmo texto e a mesma versão nos menus do começo ao fim.",
         "Quando o jogo pedir o próximo disco, troque para a imagem traduzida desse disco e continue com o mesmo save.",
         "Saves de outras versões mantêm o modo de legenda gravado. Para trocar, vá em Opções > Diálogo e Texto e escolha Modo Jogo.",
         "Os nomes dos golpes ficaram em inglês, como no resto do jogo (ex.: Swallow Flip, Tornado Kick, Shadow Step).",
@@ -92,56 +93,56 @@ window.MOG = {
       discos: [
         // patcher online: só a versão mais recente de cada disco (blocos gerados a partir do resumo.json do mog_gerar_patch.py)
         {
-          nome: "Disco 1", versao: "1.3",
+          nome: "Disco 1", versao: "1.4",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.3/Shenmue_Disc_1_PTBR_1.3.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.4/Shenmue_Disc_1_PTBR_1.4.dcp",
           espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link",
           patcher: {
             pasta: "Shenmue PT-BR - Disco 1",
-            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 195293 0 2352 track04.raw 0\n5 195893 0 2352 track05.raw 0\n6 196734 4 2352 track06.bin 0\n",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 195298 0 2352 track04.raw 0\n5 195898 0 2352 track05.raw 0\n6 196739 4 2352 track06.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 705600, md5: "91f5df82824ebd3ad7e9cf563be0d52d" },
+              { nome: "track01.bin", tamanho: 705600, md5: "91f5df82824ebd3ad7e9cf563be0d52d", patch: "patches/shenmue/disco1-v1.4/track01.xdelta", tamanhoFinal: 705600 },
               { nome: "track02.raw", tamanho: 1733424 },
-              { nome: "track03.bin", tamanho: 355079088, patch: "patches/shenmue/disco1-v1.3/track03.xdelta", tamanhoFinal: 353136336 },
+              { nome: "track03.bin", tamanho: 355079088, patch: "patches/shenmue/disco1-v1.4/track03.xdelta", tamanhoFinal: 353148096 },
               { nome: "track04.raw", tamanho: 1411200 },
               { nome: "track05.raw", tamanho: 1625232 },
-              { nome: "track06.bin", tamanho: 826939680, patch: ["patches/shenmue/disco1-v1.3/track06.xdelta.parte1", "patches/shenmue/disco1-v1.3/track06.xdelta.parte2"], tamanhoFinal: 828882432 }
+              { nome: "track06.bin", tamanho: 826939680, patch: ["patches/shenmue/disco1-v1.4/track06.xdelta.parte1", "patches/shenmue/disco1-v1.4/track06.xdelta.parte2"], tamanhoFinal: 828870672 }
             ]
           }
         },
         {
-          nome: "Disco 2", versao: "1.3",
+          nome: "Disco 2", versao: "1.4",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.3/Shenmue_Disc_2_PTBR_1.3.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.4/Shenmue_Disc_2_PTBR_1.4.dcp",
           espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link",
           patcher: {
             pasta: "Shenmue PT-BR - Disco 2",
-            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 225159 0 2352 track04.raw 0\n5 225759 0 2352 track05.raw 0\n6 226600 4 2352 track06.bin 0\n",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 225164 0 2352 track04.raw 0\n5 225764 0 2352 track05.raw 0\n6 226605 4 2352 track06.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 705600, md5: "347ae87c7f1cf09020ccb81025790159" },
+              { nome: "track01.bin", tamanho: 705600, md5: "347ae87c7f1cf09020ccb81025790159", patch: "patches/shenmue/disco2-v1.4/track01.xdelta", tamanhoFinal: 705600 },
               { nome: "track02.raw", tamanho: 1851024 },
-              { nome: "track03.bin", tamanho: 425328624, patch: "patches/shenmue/disco2-v1.3/track03.xdelta", tamanhoFinal: 423381168 },
+              { nome: "track03.bin", tamanho: 425328624, patch: "patches/shenmue/disco2-v1.4/track03.xdelta", tamanhoFinal: 423392928 },
               { nome: "track04.raw", tamanho: 1411200 },
               { nome: "track05.raw", tamanho: 1625232 },
-              { nome: "track06.bin", tamanho: 756690144, patch: ["patches/shenmue/disco2-v1.3/track06.xdelta.parte1", "patches/shenmue/disco2-v1.3/track06.xdelta.parte2"], tamanhoFinal: 758637600 }
+              { nome: "track06.bin", tamanho: 756690144, patch: ["patches/shenmue/disco2-v1.4/track06.xdelta.parte1", "patches/shenmue/disco2-v1.4/track06.xdelta.parte2"], tamanhoFinal: 758625840 }
             ]
           }
         },
         {
-          nome: "Disco 3", versao: "1.3",
+          nome: "Disco 3", versao: "1.4",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.3/Shenmue_Disc_3_PTBR_1.3.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue1_v1.4/Shenmue_Disc_3_PTBR_1.4.dcp",
           espelho: "https://drive.google.com/drive/folders/1-Y__UB633BdCS-kHjTKGcJVeg59hwwpZ?usp=drive_link",
           patcher: {
             pasta: "Shenmue PT-BR - Disco 3",
-            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 179480 0 2352 track04.raw 0\n5 180080 0 2352 track05.raw 0\n6 189664 4 2352 track06.bin 0\n",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 450 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 179485 0 2352 track04.raw 0\n5 180085 0 2352 track05.raw 0\n6 189669 4 2352 track06.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 705600, md5: "f37953d817c75581dd167d52423139e7" },
+              { nome: "track01.bin", tamanho: 705600, md5: "f37953d817c75581dd167d52423139e7", patch: "patches/shenmue/disco3-v1.4/track01.xdelta", tamanhoFinal: 705600 },
               { nome: "track02.raw", tamanho: 2483712 },
-              { nome: "track03.bin", tamanho: 317886912, patch: "patches/shenmue/disco3-v1.3/track03.xdelta", tamanhoFinal: 315944160 },
+              { nome: "track03.bin", tamanho: 317886912, patch: "patches/shenmue/disco3-v1.4/track03.xdelta", tamanhoFinal: 315955920 },
               { nome: "track04.raw", tamanho: 1411200 },
               { nome: "track05.raw", tamanho: 22188768 },
-              { nome: "track06.bin", tamanho: 843568320, patch: ["patches/shenmue/disco3-v1.3/track06.xdelta.parte1", "patches/shenmue/disco3-v1.3/track06.xdelta.parte2"], tamanhoFinal: 845511072 }
+              { nome: "track06.bin", tamanho: 843568320, patch: ["patches/shenmue/disco3-v1.4/track06.xdelta.parte1", "patches/shenmue/disco3-v1.4/track06.xdelta.parte2"], tamanhoFinal: 845499312 }
             ]
           }
         }
@@ -163,6 +164,11 @@ window.MOG = {
         { antes: "assets/jogos/shenmue/shenmue-13-en.png", depois: "assets/jogos/shenmue/shenmue-13-pt.png", mini: "assets/jogos/shenmue/shenmue-13-mini.jpg", legenda: "Tela de salvamento no VMU", vmu: true }
       ],
       changelog: [
+        { versao: "1.4", data: "21/10/2026", notas: [
+          "Menu de \"ir rápido\" no portão de casa (\"Para onde você quer ir?\") traduzido nos três discos (antes aparecia em inglês)",
+          "Telas do VMU agora dizem \"Não remova o VMU\", o termo usado no Brasil",
+          "Novo rodapé nas telas de título e menu: \"Ver. 1.4 - Tradução - MatrixHK\", com fonte mais legível, inclusive em TV de tubo"
+        ] },
         { versao: "1.3", data: "18/10/2026", notas: [
           "Disco 3 traduzido: cutscenes (emprego no porto e a empilhadeira, Goro, Mark, Mad Angels, Terry, o Long Zha, golpes ensinados pelo Mestre Chen, Gui Zhang, Tom e o velho do porto, despedidas do Tom e da Nozomi…) e todas as conversas com moradores, colegas da Alpha Trading, seguranças e trabalhadores do porto",
           "Capa própria do GDEMU para o Disco 3",

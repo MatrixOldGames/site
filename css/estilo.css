@@ -360,3 +360,6 @@ div.prose { display: grid; gap: 1em; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+.p-opcao { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; align-items: start; font-size: var(--s-1); cursor: pointer; }
+.p-opcao input { width: 1.15rem; height: 1.15rem; margin: .2rem 0 0; accent-color: var(--green); }
+.p-opcao .muted { font-size: var(--s-0); }

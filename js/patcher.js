@@ -54,6 +54,63 @@
   }
   sel.addEventListener("change", reiniciar);
 
+  /* ---------- versão compacta: faixas de dados 2352 → .iso 2048 (como o GDI Shrink) ----------
+     Cada setor de dados do GD-ROM tem 2352 bytes: 16 de cabeçalho, 2048 de dados e 288 de
+     correção de erro (EDC/ECC), que só o disco físico usa. O .iso guarda só os 2048 de dados.
+     Nenhum setor é removido e os LBAs do disc.gdi continuam os mesmos. */
+  var chkCompacto = $("[data-p-compacto]"), economia = $("[data-p-economia]");
+  function planoCompacto(cfg) {
+    var plano = {};
+    cfg.gdi.trim().split(/\r?\n/).slice(1).forEach(function (l) {
+      var c = l.trim().split(/\s+/);
+      if (c.length >= 5 && c[2] === "4" && c[3] === "2352") plano[c[4]] = c[4].replace(/\.[^.]+$/, "") + ".iso";
+    });
+    return plano;
+  }
+  function gdiCompacto(cfg) {
+    var plano = planoCompacto(cfg);
+    return cfg.gdi.trim().split(/\r?\n/).map(function (l, i) {
+      var c = l.trim().split(/\s+/);
+      if (i === 0 || !plano[c[4]]) return l.trim();
+      c[3] = "2048"; c[4] = plano[c[4]];
+      return c.join(" ");
+    }).join("\n") + "\n";
+  }
+  function atualizarEconomia() {
+    var o = atual(); if (!o || !economia) return;
+    var plano = planoCompacto(o.disco.patcher), corte = 0;
+    o.disco.patcher.faixas.forEach(function (f) { if (plano[f.nome]) corte += (f.tamanhoFinal || f.tamanho) / 2352 * 304; });
+    economia.textContent = corte ? "· cerca de " + fmt(corte) + " a menos" : "";
+  }
+  sel.addEventListener("change", atualizarEconomia);
+  atualizarEconomia();
+
+  // Recebe a faixa em pedaços de qualquer tamanho e entrega só os 2048 bytes de dados de cada setor.
+  function ConversorIso(nome, destino) { this.nome = nome; this.destino = destino; this.resto = new Uint8Array(2352); this.n = 0; this.setor = 0; }
+  ConversorIso.prototype.conferir = function (b, o) {
+    var ok = b[o] === 0 && b[o + 11] === 0 && b[o + 15] === 1;
+    for (var k = 1; ok && k < 11; k++) ok = b[o + k] === 255;
+    if (!ok) { var e = new Error("O setor " + this.setor + " de " + this.nome + " não está no formato padrão, então a versão compacta não pode ser gerada. Desmarque a opção \"Versão compacta\" e gere de novo."); e.codigo = "compacto"; throw e; }
+    this.setor++;
+  };
+  ConversorIso.prototype.write = function (u8) {
+    var i = 0, n = u8.length, setores = Math.floor((this.n + n) / 2352), saida = new Uint8Array(setores * 2048), s = 0;
+    if (this.n) {
+      var falta = Math.min(2352 - this.n, n);
+      this.resto.set(u8.subarray(0, falta), this.n); this.n += falta; i = falta;
+      if (this.n === 2352) { this.conferir(this.resto, 0); saida.set(this.resto.subarray(16, 2064), 0); s = 2048; this.n = 0; }
+    }
+    for (; i + 2352 <= n; i += 2352, s += 2048) { this.conferir(u8, i); saida.set(u8.subarray(i + 16, i + 2064), s); }
+    if (i < n) { this.resto.set(u8.subarray(i), 0); this.n = n - i; }
+    return saida.length ? this.destino.write(saida) : Promise.resolve();
+  };
+  ConversorIso.prototype.fechar = function () {
+    if (this.n) throw new Error("O tamanho de " + this.nome + " não fecha em setores completos. Desmarque a opção \"Versão compacta\" e gere de novo.");
+  };
+  async function copiarBlob(blob, destino) {
+    for (var o = 0; o < blob.size; o += 16 * MB) await destino.write(new Uint8Array(await blob.slice(o, Math.min(blob.size, o + 16 * MB)).arrayBuffer()));
+  }
+
   /* ---------- leitura do .zip (em partes, sem estourar a memória) ---------- */
   function Coletor() { this.blobs = []; this.partes = []; this.n = 0; }
   Coletor.prototype.add = function (u8) {
@@ -202,7 +259,9 @@
     progresso(0, "Preparando…");
     window.addEventListener("beforeunload", segurar);
     var total = cfg.faixas.reduce(function (s, f) { return s + (f.tamanhoFinal || f.tamanho); }, 0), feito = 0;
-    var linhas = cfg.faixas.map(function (f) { return { nome: f.nome, estado: "fila", txt: f.patch ? "traduzir" : "copiar" }; });
+    var compacto = !!(chkCompacto && chkCompacto.checked), plano = compacto ? planoCompacto(cfg) : {};
+    var saidaDe = function (f) { return plano[f.nome] || f.nome; };
+    var linhas = cfg.faixas.map(function (f) { return { nome: saidaDe(f), estado: "fila", txt: f.patch ? "traduzir" : plano[f.nome] ? "converter" : "copiar" }; });
     linhas.push({ nome: "disc.gdi", estado: "fila", txt: "criar" });
     var marcar = function (i, e, t) { linhas[i].estado = e; linhas[i].txt = t; listaFaixas(linhas); };
     var resultados = [];
@@ -211,30 +270,30 @@
       mensagem("info", '<span class="p-girando" aria-hidden="true"></span>Gerando a versão traduzida. Isso leva alguns minutos, não feche esta página. ' + (destinoPasta ? "Os arquivos vão para a pasta <strong>" + esc(cfg.pasta) + "</strong>." : ""));
       for (var i = 0; i < cfg.faixas.length; i++) {
         var f = cfg.faixas[i], origem = estado.faixas[f.nome], base0 = feito;
-        marcar(i, "andamento", f.patch ? "traduzindo…" : "copiando…");
-        if (destinoPasta) {
-          var fh = await destinoPasta.getFileHandle(f.nome, { create: true }), w = await fh.createWritable();
-          if (f.patch) {
-            await V.aplicar(estado.patches[f.nome], await fonteDe(f.nome, origem, base0, total), { write: function (u) { return w.write(u); } },
-              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total) + tempo((base0 + n) / total)); } });
-          } else {
-            progresso(feito / total, "Copiando " + f.nome + "…" + tempo(feito / total));
-            await w.write(origem);
-          }
-          await w.close();
+        marcar(i, "andamento", f.patch ? "traduzindo…" : plano[f.nome] ? "convertendo…" : "copiando…");
+        var nomeSaida = saidaDe(f), w = null, col = null;
+        if (destinoPasta) w = await (await destinoPasta.getFileHandle(nomeSaida, { create: true })).createWritable();
+        else col = new Coletor();
+        var destino = w ? { write: function (u) { return w.write(u); } } : { write: function (u) { col.add(u); return pausa(); } };
+        var conv = plano[f.nome] ? new ConversorIso(f.nome, destino) : null;
+        if (f.patch) {
+          await V.aplicar(estado.patches[f.nome], await fonteDe(f.nome, origem, base0, total), conv || destino,
+            { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total) + tempo((base0 + n) / total)); } });
+        } else if (conv) {
+          progresso(feito / total, "Convertendo " + f.nome + "…" + tempo(feito / total));
+          await copiarBlob(origem, conv);
         } else {
-          if (f.patch) {
-            var col = new Coletor();
-            await V.aplicar(estado.patches[f.nome], await fonteDe(f.nome, origem, base0, total), { write: function (u) { col.add(u); return pausa(); } },
-              { aoProgredir: function (n) { progresso((base0 + n) / total, "Traduzindo " + f.nome + "… " + fmt(base0 + n) + " de " + fmt(total) + tempo((base0 + n) / total)); } });
-            resultados.push({ nome: f.nome, blob: col.blob() });
-          } else resultados.push({ nome: f.nome, blob: origem });
+          progresso(feito / total, "Copiando " + f.nome + "…" + tempo(feito / total));
+          if (w) await w.write(origem);
         }
+        if (conv) conv.fechar();
+        if (w) await w.close();
+        else resultados.push({ nome: nomeSaida, blob: f.patch || conv ? col.blob() : origem });
         feito += f.tamanhoFinal || f.tamanho;
-        marcar(i, "ok", f.patch ? "traduzido" : "copiado");
+        marcar(i, "ok", f.patch ? "traduzido" : conv ? "convertido" : "copiado");
         progresso(feito / total, fmt(feito) + " de " + fmt(total));
       }
-      var gdi = new Blob([cfg.gdi.replace(/\n/g, "\r\n")], { type: "text/plain" });
+      var gdi = new Blob([(compacto ? gdiCompacto(cfg) : cfg.gdi).replace(/\n/g, "\r\n")], { type: "text/plain" });
       if (destinoPasta) { var gh = await destinoPasta.getFileHandle("disc.gdi", { create: true }), gw = await gh.createWritable(); await gw.write(gdi); await gw.close(); }
       else resultados.push({ nome: "disc.gdi", blob: gdi });
       marcar(linhas.length - 1, "ok", "criado");
@@ -249,7 +308,7 @@
       concluir(cfg, destinoPasta ? null : resultados, pacote);
     } catch (e) {
       progresso(null);
-      mensagem("erro", esc(e && e.message ? e.message : String(e)) + (e && e.codigo === "checksum" ? "" : " Se o problema continuar, use o patch .dcp na página do jogo."));
+      mensagem("erro", esc(e && e.message ? e.message : String(e)) + (e && (e.codigo === "checksum" || e.codigo === "compacto") ? "" : " Se o problema continuar, use o patch .dcp na página do jogo."));
       btnGerar.disabled = false;
     } finally {
       estado.ocupado = false; raiz.classList.remove("p-trabalhando");
@@ -322,7 +381,7 @@
       '<div class="stack" style="gap:.6rem"><h3>Como jogar</h3><ul class="lista-check">' +
       "<li><strong>GDEMU / MODE:</strong> copie a pasta para o cartão SD, como qualquer outro jogo.</li>" +
       "<li><strong>Emulador (Flycast, Redream):</strong> abra o arquivo <span class=\"mono\">disc.gdi</span>.</li>" +
-      "<li>Na tela de título deve aparecer <strong>Versão " + esc(atual().disco.versao) + "</strong> no canto.</li></ul></div>" +
+      "<li>Na tela de título deve aparecer <strong>Ver. " + esc(atual().disco.versao) + "</strong> no rodapé.</li></ul></div>" +
       '<div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Curtiu? Apoie o projeto</strong>' +
       '<p class="muted" style="font-size:var(--s-1)">A tradução é gratuita. Se quiser ajudar nas próximas, qualquer valor ajuda.</p>' +
       (A.pixChave ? window.MOGPix.bloco(A, "fim") : "") +
