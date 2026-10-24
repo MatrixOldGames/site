@@ -238,7 +238,10 @@ window.MOG = {
         { nome: "Disco 4", versao: "", etapas: { menus: "ok", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
-      changelog: []
+      changelog: [
+        { versao: "1.0", data: "", notas: ["Primeira versão pública do Disco 1."] }
+      ]
+    },
     }
   ]
 };
