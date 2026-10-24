@@ -235,7 +235,7 @@ window.MOG = {
           download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.0/Shenmue2_Disc_1_PTBR_1.0.dcp", 
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
-            pasta: "PREENCHER - Disco 1",
+            pasta: "Shenmue2 PT-BR - Disco 1",
             gdi: "6\n1 0 4 2352 track01.bin 0\n2 480 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 101910 0 2352 track04.raw 0\n5 102510 0 2352 track05.raw 0\n6 103351 4 2352 track06.bin 0\n",
             faixas: [
                 { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.0/track01.xdelta", tamanhoFinal: 776160 },
