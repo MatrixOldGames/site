@@ -31,7 +31,7 @@
     <div class="jogo-meta"><span class="tag tag--plat">Dreamcast</span><span class="tag">2001</span><span class="estado estado--andamento">em produção</span></div>
     <h1>Shenmue II em <em>português</em></h1>
     <p class="lead">A jornada de Ryo continua em Hong Kong e Guilin. A tradução começou pelos menus e imagens do Disco 1, com o mesmo cuidado de fontes, contornos e sombras do primeiro jogo.</p>
-    <div class="btns"><a class="btn" href="#acompanhe">Acompanhar o andamento</a><a class="btn btn--ghost" href="shenmue.html">Jogar o Shenmue em português</a></div>
+    <div class="btns"><a class="btn" href="patcher.html?jogo=shenmue">Traduzir pelo navegador</a><a class="btn btn--ghost" href="#downloads">Baixar o patch</a></div>
   </div>
   <div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Ficha</strong><dl class="ficha" data-ficha></dl></div>
 </div></section>
@@ -46,23 +46,62 @@
   <div data-prints></div>
 </div></section>
 
-<section class="band" id="acompanhe"><div class="wrap section-head" style="margin-bottom:0">
-  <div class="stack" style="gap:.6rem"><span class="eyebrow">Acompanhe</span><h2>Prévias e lançamentos</h2>
-  <p class="muted" style="max-width:52ch">As telas traduzidas e cada disco novo aparecem primeiro nas redes do projeto.</p></div>
-  <div class="btns">
-    <a class="btn btn--ghost" data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn btn--ghost" data-youtube href="#" target="_blank" rel="noopener">YouTube</a>
-    <a class="btn btn--ghost" data-facebook href="#" target="_blank" rel="noopener">Facebook</a>
+<section class="band band--panel"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Conteúdo</span><h2>O que já está traduzido</h2></div></div>
+  <div class="traduzido" data-traduzido></div>
+</div></section>
+
+<section class="band" id="downloads"><div class="wrap duas-col">
+  <div class="stack">
+    <span class="eyebrow">Downloads</span>
+    <h2>Patches de tradução</h2>
+    <p class="muted prose">Os arquivos são patches no formato .dcp. Eles não contêm o jogo: você aplica sobre a sua própria imagem do disco, versão <strong style="color:var(--fg)" data-versao-base></strong>, em GDI ou CUE/BIN (Redump), original e sem modificações. Com outra versão do jogo, o patch não funciona.</p>
+    <div class="downloads" data-downloads></div>
+    <p class="muted" style="font-size:var(--s-1)"><strong style="color:var(--fg)">Aplicar o patch</strong> traduz o seu jogo direto no navegador, sem instalar nada. <strong style="color:var(--fg)">Baixar .dcp</strong> é para quem prefere o Universal Dreamcast Patcher.</p>
   </div>
+  <div class="stack">
+    <span class="eyebrow">Precisa de ajuda?</span>
+    <h3>Antes de baixar</h3>
+    <ul class="lista-check lista-obs">
+      <li>Confira se a sua imagem é a <strong data-versao-base></strong>, original e sem modificações.</li>
+      <li>Atualizando de uma versão anterior? Aplique a nova versão sobre a imagem original, não sobre a já traduzida.</li>
+      <li>Use o patch de cada disco na imagem do mesmo disco. O patcher online troca de disco sozinho se você se enganar.</li>
+      <li>O Google Drive é um espelho, caso o download principal esteja lento.</li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="band band--panel" id="como-aplicar"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Passo a passo</span><h2>Como aplicar o patch</h2></div><p class="muted" style="max-width:44ch;font-size:var(--s-1)">Dúvidas sobre o processo? Veja também o <a data-guia href="#" target="_blank" rel="noopener">guia</a>.</p></div>
+  <ol class="passos">
+    <li><h3>Baixe o patcher</h3><p class="muted">Instale o <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a>, que é gratuito, e abra o programa.</p></li>
+    <li><h3>Escolha o jogo original</h3><p class="muted">Em <span class="mono">Source Disc Image</span>, selecione o arquivo .gdi (ou .cue) do disco original, versão <span data-versao-base></span>.</p></li>
+    <li><h3>Escolha o patch</h3><p class="muted">Em <span class="mono">Patch File</span>, selecione o .dcp do mesmo disco, por exemplo <span class="mono">Shenmue2_Disc_1_PTBR_1.0.dcp</span> para o Disco 1.</p></li>
+    <li><h3>Aplique e jogue</h3><p class="muted">Clique em <span class="mono">Apply Patch</span>. A imagem traduzida aparece na pasta de saída do programa. Funciona em <span data-compativel></span></p></li>
+  </ol>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Antes de jogar</span><h2>Observações</h2></div></div>
+  <div class="prose" data-observacoes></div>
 </div></section>
 
 <section class="band band--panel"><div class="wrap duas-col">
   <div class="stack">
-    <span class="eyebrow">Apoie</span>
-    <h2>Ajude o Shenmue II a sair mais rápido</h2>
-    <p class="muted prose">A tradução é e continua gratuita. As doações ajudam a manter o tempo, as ferramentas e o hardware de teste.</p>
+    <span class="eyebrow">Histórico</span>
+    <h2>Versões</h2>
+    <ul class="changelog" data-changelog></ul>
   </div>
-  <div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Doe por Pix ou itch.io</strong><div class="btns"><a class="btn" href="apoie.html">Quero apoiar</a><a class="btn btn--ghost" href="apoiadores.html">Ver apoiadores</a></div></div>
+  <div class="stack">
+    <span class="eyebrow">Créditos</span>
+    <dl class="ficha">
+      <dt>Tradução e arte</dt><dd>MatrixHK</dd>
+      <dt>Ferramentas</dt><dd>Shenmue Translation Pack, <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a></dd>
+      <dt>Testes</dt><dd>Dreamcast com GDEMU, Dreamcast original com CD-R e emulador</dd>
+      <dt>Apoio</dt><dd>Obrigado a todos os <a href="apoiadores.html">apoiadores</a> do projeto</dd>
+    </dl>
+    <p class="aviso-legal">Encontrou um erro de texto ou um travamento? Mande um print com o disco, a versão do patch e onde aconteceu para <a data-email href="#"></a> ou pelo <a data-instagram href="#">Instagram</a>.</p>
+  </div>
 </div></section>
 
 </main>
