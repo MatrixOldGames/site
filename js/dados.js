@@ -46,6 +46,7 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue/shenmue-capa.jpg",
       resumo: "Tradução completa dos 3 discos para português do Brasil: menus, itens, legendas e diálogos, mantendo fontes, cores e o visual originais.",
+      destaque: true,    // aparece em destaque na página inicial
       base: { regiao: "USA (NTSC-U)", versao: "v1.003", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",          // página deste jogo no itch.io (com preço mínimo US$ 0), ex.: "https://matrixoldgames.itch.io/shenmue-ptbr"
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
@@ -200,7 +201,7 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue2/shenmue2-capa.jpg",
       resumo: "A continuação da jornada de Ryo, agora em Hong Kong e Guilin. Tradução em produção, com o mesmo cuidado de fontes, cores e visual do primeiro jogo.",
-      destaque: true,    // aparece em destaque na página inicial
+      //destaque: true,    // aparece em destaque na página inicial
       base: { regiao: "Europa (PAL)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
