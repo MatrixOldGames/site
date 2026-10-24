@@ -254,7 +254,6 @@ window.MOG = {
       changelog: [
         { versao: "1.0", data: "", notas: ["Primeira versão pública do Disco 1."] }
       ]
-    },
     }
   ]
 };
