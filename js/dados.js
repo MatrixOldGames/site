@@ -46,7 +46,6 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue/shenmue-capa.jpg",
       resumo: "Tradução completa dos 3 discos para português do Brasil: menus, itens, legendas e diálogos, mantendo fontes, cores e o visual originais.",
-      destaque: true,    // aparece em destaque na página inicial
       base: { regiao: "USA (NTSC-U)", versao: "v1.003", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",          // página deste jogo no itch.io (com preço mínimo US$ 0), ex.: "https://matrixoldgames.itch.io/shenmue-ptbr"
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
@@ -201,13 +200,39 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue2/shenmue2-capa.jpg",
       resumo: "A continuação da jornada de Ryo, agora em Hong Kong e Guilin. Tradução em produção, com o mesmo cuidado de fontes, cores e visual do primeiro jogo.",
-      base: { regiao: "Europa (PAL)", versao: "", formato: "GDI", hash: "" },
+      destaque: true,    // aparece em destaque na página inicial
+      base: { regiao: "Europa (PAL)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
       compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
+      // o que já está traduzido (lista atual, por disco)
+      traduzido: {
+        "Disco 1": [
+          "Todas as legendas das cutscenes",
+          "Legenda da profecia da Shenhua na abertura",
+          "Todas as conversas com moradores, comerciantes e NPCs",
+          "Menus, opções, telas de carregamento, salvar/carregar e cartão de memória",
+          "Telas do VMU (salvando, carregando, concluído e telas da batalha) e logo com selo PT-BR",
+          "Nomes de lugares nas telas de carregamento e no mapa",
+          "Caderno do Ryo, itens, coleção, lista de golpes, ajudas e instruções dos minigames e trabalhos, avisos e textos do jogo",
+          "Acentuação completa (á, é, ç, ã, õ etc.)",
+          "Capa própria do GDEMU"
+        ]
+      },
+      observacoes: [
+        "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
+        "Não troque os discos: cada patch só funciona na imagem original do mesmo disco.",
+        "Os nomes dos golpes ficaram em inglês, como no resto do jogo (ex.: Swallow Flip, Tornado Kick, Shadow Step).",
+        "A tela \"Produced by or under license from SEGA\" é do console e fica em inglês em todas as versões oficiais."
+      ],
       discos: [
-        { nome: "Disco 1", versao: "", etapas: { menus: "ok", dialogos: "ok", testes: "andamento" }, download: "", espelho: "" },
+        // patcher online: só a versão mais recente de cada disco (blocos gerados a partir do resumo.json do mog_gerar_patch.py)
+        { 
+	  nome: "Disco 1", versao: "1.0", 
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.0/Shenmue2_Disc_1_PTBR_1.0.dcp", 
+          espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link" },
         { nome: "Disco 2", versao: "", etapas: { menus: "ok", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
         { nome: "Disco 3", versao: "", etapas: { menus: "ok", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
         { nome: "Disco 4", versao: "", etapas: { menus: "ok", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
@@ -217,3 +242,51 @@ window.MOG = {
     }
   ]
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
