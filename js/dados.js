@@ -33,7 +33,8 @@ window.MOG = {
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
     { nome: "Wellinton Martins Correia" },
-    { nome: "William da Silva Sampaio" }
+	{ nome: "Wesley G Holanda" },
+	{ nome: "William da Silva Sampaio" }
   ],
 
   traducoes: [
