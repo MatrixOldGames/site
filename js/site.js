@@ -227,8 +227,8 @@
       proximos.map(function (t) {
         var d = t.discos.filter(function (x) { return estadoDisco(x) === "andamento"; })[0] || t.discos[0];
         return '<a class="proximo" href="' + esc(t.pagina) + '">' + (t.capa ? '<img src="' + esc(t.capa) + '" alt="" loading="lazy">' : "") +
-          '<div class="stack" style="gap:.35rem;min-width:0"><span class="eyebrow">Em produção</span><strong>' + esc(t.titulo) + "</strong>" +
-          '<span class="muted" style="font-size:var(--s-1)">' + esc(t.plataforma) + " · " + esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila") + "</span></div>" +
+          '<div class="stack" style="gap:.35rem;min-width:0"><span class="eyebrow">' + (ultimoLancado(t) ? "Lançamento parcial" : "Em produção") + '</span><strong>' + esc(t.titulo) + "</strong>" +
+          '<span class="muted" style="font-size:var(--s-1)">' + esc(t.plataforma) + " · " + (ultimoLancado(t) ? resumoJogo(t) : esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila")) + "</span></div>" +
           '<span class="mono proximo-seta" aria-hidden="true">→</span></a>';
       }).join("");
   });

@@ -33,8 +33,8 @@ window.MOG = {
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
     { nome: "Wellinton Martins Correia" },
-	{ nome: "Wesley G Holanda" },
-	{ nome: "William da Silva Sampaio" }
+    { nome: "Wesley G Holanda" },
+    { nome: "William da Silva Sampaio" }
   ],
 
   traducoes: [
@@ -201,7 +201,7 @@ window.MOG = {
       ano: 2001,
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue2/shenmue2-capa.jpg",
-      resumo: "A continuação da jornada de Ryo, agora em Hong Kong e Guilin. Tradução em produção, com o mesmo cuidado de fontes, cores e visual do primeiro jogo.",
+      resumo: "A continuação da jornada de Ryo em Hong Kong. Os Discos 1 e 2 já estão em português, com o mesmo cuidado de fontes, cores e visual do primeiro jogo.",
       //destaque: true,    // aparece em destaque na página inicial
       base: { regiao: "Europa (PAL)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",
@@ -212,98 +212,87 @@ window.MOG = {
       traduzido: {
         "Disco 1": [
           "Todas as legendas das cutscenes",
-          "Legenda da profecia da Shenhua na abertura",
           "Todas as conversas com moradores, comerciantes e NPCs",
-          "Menus, opções, telas de carregamento, salvar/carregar e cartão de memória",
-          "Telas do VMU (salvando, carregando, concluído e telas da batalha) e logo com selo PT-BR",
-          "Nomes de lugares nas telas de carregamento e no mapa",
+          "Tela de título (\"APERTE O BOTÃO START\"), menus, opções, telas de carregamento, salvar/carregar e cartão de memória",
+          "Telas do VMU (salvando, carregando, concluído etc.)",
+          "Nomes de lugares nas telas de carregamento e no mapa: tipo do lugar traduzido + nome próprio (ex.: Casa de Penhores Mercado Verde, Café dos Pombos)",
           "Caderno do Ryo, itens, coleção, lista de golpes, ajudas e instruções dos minigames e trabalhos, avisos e textos do jogo",
           "Acentuação completa (á, é, ç, ã, õ etc.)",
+          "Capa própria do GDEMU"
+        ],
+        "Disco 2": [
+          "Wan Chai e Aberdeen, até a partida para Kowloon: todas as legendas das cutscenes",
+          "Todas as conversas com moradores, comerciantes e NPCs",
+          "Menus, telas do VMU, caderno, itens e textos do jogo, como no Disco 1",
           "Capa própria do GDEMU"
         ]
       },
       observacoes: [
         "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
         "Não troque os discos: cada patch só funciona na imagem original do mesmo disco.",
-        "Os nomes dos golpes ficaram em inglês, como no resto do jogo (ex.: Swallow Flip, Tornado Kick, Shadow Step).",
+        "Quem já tem a 1.0: aplique o patch 1.1 do Disco 1 sobre a imagem original, não sobre a já traduzida. Os saves da 1.0 continuam funcionando.",
+        "A versão europeia tem vários idiomas e a tradução ocupa o lugar do inglês. Se o jogo aparecer em outro idioma, ajuste o idioma do Dreamcast (ou do emulador) para English.",
+        "O Shenmue II traduzido aceita o save de final de jogo do Shenmue 1, tanto da versão europeia quanto da americana, incluindo o save da tradução PT-BR do Shenmue 1. Não é preciso converter o save.",
+        "Os Discos 3 e 4 virão nas próximas versões. Ao trocar para um disco ainda não traduzido, o jogo continua normalmente, mas em inglês.",
+        "Os nomes dos golpes ficaram em inglês, como no Shenmue 1 (ex.: Swallow Flip, Tornado Kick, Iron Palm).",
+        "Nomes de gangues e de alguns estabelecimentos ficaram como no original (ex.: Heavens, Lucky Hit, Swing).",
+        "As vozes continuam em inglês; a tradução está nas legendas e textos.",
         "A tela \"Produced by or under license from SEGA\" é do console e fica em inglês em todas as versões oficiais."
       ],
       discos: [
         // patcher online: só a versão mais recente de cada disco (blocos gerados a partir do resumo.json do mog_gerar_patch.py)
-        { 
-	  nome: "Disco 1", versao: "1.0", 
+        {
+          nome: "Disco 1", versao: "1.1",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.0/Shenmue2_Disc_1_PTBR_1.0.dcp", 
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.1/Shenmue2_Disc_1_PTBR_1.1.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
             pasta: "Shenmue2 PT-BR - Disco 1",
-            gdi: "6\n1 0 4 2352 track01.bin 0\n2 480 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 101910 0 2352 track04.raw 0\n5 102510 0 2352 track05.raw 0\n6 103351 4 2352 track06.bin 0\n",
+            gdi: "6\n1 0 4 2352 track01.bin 0\n2 480 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 101909 0 2352 track04.raw 0\n5 102509 0 2352 track05.raw 0\n6 103350 4 2352 track06.bin 0\n",
             faixas: [
-                { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.0/track01.xdelta", tamanhoFinal: 776160 },
-                { nome: "track02.raw", tamanho: 13994400 },
-                { nome: "track03.bin", tamanho: 133407792, patch: "patches/shenmue2/disco1-v1.0/track03.xdelta", tamanhoFinal: 133499520 },
-                { nome: "track04.raw", tamanho: 1411200 },
-                { nome: "track05.raw", tamanho: 1625232 },
-                { nome: "track06.bin", tamanho: 1048610976, patch: ["patches/shenmue2/disco1-v1.0/track06.xdelta.parte1", "patches/shenmue2/disco1-v1.0/track06.xdelta.parte2", "patches/shenmue2/disco1-v1.0/track06.xdelta.parte3"], tamanhoFinal: 1048519248 }
+              { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.1/track01.xdelta", tamanhoFinal: 776160 },
+              { nome: "track02.raw", tamanho: 13994400 },
+              { nome: "track03.bin", tamanho: 133407792, patch: "patches/shenmue2/disco1-v1.1/track03.xdelta", tamanhoFinal: 133497168 },
+              { nome: "track04.raw", tamanho: 1411200 },
+              { nome: "track05.raw", tamanho: 1625232 },
+              { nome: "track06.bin", tamanho: 1048610976, patch: ["patches/shenmue2/disco1-v1.1/track06.xdelta.parte1", "patches/shenmue2/disco1-v1.1/track06.xdelta.parte2", "patches/shenmue2/disco1-v1.1/track06.xdelta.parte3"], tamanhoFinal: 1048521600 }
             ]
           }
         },
-        { nome: "Disco 2", versao: "", etapas: { menus: "ok", dialogos: "ok", testes: "andamento" }, download: "", espelho: "" },
+        {
+          nome: "Disco 2", versao: "1.1",
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.1/Shenmue2_Disc_2_PTBR_1.1.dcp",
+          espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
+          patcher: {
+            pasta: "Shenmue2 PT-BR - Disco 2",
+            gdi: "3\n1 0 4 2352 track01.bin 0\n2 973 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 1935696, md5: "0bdb3e13031566c10c70ca80a145803f", patch: "patches/shenmue2/disco2-v1.1/track01.xdelta", tamanhoFinal: 1935696 },
+              { nome: "track02.raw", tamanho: 13994400 },
+              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco2-v1.1/track03.xdelta.parte1", "patches/shenmue2/disco2-v1.1/track03.xdelta.parte2", "patches/shenmue2/disco2-v1.1/track03.xdelta.parte3"], tamanhoFinal: 1185760800 }
+            ]
+          }
+        },
         { nome: "Disco 3", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
         { nome: "Disco 4", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
       changelog: [
+        { versao: "1.1", data: "29/10/2026", notas: [
+          "Disco 2 traduzido por completo (Wan Chai e Aberdeen, até a partida para Kowloon): todas as legendas das cutscenes e todas as conversas com moradores, comerciantes e NPCs",
+          "Disco 1: corrigido o travamento na tela de mapas (lista de bairros de Wan Chai), com os nomes ajustados ao limite do jogo",
+          "Nomes de lugares padronizados: tipo do lugar traduzido + nome próprio (ex.: Casa de Penhores Mercado Verde, Café Moon, Shopping Dourado, Bairro Carmain do Sul). O bar Swing ficou com o nome original",
+          "Menu rápido: \"Local de Ontem\" e \"Carmain do Sul\"",
+          "Lishao Tao passa a ser tratada como \"a Mestra\" depois que o Ryo descobre quem ela é",
+          "Nomes dos golpes sempre em inglês (ex.: Iron Palm)",
+          "Caderno do Ryo: anotações sobre artes marciais corrigidas",
+          "Opções de diálogo com a Fangmei corrigidas (\"Você Consegue\", \"Esforce-se\")",
+          "Telas de carregamento e placas de nomes de bairros revisadas",
+          "Número da versão atualizado nas telas de título e de opções"
+        ] },
         { versao: "1.0", data: "", notas: ["Primeira versão pública do Disco 1."] }
       ]
     }
   ]
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
