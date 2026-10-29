@@ -274,7 +274,7 @@ window.MOG = {
             ]
           }
         },
-        { nome: "Disco 3", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
+        { nome: "Disco 3", versao: "", etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" }, download: "", espelho: "" },
         { nome: "Disco 4", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
