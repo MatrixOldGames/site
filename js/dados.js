@@ -247,7 +247,7 @@ window.MOG = {
           download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.1/Shenmue2_Disc_1_PTBR_1.1.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
-            pasta: "Shenmue2 PT-BR - Disco 1",
+            pasta: "Shenmue II PT-BR - Disco 1",
             gdi: "6\n1 0 4 2352 track01.bin 0\n2 480 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 101909 0 2352 track04.raw 0\n5 102509 0 2352 track05.raw 0\n6 103350 4 2352 track06.bin 0\n",
             faixas: [
               { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.1/track01.xdelta", tamanhoFinal: 776160 },
@@ -265,7 +265,7 @@ window.MOG = {
           download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.1/Shenmue2_Disc_2_PTBR_1.1.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
-            pasta: "Shenmue2 PT-BR - Disco 2",
+            pasta: "Shenmue II PT-BR - Disco 2",
             gdi: "3\n1 0 4 2352 track01.bin 0\n2 973 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
             faixas: [
               { nome: "track01.bin", tamanho: 1935696, md5: "0bdb3e13031566c10c70ca80a145803f", patch: "patches/shenmue2/disco2-v1.1/track01.xdelta", tamanhoFinal: 1935696 },
@@ -274,7 +274,7 @@ window.MOG = {
             ]
           }
         },
-        { nome: "Disco 3", versao: "", etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" }, download: "", espelho: "" },
+        { nome: "Disco 3", versao: "", etapas: { menus: "ok", dialogos: "ok", testes: "andamento" }, download: "", espelho: "" },
         { nome: "Disco 4", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
@@ -293,6 +293,27 @@ window.MOG = {
         ] },
         { versao: "1.0", data: "", notas: ["Primeira versão pública do Disco 1."] }
       ]
+    }
+    ,{
+      id: "pso2",
+      pagina: "pso2.html",
+      titulo: "Phantasy Star Online Ver.2",
+      plataforma: "Dreamcast",
+      ano: 2001,
+      tradutor: "MatrixHK",
+      capa: "assets/jogos/pso2/pso2-capa.jpg",
+      resumo: "O RPG online da SEGA em português: menus, itens, técnicas, quests offline, Word Select e o vídeo de abertura. Próximo projeto, depois do Shenmue II.",
+      chamada: "Próximo da fila, depois do Shenmue II",   // texto curto do card "Em breve" na página inicial (opcional)
+      base: { regiao: "a definir", versao: "", formato: "GDI", hash: "" },
+      itch: "",
+      ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
+      guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
+      compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
+      discos: [
+        { nome: "GD-ROM", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
+      ],
+      prints: [],
+      changelog: []
     }
   ]
 };
