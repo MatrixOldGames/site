@@ -29,6 +29,7 @@ window.MOG = {
     { nome: "André Oliveira da Cruz" },
     { nome: "Dan Carvalho" },
     { nome: "Davi Damasceno Vieira Rosa" },
+    { nome: "Marcelo Pereira da Silva" },
     { nome: "Pablo Rodrigues Machado" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
@@ -296,7 +297,7 @@ window.MOG = {
             ]
           }
         },
-        { nome: "Disco 4", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
+        { nome: "Disco 4", versao: "", etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [
         { antes: "assets/jogos/shenmue2/shenmue2-01-en.jpg", depois: "assets/jogos/shenmue2/shenmue2-01-pt.jpg", mini: "assets/jogos/shenmue2/shenmue2-01-mini.jpg", legenda: "Tela de título" },
