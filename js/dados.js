@@ -29,6 +29,7 @@ window.MOG = {
     { nome: "André Oliveira da Cruz" },
     { nome: "Dan Carvalho" },
     { nome: "Davi Damasceno Vieira Rosa" },
+    { nome: "Marcelo Pereira da Silva" },
     { nome: "Pablo Rodrigues Machado" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
