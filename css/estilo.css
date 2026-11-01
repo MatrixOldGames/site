@@ -1,9 +1,9 @@
 /* Matrix Old Games — "Madrugada Retrô"
    Layout: coluna central de leitura (~72rem), faixas de largura total por seção,
    a TV de tubo como peça principal da home e "slots de save" como linguagem de status. */
-/* "2" redesenhado: o da Pixelify Sans é fechado e parece um 8. Só o dígito 2 vem desta fonte. */
-@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-500.woff2") format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0032; }
-@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-600.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0032; }
+/* "2" e "5" redesenhados: na Pixelify Sans o 2 parece um 8 e o 5 é igual ao S. Só esses dois dígitos vêm desta fonte. */
+@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-500.woff2") format("woff2"); font-weight: 500; font-display: swap; unicode-range: U+0032, U+0035; }
+@font-face { font-family: "MOG Dois"; src: url("../assets/fontes/mog-dois-600.woff2") format("woff2"); font-weight: 600; font-display: swap; unicode-range: U+0032, U+0035; }
 :root {
   color-scheme: dark;
   --bg: #0D1020;          /* madrugada */
@@ -363,3 +363,35 @@ div.prose { display: grid; gap: 1em; }
 .p-opcao { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .65rem; align-items: start; font-size: var(--s-1); cursor: pointer; }
 .p-opcao input { width: 1.15rem; height: 1.15rem; margin: .2rem 0 0; accent-color: var(--green); }
 .p-opcao .muted { font-size: var(--s-0); }
+
+/* ---------- destaque da página inicial para tradução completa ---------- */
+.destaque-completo { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3rem); align-items: center; }
+.dc-capa { position: relative; display: block; text-decoration: none; }
+.dc-capa img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; border: 1px solid var(--line); box-shadow: 8px 8px 0 #000; }
+.dc-capa:hover img { border-color: var(--yellow); }
+.dc-selo { position: absolute; left: -.5rem; top: 1rem; font-family: var(--f-mono); font-size: var(--s-0); letter-spacing: .1em; text-transform: uppercase; padding: .45em .9em; background: var(--green); color: #07160D; box-shadow: 4px 4px 0 #000; }
+.dc-texto { gap: 1rem; }
+.dc-texto h2 { font-size: var(--s-5); }
+.dc-discos { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+.dc-discos li { font-family: var(--f-mono); font-size: var(--s-0); padding: .3em .75em; border: 1px solid color-mix(in srgb, var(--ok) 60%, var(--line)); color: var(--fg); }
+.dc-discos li span { color: var(--ok); }
+.proximo--ok { border-style: solid; border-color: color-mix(in srgb, var(--ok) 45%, var(--line)); }
+.proximo--ok .eyebrow { color: var(--ok); }
+@media (max-width: 860px) { .destaque-completo { grid-template-columns: minmax(0, 1fr); } .dc-texto h2 { font-size: var(--s-4); } }
+
+/* ---------- números (bastidores) ---------- */
+.numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11.5rem), 1fr)); gap: .75rem; }
+.numero { background: var(--surface-2); border: 1px solid var(--line); border-top: 3px solid var(--yellow); padding: .9rem 1rem 1rem; display: grid; gap: .35rem; align-content: start; }
+.numero strong { font-family: var(--f-display); font-size: var(--s-4); line-height: 1.05; color: var(--yellow); }
+.numero span { color: var(--muted); font-size: var(--s-1); line-height: 1.35; }
+.dc-texto .numero strong { font-size: var(--s-3); }
+.dc-texto .numeros { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 520px) { .dc-texto .numeros { gap: .5rem; } .dc-texto .numero { padding: .6rem .6rem .7rem; } .dc-texto .numero strong { font-size: var(--s-2); } .dc-texto .numero span { font-size: var(--s-0); } }
+.jornada { display: grid; gap: 1.75rem; }
+.jornada .numeros { grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); }
+@media (max-width: 860px) { .jornada .numeros { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 380px) { .jornada .numeros { grid-template-columns: minmax(0, 1fr); } }
+.jornada-nota { font-size: var(--s-1); margin: -.5rem 0 0; }
+.jornada-texto { max-width: 62ch; }
+.jornada-texto p { font-size: var(--s-2); }
+.jornada-fecho { font-family: var(--f-display); font-size: var(--s-3) !important; color: var(--fg); line-height: 1.3; }

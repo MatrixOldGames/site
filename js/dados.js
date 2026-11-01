@@ -48,7 +48,27 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue/shenmue-capa.jpg",
       resumo: "Tradução completa dos 3 discos para português do Brasil: menus, itens, legendas e diálogos, mantendo fontes, cores e o visual originais.",
-      destaque: true,    // aparece em destaque na página inicial
+      // jornada: seção "bastidores" da página do jogo (e números no destaque da página inicial)
+      jornada: {
+        titulo: "Relembrando o caminho percorrido",
+        intro: "Foram semanas entre abrir o primeiro arquivo do disco e aprovar a versão final. Nesse período, Yokosuka passou a falar português.",
+        numeros: [
+          ["35 mil", "falas legendadas"],
+          ["185 mil", "palavras"],
+          ["3", "discos traduzidos de ponta a ponta"],
+          ["225", "cenas e áreas do jogo"],
+          ["684", "arquivos de legenda reconstruídos"],
+          ["Quase 200", "personagens com voz própria"],
+          ["+130", "imagens e telas redesenhadas"],
+          ["2.343", "arquivos vasculhados atrás de textos escondidos"]
+        ],
+        nota: "",
+        texto: [
+          "Cada morador de Dobuita, cada colega do porto e cada conselho do Mestre Chen foi traduzido com cuidado, sem perder o jeito de falar de cada um.",
+          "Também desenhamos as letras acentuadas direto na fonte original do jogo, refizemos pixel a pixel as telas do VMU, criamos uma capa para cada disco e demos legenda à profecia da Shenhua, que no original não tinha texto.",
+          "Tudo isso para que você viva Shenmue como sempre mereceu: no seu idioma."
+        ]
+      },
       base: { regiao: "USA (NTSC-U)", versao: "v1.003", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",          // página deste jogo no itch.io (com preço mínimo US$ 0), ex.: "https://matrixoldgames.itch.io/shenmue-ptbr"
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
@@ -202,8 +222,25 @@ window.MOG = {
       ano: 2001,
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue2/shenmue2-capa.jpg",
-      resumo: "A continuação da jornada de Ryo em Hong Kong e Kowloon. Os Discos 1, 2 e 3 já estão em português, com o mesmo cuidado de fontes, cores e visual do primeiro jogo.",
-      //destaque: true,    // aparece em destaque na página inicial
+      resumo: "Tradução completa dos 4 discos: de Hong Kong a Kowloon e Guilin, com legendas, diálogos, menus, o Filme Resumo e o Shenmue Collection em português.",
+      destaque: true,    // aparece em destaque na página inicial
+      jornada: {
+        titulo: "O caminho até aqui",
+        intro: "Shenmue II nunca teve uma versão em português. Agora, cada fala do jogo pode ser lida no nosso idioma, do primeiro passo em Aberdeen até a última cena em Guilin.",
+        numeros: [
+          ["220 mil", "falas exibidas no jogo"],
+          ["52 mil", "frases traduzidas, uma a uma"],
+          ["376 mil", "palavras em português"],
+          ["4", "discos traduzidos por completo"],
+          ["+1.800", "arquivos do jogo modificados"],
+          ["+380", "imagens recriadas: menus, telas de carregamento, placas, minigames e capas"]
+        ],
+        nota: "Foram semanas da primeira análise ao último disco.",
+        texto: [
+          "Seja nas cutscenes, nas conversas com moradores ou no menu do Shenmue Collection, nenhuma fala ficou de fora. Até o resumo em vídeo do Shenmue 1 ganhou legendas.",
+          "Uma tradução de fã, feita por amor à série, para que mais gente possa viver essa história em português."
+        ]
+      },
       base: { regiao: "Europa (PAL)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" }, // hash: MD5 do GDI/track original esperado
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
@@ -233,15 +270,25 @@ window.MOG = {
           "Prédios e bairros de Kowloon com nomes traduzidos (ex.: Prédio Cabeça Amarela, Prédio Bela Vista, Bairro das Barracas, Bairro do Dim Sum, Rua do Dragão)",
           "Lojas com o tipo do lugar traduzido + nome próprio (ex.: Pássaros Nine Birds, Restaurante Everyone's, Casa de Chá Nihao, Café Anna)",
           "Capa própria do GDEMU"
+        ],
+        "Disco 4": [
+          "Guilin e a Vila Bailu, até o final: todas as legendas das cutscenes",
+          "Todas as conversas com a Shenhua pelo caminho e todas as falas de moradores e viajantes",
+          "Filme Resumo (resumo do Shenmue 1) com legendas completas em português, aplicadas direto no vídeo",
+          "Shenmue Collection: menus, títulos, botões, nomes dos minigames e lutadores e todas as descrições",
+          "Crédito da tradução numa tela própria, logo antes de \"Directed & Produced By\"",
+          "Capa própria do GDEMU"
         ]
       },
       observacoes: [
         "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
         "Não troque os discos: cada patch só funciona na imagem original do mesmo disco.",
-        "Quem já tem a 1.0 ou a 1.1: aplique os patches 1.2 sobre as imagens originais, não sobre as já traduzidas. Atualize os Discos 1 e 2 também, para todos ficarem na mesma versão. Os saves das versões anteriores continuam funcionando.",
+        "Quem já tem uma versão anterior (1.0 a 1.2): aplique os patches 1.3 sobre as imagens originais, não sobre as já traduzidas. Atualize os Discos 1 a 3 também, para todos ficarem na mesma versão. Os saves das versões anteriores continuam funcionando.",
         "A versão europeia tem vários idiomas e a tradução ocupa o lugar do inglês. Se o jogo aparecer em outro idioma, ajuste o idioma do Dreamcast (ou do emulador) para English.",
         "O Shenmue II traduzido aceita o save de final de jogo do Shenmue 1, tanto da versão europeia quanto da americana, incluindo o save da tradução PT-BR do Shenmue 1. Não é preciso converter o save.",
-        "O Disco 4 virá na próxima versão. Ao trocar para ele, o jogo continua normalmente, mas em inglês.",
+        "Os quatro discos estão traduzidos: o jogo pode ser jogado do início ao fim em português.",
+        "O vídeo da versão de Saturn (Shenmue Collection) não tem falas nem textos, só música, e ficou como no original.",
+        "Os créditos finais da equipe original ficaram em inglês, como em todas as versões oficiais.",
         "Os nomes dos golpes ficaram em inglês, como no Shenmue 1 (ex.: Swallow Flip, Tornado Kick, Iron Palm).",
         "Nomes de gangues e de alguns estabelecimentos ficaram como no original (ex.: Heavens, Yellow Head, Lucky Hit, Swing).",
         "As vozes continuam em inglês; a tradução está nas legendas e textos.",
@@ -250,54 +297,68 @@ window.MOG = {
       discos: [
         // patcher online: só a versão mais recente de cada disco (blocos gerados a partir do resumo.json do mog_gerar_patch.py)
         {
-          nome: "Disco 1", versao: "1.2",
+          nome: "Disco 1", versao: "1.3",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.2/Shenmue2_Disc_1_PTBR_1.2.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.3/Shenmue2_Disc_1_PTBR_1.3.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
             pasta: "Shenmue II PT-BR - Disco 1",
             gdi: "6\n1 0 4 2352 track01.bin 0\n2 480 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 101909 0 2352 track04.raw 0\n5 102509 0 2352 track05.raw 0\n6 103350 4 2352 track06.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.2/track01.xdelta", tamanhoFinal: 776160 },
+              { nome: "track01.bin", tamanho: 776160, md5: "2da6c577d816aead233010104c98b165", patch: "patches/shenmue2/disco1-v1.3/track01.xdelta", tamanhoFinal: 776160 },
               { nome: "track02.raw", tamanho: 13994400 },
-              { nome: "track03.bin", tamanho: 133407792, patch: "patches/shenmue2/disco1-v1.2/track03.xdelta", tamanhoFinal: 133497168 },
+              { nome: "track03.bin", tamanho: 133407792, patch: "patches/shenmue2/disco1-v1.3/track03.xdelta", tamanhoFinal: 133497168 },
               { nome: "track04.raw", tamanho: 1411200 },
               { nome: "track05.raw", tamanho: 1625232 },
-              { nome: "track06.bin", tamanho: 1048610976, patch: ["patches/shenmue2/disco1-v1.2/track06.xdelta.parte1", "patches/shenmue2/disco1-v1.2/track06.xdelta.parte2", "patches/shenmue2/disco1-v1.2/track06.xdelta.parte3"], tamanhoFinal: 1048521600 }
+              { nome: "track06.bin", tamanho: 1048610976, patch: ["patches/shenmue2/disco1-v1.3/track06.xdelta.parte1", "patches/shenmue2/disco1-v1.3/track06.xdelta.parte2", "patches/shenmue2/disco1-v1.3/track06.xdelta.parte3"], tamanhoFinal: 1048521600 }
             ]
           }
         },
         {
-          nome: "Disco 2", versao: "1.2",
+          nome: "Disco 2", versao: "1.3",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.2/Shenmue2_Disc_2_PTBR_1.2.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.3/Shenmue2_Disc_2_PTBR_1.3.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
             pasta: "Shenmue II PT-BR - Disco 2",
             gdi: "3\n1 0 4 2352 track01.bin 0\n2 973 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 1935696, md5: "0bdb3e13031566c10c70ca80a145803f", patch: "patches/shenmue2/disco2-v1.2/track01.xdelta", tamanhoFinal: 1935696 },
+              { nome: "track01.bin", tamanho: 1935696, md5: "0bdb3e13031566c10c70ca80a145803f", patch: "patches/shenmue2/disco2-v1.3/track01.xdelta", tamanhoFinal: 1935696 },
               { nome: "track02.raw", tamanho: 13994400 },
-              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco2-v1.2/track03.xdelta.parte1", "patches/shenmue2/disco2-v1.2/track03.xdelta.parte2", "patches/shenmue2/disco2-v1.2/track03.xdelta.parte3"], tamanhoFinal: 1185760800 }
+              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco2-v1.3/track03.xdelta.parte1", "patches/shenmue2/disco2-v1.3/track03.xdelta.parte2", "patches/shenmue2/disco2-v1.3/track03.xdelta.parte3"], tamanhoFinal: 1185760800 }
             ]
           }
         },
         {
-          nome: "Disco 3", versao: "1.2",
+          nome: "Disco 3", versao: "1.3",
           etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
-          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.2/Shenmue2_Disc_3_PTBR_1.2.dcp",
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.3/Shenmue2_Disc_3_PTBR_1.3.dcp",
           espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
           patcher: {
             pasta: "Shenmue II PT-BR - Disco 3",
             gdi: "3\n1 0 4 2352 track01.bin 0\n2 729 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
             faixas: [
-              { nome: "track01.bin", tamanho: 1361808, md5: "ec299e05308187aeccf5a6a17928cae1", patch: "patches/shenmue2/disco3-v1.2/track01.xdelta", tamanhoFinal: 1361808 },
+              { nome: "track01.bin", tamanho: 1361808, md5: "ec299e05308187aeccf5a6a17928cae1", patch: "patches/shenmue2/disco3-v1.3/track01.xdelta", tamanhoFinal: 1361808 },
               { nome: "track02.raw", tamanho: 13994400 },
-              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco3-v1.2/track03.xdelta.parte1", "patches/shenmue2/disco3-v1.2/track03.xdelta.parte2", "patches/shenmue2/disco3-v1.2/track03.xdelta.parte3"], tamanhoFinal: 1185760800 }
+              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco3-v1.3/track03.xdelta.parte1", "patches/shenmue2/disco3-v1.3/track03.xdelta.parte2", "patches/shenmue2/disco3-v1.3/track03.xdelta.parte3"], tamanhoFinal: 1185760800 }
             ]
           }
         },
-        { nome: "Disco 4", versao: "", etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" }, download: "", espelho: "" }
+        {
+          nome: "Disco 4", versao: "1.3",
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/shenmue2_v1.3/Shenmue2_Disc_4_PTBR_1.3.dcp",
+          espelho: "https://drive.google.com/drive/folders/1cNDF2RjwknRwlbvE7M6GSZu3wusQVDIY?usp=share_link",
+          patcher: {
+            pasta: "Shenmue II PT-BR - Disco 4",
+            gdi: "3\n1 0 4 2352 track01.bin 0\n2 11820 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 27447840, md5: "c432f0992fdfffa8cddebd3193d60c7a", patch: "patches/shenmue2/disco4-v1.3/track01.xdelta", tamanhoFinal: 27447840 },
+              { nome: "track02.raw", tamanho: 13994400 },
+              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/shenmue2/disco4-v1.3/track03.xdelta.parte1", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte2", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte3", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte4", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte5", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte6", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte7", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte8", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte9", "patches/shenmue2/disco4-v1.3/track03.xdelta.parte10"], tamanhoFinal: 1185760800 }
+            ]
+          }
+        }
       ],
       prints: [
         { antes: "assets/jogos/shenmue2/shenmue2-01-en.jpg", depois: "assets/jogos/shenmue2/shenmue2-01-pt.jpg", mini: "assets/jogos/shenmue2/shenmue2-01-mini.jpg", legenda: "Tela de título" },
@@ -309,6 +370,15 @@ window.MOG = {
         { antes: "assets/jogos/shenmue2/shenmue2-07-en.png", depois: "assets/jogos/shenmue2/shenmue2-07-pt.png", mini: "assets/jogos/shenmue2/shenmue2-07-mini.jpg", legenda: "Tela de salvamento no VMU", vmu: true }
       ],
       changelog: [
+        { versao: "1.3", data: "01/11/2026", notas: [
+          "Disco 4 traduzido por completo (Guilin e a Vila Bailu, até o final): todas as legendas das cutscenes, todas as conversas com a Shenhua pelo caminho e todas as falas de moradores e viajantes",
+          "Filme Resumo (resumo do Shenmue 1, exclusivo do Disco 4): legendas completas em português, aplicadas direto no vídeo. O botão do menu passou a ser \"B: VOLTAR\"",
+          "Shenmue Collection (exclusivo do Disco 4): menus, títulos, botões, nomes dos minigames e lutadores e todas as descrições traduzidos",
+          "Créditos finais: os da equipe original continuam em inglês, como nas versões oficiais, e o crédito da tradução aparece numa tela separada, logo antes de \"Directed & Produced By\"",
+          "Capa do Disco 4 para o GDEMU",
+          "Número da versão atualizado nas telas de título e de opções dos quatro discos",
+          "Com o Disco 4, a tradução do Shenmue II está completa"
+        ] },
         { versao: "1.2", data: "31/10/2026", notas: [
           "Disco 3 traduzido por completo (Kowloon): todas as legendas das cutscenes e todas as conversas com moradores, comerciantes e NPCs",
           "Prédios e bairros de Kowloon traduzidos no mesmo padrão dos discos anteriores (ex.: Prédio Cabeça Amarela, Prédio Filho da Lua, Prédio Bela Vista, Bairro das Barracas, Bairro do Dim Sum, Rua do Dragão)",
@@ -339,15 +409,15 @@ window.MOG = {
       ano: 2001,
       tradutor: "MatrixHK",
       capa: "assets/jogos/pso2/pso2-capa.jpg",
-      resumo: "O RPG online da SEGA em português: menus, itens, técnicas, quests offline, Word Select e o vídeo de abertura. Próximo projeto, depois do Shenmue II.",
-      chamada: "Próximo da fila, depois do Shenmue II",   // texto curto do card "Em breve" na página inicial (opcional)
-      base: { regiao: "a definir", versao: "", formato: "GDI", hash: "" },
+      resumo: "O RPG online da SEGA em português: menus, itens, técnicas, quests offline, Word Select e o vídeo de abertura. Tradução em andamento.",
+      chamada: "",   // texto curto opcional para o card da página inicial
+      base: { regiao: "USA (NTSC-U)", versao: "v1.004", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
       compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
       discos: [
-        { nome: "GD-ROM", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
+        { nome: "GD-ROM", versao: "", etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
       changelog: []

@@ -213,24 +213,56 @@
   }
 
   /* ---------- destaque da home ---------- */
+  function numerosJornada(j, n) {
+    if (!j.jornada || !j.jornada.numeros) return "";
+    var lista = j.jornada.numeros.slice(0, n), cols = lista.length % 4 === 0 ? 4 : 3;
+    return '<div class="numeros" style="--cols:' + cols + '">' + lista.map(function (x) {
+      return '<div class="numero"><strong>' + esc(x[0]) + "</strong><span>" + esc(x[1]) + "</span></div>";
+    }).join("") + "</div>";
+  }
+  function cardJogo(t) {
+    var d = t.discos.filter(function (x) { return estadoDisco(x) === "andamento"; })[0] || t.discos[0];
+    var e = estadoJogo(t), olho, linha;
+    if (e === "ok") { olho = "Tradução completa"; linha = resumoJogo(t); }
+    else if (ultimoLancado(t)) { olho = "Lançamento parcial"; linha = resumoJogo(t); }
+    else { olho = e === "pendente" ? "Em breve" : "Em produção"; linha = t.chamada ? esc(t.chamada) : esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila"); }
+    return '<a class="proximo' + (e === "ok" ? " proximo--ok" : "") + '" href="' + esc(t.pagina) + '">' + (t.capa ? '<img src="' + esc(t.capa) + '" alt="" loading="lazy">' : "") +
+      '<div class="stack" style="gap:.35rem;min-width:0"><span class="eyebrow">' + olho + '</span><strong>' + esc(t.titulo) + "</strong>" +
+      '<span class="muted" style="font-size:var(--s-1)">' + esc(t.plataforma) + " · " + linha + "</span></div>" +
+      '<span class="mono proximo-seta" aria-hidden="true">→</span></a>';
+  }
   $$("[data-destaque]").forEach(function (el) {
     var j = D.traducoes.filter(function (t) { return t.destaque; })[0] ||
       D.traducoes.filter(function (t) { return estadoJogo(t) === "andamento"; })[0] || D.traducoes[0];
     if (!j) return;
     var completa = estadoJogo(j) === "ok";
-    var proximos = D.traducoes.filter(function (t) { return t !== j && estadoJogo(t) !== "ok"; });
-    el.innerHTML =
-      '<div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">' + (completa ? "Tradução completa" : "Tradução em destaque") + "</span>" +
-      "<h2>" + esc(j.titulo) + (completa ? ' <span class="selo-completo">100% em português</span>' : "") + '</h2><div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + resumoJogo(j) + "</span></div></div>" +
-      '<a class="btn' + (completa ? "" : " btn--ghost") + '" href="' + esc(j.pagina) + '">' + (completa ? "Jogar em português" : "Página da tradução") + "</a></div>" +
-      '<div class="slots">' + j.discos.map(slot).join("") + "</div>" +
-      proximos.map(function (t) {
-        var d = t.discos.filter(function (x) { return estadoDisco(x) === "andamento"; })[0] || t.discos[0];
-        return '<a class="proximo" href="' + esc(t.pagina) + '">' + (t.capa ? '<img src="' + esc(t.capa) + '" alt="" loading="lazy">' : "") +
-          '<div class="stack" style="gap:.35rem;min-width:0"><span class="eyebrow">' + (ultimoLancado(t) ? "Lançamento parcial" : estadoJogo(t) === "pendente" ? "Em breve" : "Em produção") + '</span><strong>' + esc(t.titulo) + "</strong>" +
-          '<span class="muted" style="font-size:var(--s-1)">' + esc(t.plataforma) + " · " + (ultimoLancado(t) ? resumoJogo(t) : t.chamada ? esc(t.chamada) : esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila")) + "</span></div>" +
-          '<span class="mono proximo-seta" aria-hidden="true">→</span></a>';
-      }).join("");
+    var outros = D.traducoes.filter(function (t) { return t !== j; });
+    // completos primeiro, depois os em produção
+    outros.sort(function (a, b) { return (estadoJogo(a) === "ok" ? 0 : 1) - (estadoJogo(b) === "ok" ? 0 : 1); });
+    var topo;
+    if (completa) {
+      var v = ultimoLancado(j), n = j.discos.length;
+      topo = '<div class="destaque-completo">' +
+        '<a class="dc-capa" href="' + esc(j.pagina) + '" aria-label="' + esc(j.titulo) + '">' +
+          (j.capa ? '<img src="' + esc(j.capa) + '" alt="Capa da tradução de ' + esc(j.titulo) + '" width="1200" height="750">' : '<span class="titulo-capa">' + esc(j.titulo) + "</span>") +
+          '<span class="dc-selo">100% em português</span></a>' +
+        '<div class="stack dc-texto">' +
+          '<span class="eyebrow">Tradução completa</span>' +
+          "<h2>" + esc(j.titulo) + "</h2>" +
+          '<div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + (n > 1 ? n + " discos" : "1 disco") + (v && v.versao ? " · v" + esc(v.versao) : "") + "</span></div>" +
+          '<p class="muted">' + esc(j.resumo) + "</p>" +
+          numerosJornada(j, 3) +
+          '<ul class="dc-discos" aria-label="Discos">' + j.discos.map(function (d) { return '<li><span aria-hidden="true">✓</span> ' + esc(d.nome) + "</li>"; }).join("") + "</ul>" +
+          '<div class="btns"><a class="btn" href="' + esc(j.pagina) + '">Jogar em português</a>' +
+          (j.discos.some(function (d) { return d.patcher; }) ? '<a class="btn btn--ghost" href="patcher.html?jogo=' + encodeURIComponent(j.id) + '">Traduzir pelo navegador</a>' : "") + "</div>" +
+        "</div></div>";
+    } else {
+      topo = '<div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Tradução em destaque</span>' +
+        "<h2>" + esc(j.titulo) + '</h2><div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + resumoJogo(j) + "</span></div></div>" +
+        '<a class="btn btn--ghost" href="' + esc(j.pagina) + '">Página da tradução</a></div>' +
+        '<div class="slots">' + j.discos.map(slot).join("") + "</div>";
+    }
+    el.innerHTML = topo + outros.map(cardJogo).join("");
   });
 
   /* ---------- botão "baixar" do hero ---------- */
@@ -335,6 +367,18 @@
       var campo = sec.getAttribute("data-esconder-vazio"), v = J[campo];
       if (!v || (Array.isArray(v) ? !v.length : !Object.keys(v).length)) sec.hidden = true;
     });
+    var jo = $("[data-jornada]");
+    if (jo && J.jornada) {
+      var JR = J.jornada;
+      jo.innerHTML =
+        '<div class="stack" style="gap:.9rem;max-width:62ch"><span class="eyebrow">Bastidores</span><h2>' + esc(JR.titulo) + "</h2>" +
+        (JR.intro ? '<p class="lead jornada-intro">' + esc(JR.intro) + "</p>" : "") + "</div>" +
+        numerosJornada(J, 99) +
+        (JR.nota ? '<p class="mono muted jornada-nota">' + esc(JR.nota) + "</p>" : "") +
+        (JR.texto && JR.texto.length ? '<div class="prose jornada-texto">' + JR.texto.map(function (t, i) {
+          return "<p" + (i === JR.texto.length - 1 ? ' class="jornada-fecho"' : "") + ">" + esc(t) + "</p>";
+        }).join("") + "</div>" : "");
+    }
     var ch = $("[data-changelog]");
     if (ch) ch.innerHTML = J.changelog.map(function (c) {
       return '<li><span class="v">v' + esc(c.versao) + "</span><div>" + (c.data ? '<span class="mono muted" style="font-size:var(--s-0)">' + esc(c.data) + "</span>" : "") +
