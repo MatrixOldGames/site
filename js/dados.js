@@ -29,13 +29,15 @@ window.MOG = {
     { nome: "André Oliveira da Cruz" },
     { nome: "Dan Carvalho" },
     { nome: "Davi Damasceno Vieira Rosa" },
+    { nome: "Gustavo de Abreu Pinheiro" },
     { nome: "Marcelo Pereira da Silva" },
     { nome: "Pablo Rodrigues Machado" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
     { nome: "Wellinton Martins Correia" },
     { nome: "Wesley G Holanda" },
-    { nome: "William da Silva Sampaio" }
+    { nome: "William da Silva Sampaio" },
+    { nome: "William de Oliveira Laurindo" }
   ],
 
   traducoes: [
