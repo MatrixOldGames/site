@@ -395,3 +395,10 @@ div.prose { display: grid; gap: 1em; }
 .jornada-texto { max-width: 62ch; }
 .jornada-texto p { font-size: var(--s-2); }
 .jornada-fecho { font-family: var(--f-display); font-size: var(--s-3) !important; color: var(--fg); line-height: 1.3; }
+
+/* galeria 16:9 (widescreen) e bloco de código */
+.galeria--wide { max-width: 64rem; }
+.galeria--wide .tela { aspect-ratio: 16 / 9; }
+.galeria--wide .g-minis button { width: 112px; aspect-ratio: 16 / 9; }
+.codigo { margin: 0; font-family: var(--f-mono); font-size: var(--s-2); line-height: 1.6; color: var(--yellow); background: var(--bg); border: 1px solid var(--line); padding: .8rem 1rem; overflow-x: auto; white-space: pre; }
+.ws-codigo { display: grid; gap: .75rem; justify-items: start; }

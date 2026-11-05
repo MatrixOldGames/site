@@ -112,12 +112,14 @@
   /* ---------- carrossel antes/depois ----------
      Cada cena mostra o original e depois a tradução; em seguida passa para a próxima.
      Qualquer clique do visitante pausa a troca automática. */
-  function galeria(el, prints) {
+  function galeria(el, prints, opc) {
+    opc = opc || {};
+    var rotA = opc.rotuloAntes || "ORIGINAL", rotD = opc.rotuloDepois || "PT-BR";
     var n = prints.length, i = 0, pt = false, auto = true, timer = null, visivel = false;
     var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var dois = function (x) { return (x < 10 ? "0" : "") + x; };
     el.innerHTML =
-      '<div class="galeria">' +
+      '<div class="galeria' + (opc.wide ? " galeria--wide" : "") + '">' +
       '<div class="tv"><div class="tela tela--foto">' +
       '<img class="g-img g-en" alt=""><img class="g-img g-pt" alt="">' +
       '<span class="g-selo" aria-hidden="true"></span></div>' +
@@ -141,7 +143,7 @@
       en.alt = "Tela original em inglês: " + (p.legenda || ""); ptb.alt = "Mesma tela traduzida: " + (p.legenda || "");
       tela.classList.toggle("tela--vmu", !!p.vmu);
       ptb.classList.toggle("ativa", pt);
-      selo.textContent = pt ? "PT-BR" : "ORIGINAL"; selo.classList.toggle("pt", pt);
+      selo.textContent = pt ? rotD : rotA; selo.classList.toggle("pt", pt);
       cont.textContent = "CENA " + dois(i + 1) + "/" + dois(n);
       leg.textContent = p.legenda || "";
       $$(".g-idioma button", el).forEach(function (b) { b.setAttribute("aria-pressed", String((b.getAttribute("data-g") === "pt") === pt)); });
@@ -215,7 +217,7 @@
   /* ---------- destaque da home ---------- */
   function numerosJornada(j, n) {
     if (!j.jornada || !j.jornada.numeros) return "";
-    var lista = j.jornada.numeros.slice(0, n), cols = lista.length % 4 === 0 ? 4 : 3;
+    var lista = j.jornada.numeros.slice(0, n), cols = lista.length % 4 === 0 ? 4 : lista.length % 5 === 0 && lista.length > 5 ? 5 : 3;
     return '<div class="numeros" style="--cols:' + cols + '">' + lista.map(function (x) {
       return '<div class="numero"><strong>' + esc(x[0]) + "</strong><span>" + esc(x[1]) + "</span></div>";
     }).join("") + "</div>";
@@ -361,6 +363,16 @@
       } else {
         galeria(pr, J.prints);
       }
+    }
+
+    var ws = $("[data-widescreen]");
+    if (ws && J.widescreen && J.widescreen.prints && J.widescreen.prints.length) {
+      galeria(ws, J.widescreen.prints, { wide: true, rotuloAntes: "ORIGINAL 16:9", rotuloDepois: "TRADUÇÃO 16:9" });
+    }
+    var wc = $("[data-widescreen-codigo]");
+    if (wc && J.widescreen && J.widescreen.codigo) {
+      wc.innerHTML = '<pre class="codigo" id="ws-codigo">' + J.widescreen.codigo.map(esc).join("\n") + "</pre>" +
+        '<button type="button" class="btn btn--ghost" data-copiar="ws-codigo" data-aviso="Código copiado">Copiar código</button>';
     }
 
     $$("[data-esconder-vazio]").forEach(function (sec) {

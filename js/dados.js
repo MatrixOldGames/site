@@ -229,7 +229,6 @@ window.MOG = {
       tradutor: "MatrixHK",
       capa: "assets/jogos/shenmue2/shenmue2-capa.jpg",
       resumo: "Tradução completa dos 4 discos: de Hong Kong a Kowloon e Guilin, com legendas, diálogos, menus, o Filme Resumo e o Shenmue Collection em português.",
-      destaque: true,    // aparece em destaque na página inicial
       jornada: {
         titulo: "O caminho até aqui",
         intro: "Shenmue II nunca teve uma versão em português. Agora, cada fala do jogo pode ser lida no nosso idioma, do primeiro passo em Aberdeen até a última cena em Guilin.",
@@ -415,9 +414,117 @@ window.MOG = {
       ano: 2001,
       tradutor: "MatrixHK",
       capa: "assets/jogos/pso2/pso2-capa.jpg",
-      resumo: "O RPG online da SEGA em português: menus, itens, técnicas, quests offline, Word Select e o vídeo de abertura. Tradução em andamento.",
+      destaque: true,    // aparece em destaque na página inicial (só um jogo por vez)
+      resumo: "Ragol em português: missões offline, falas da Pioneer 2, itens, Word Select e menus traduzidos, e o jogo funcionando de verdade em widescreen.",
       chamada: "",   // texto curto opcional para o card da página inicial
       base: { regiao: "USA (NTSC-U)", versao: "v1.004", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
+      itch: "",
+      ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
+      guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
+      compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
+      jornada: {
+        titulo: "O caminho até aqui",
+        intro: "Em 8 dias, da primeira análise do disco ao teste final no Dreamcast, Ragol aprendeu a falar português. Cada missão, cada fala da Pioneer 2, cada aviso da Rico e cada item da sua bolsa agora estão no nosso idioma. E a aventura ainda ganhou a tela inteira: o jogo passou a funcionar de verdade em widescreen.",
+        numeros: [
+          ["39 mil", "palavras traduzidas"],
+          ["6 mil", "textos entre falas, menus, itens e mensagens"],
+          ["21", "missões offline traduzidas do início ao fim"],
+          ["1.120", "frases do Word Select"],
+          ["540", "itens com nome e descrição em português"],
+          ["5", "cenários com todas as falas: Pioneer 2, Floresta, Caverna, Minas e Ruínas"],
+          ["60", "imagens recriadas: menus, títulos, botões, telas e o vídeo de abertura"],
+          ["90", "arquivos do jogo alterados"],
+          ["16:9", "widescreen de ponta a ponta: efeitos, telas de título e menus"],
+          ["8", "dias, da análise do disco à versão 1.0"]
+        ],
+        nota: "",
+        texto: [
+          "Feito por fã, para fãs. Boa caçada, Hunter!"
+        ]
+      },
+      // seção "widescreen" da página: galeria 16:9 e códigos
+      widescreen: {
+        codigo: ["02548E84 43D20000", "020925A4 3FA66666"],
+        prints: [
+          { antes: "assets/jogos/pso2/pso2-ws-01-en.jpg", depois: "assets/jogos/pso2/pso2-ws-01-pt.jpg", mini: "assets/jogos/pso2/pso2-ws-01-mini.jpg", legenda: "Tela de título: a arte ocupa a tela inteira" },
+          { antes: "assets/jogos/pso2/pso2-ws-02-en.jpg", depois: "assets/jogos/pso2/pso2-ws-02-pt.jpg", mini: "assets/jogos/pso2/pso2-ws-02-mini.jpg", legenda: "Menus: fundo e faixa de título de ponta a ponta" },
+          { antes: "assets/jogos/pso2/pso2-ws-03-en.jpg", depois: "assets/jogos/pso2/pso2-ws-03-pt.jpg", mini: "assets/jogos/pso2/pso2-ws-03-mini.jpg", legenda: "Cenas: faixas de cinema na largura toda" }
+        ]
+      },
+      traduzido: {
+        "GD-ROM": [
+          "Interface completa: menu principal (Bolsa, Personalizar, Técnicas, Chat, Opções), status do personagem, opções, mensagens do sistema, salvar/carregar e VMU",
+          "Criação e seleção de personagem: telas, títulos, botões e descrições",
+          "Itens: nomes genéricos e todas as descrições de armas, proteções, unidades, mags, ferramentas e itens especiais",
+          "Técnicas e suas descrições",
+          "Pioneer 2: falas de todos os moradores e funcionários, Diretor, Hunter's Guild, lojas, Tekker, Depósito e Centro Médico",
+          "Todas as missões offline do Hunter's Guild: lista, resumos, descrições, diálogos e mensagens durante as missões",
+          "Floresta, Caverna, Minas e Ruínas: mensagens da Rico, cápsulas, avisos e falas dos personagens pelo caminho",
+          "Word Select (chat por frases prontas)",
+          "Modo Batalha e Desafio: mensagens e resultados",
+          "Telas de conexão, títulos das janelas online e o navegador do jogo (Dream Passport), com o gerenciador de arquivos do VMU e o utilitário de banda larga",
+          "Telas com texto desenhado: títulos, legendas dos botões, ajuste de TV e textos dos menus",
+          "Créditos finais com o crédito da tradução",
+          "Logo do PSO no VMU com o selo PT-BR, acentuação completa e capa do disco para o GDEMU"
+        ]
+      },
+      observacoes: [
+        "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
+        "A tradução ocupa o lugar do inglês: no menu de idioma do jogo, a opção que era \"English\" agora aparece como \"Português\".",
+        "Funciona nos servidores privados de PSO para Dreamcast, com o mesmo número de série e a mesma chave de acesso que você já usa.",
+        "Online, textos enviados pelo servidor aparecem no idioma do servidor: nomes e descrições das missões para download, avisos e menus próprios de cada servidor.",
+        "No chat, as mensagens digitadas aparecem como foram escritas. O Word Select mostra as frases no idioma de quem recebe.",
+        "Ficaram em inglês, como nomes próprios do jogo: classes (HUmar, FOnewearl, RAcast etc.), nomes de armas e itens especiais, técnicas (Foie, Resta, Ryuker etc.), inimigos, Section IDs, Hunter's Guild, Guild Card e Black Paper.",
+        "As vozes e os efeitos sonoros não foram alterados.",
+        "A tela \"Produced by or under license from SEGA\" é do console e fica em inglês em todas as versões oficiais.",
+        "A Ver.1 do Phantasy Star Online terá a sua própria tradução."
+      ],
+      discos: [
+        // patcher online: só a versão mais recente (bloco gerado a partir do resumo.json do mog_gerar_patch.py)
+        {
+          nome: "GD-ROM", versao: "1.0",
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/pso2_v1.0/PSO_Ver2_PTBR_1.0.dcp",
+          espelho: "",
+          patcher: {
+            pasta: "Phantasy Star Online Ver.2 PT-BR",
+            gdi: "3\n1 0 4 2352 track01.bin 0\n2 6795 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 15629040, md5: "2bdcdccf7d129c2a3e9ef005b4044eca", patch: "patches/pso2/disco1-v1.0/track01.xdelta", tamanhoFinal: 15629040 },
+              { nome: "track02.raw", tamanho: 1237152 },
+              { nome: "track03.bin", tamanho: 1185760800, patch: ["patches/pso2/disco1-v1.0/track03.xdelta.parte1", "patches/pso2/disco1-v1.0/track03.xdelta.parte2", "patches/pso2/disco1-v1.0/track03.xdelta.parte3", "patches/pso2/disco1-v1.0/track03.xdelta.parte4", "patches/pso2/disco1-v1.0/track03.xdelta.parte5"], tamanhoFinal: 1185760800 }
+            ]
+          }
+        }
+      ],
+      prints: [
+        { antes: "assets/jogos/pso2/pso2-01-en.jpg", depois: "assets/jogos/pso2/pso2-01-pt.jpg", mini: "assets/jogos/pso2/pso2-01-mini.jpg", legenda: "Tela de título" },
+        { antes: "assets/jogos/pso2/pso2-02-en.jpg", depois: "assets/jogos/pso2/pso2-02-pt.jpg", mini: "assets/jogos/pso2/pso2-02-mini.jpg", legenda: "Opções: Português no lugar do inglês" },
+        { antes: "assets/jogos/pso2/pso2-03-en.jpg", depois: "assets/jogos/pso2/pso2-03-pt.jpg", mini: "assets/jogos/pso2/pso2-03-mini.jpg", legenda: "Diretor Tyrell" },
+        { antes: "assets/jogos/pso2/pso2-04-en.jpg", depois: "assets/jogos/pso2/pso2-04-pt.jpg", mini: "assets/jogos/pso2/pso2-04-mini.jpg", legenda: "Menu principal e status" },
+        { antes: "assets/jogos/pso2/pso2-05-en.jpg", depois: "assets/jogos/pso2/pso2-05-pt.jpg", mini: "assets/jogos/pso2/pso2-05-mini.jpg", legenda: "Moradores da Pioneer 2" },
+        { antes: "assets/jogos/pso2/pso2-06-en.jpg", depois: "assets/jogos/pso2/pso2-06-pt.jpg", mini: "assets/jogos/pso2/pso2-06-mini.jpg", legenda: "Missões do Hunter's Guild" },
+        { antes: "assets/jogos/pso2/pso2-07-en.jpg", depois: "assets/jogos/pso2/pso2-07-pt.jpg", mini: "assets/jogos/pso2/pso2-07-mini.jpg", legenda: "Mensagens na Floresta" }
+      ],
+      changelog: [
+        { versao: "1.0", data: "05/11/2026", notas: [
+          "Primeira versão: interface, itens, técnicas, Pioneer 2, as 21 missões offline, Floresta, Caverna, Minas e Ruínas, Word Select, Modo Batalha e Desafio, telas de conexão e Dream Passport",
+          "Suporte a widescreen (16:9): escurecimento das conversas, faixas de cinema, tela de título, logos, fundo dos menus e faixas de título ocupam a tela inteira. Em 4:3, o jogo continua igual ao original",
+          "Logo no VMU com o selo PT-BR, capa do GDEMU e crédito da tradução nos créditos finais"
+        ] }
+      ]
+    },
+    {
+      id: "grandia2",
+      pagina: "grandia2.html",
+      titulo: "Grandia II",
+      plataforma: "Dreamcast",
+      ano: 2000,
+      tradutor: "MatrixHK",
+      capa: "assets/jogos/grandia2/grandia2-capa.jpg",
+      resumo: "O clássico RPG da Game Arts em português: diálogos da história, menus, itens, golpes e magias. Tradução em andamento.",
+      chamada: "",
+      base: { regiao: "USA (NTSC-U)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
@@ -428,5 +535,6 @@ window.MOG = {
       prints: [],
       changelog: []
     }
+
   ]
 };

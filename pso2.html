@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Phantasy Star Online Ver.2 em Português · Matrix Old Games</title>
-<meta name="description" content="Tradução de fãs de Phantasy Star Online Ver.2 (Dreamcast) para português do Brasil, em produção: veja o que vai ser traduzido e acompanhe.">
+<meta name="description" content="Tradução de fãs de Phantasy Star Online Ver.2 (Dreamcast) para português do Brasil, com suporte a widescreen: download do patch e como aplicar.">
 <meta property="og:title" content="Phantasy Star Online Ver.2 em Português · Matrix Old Games">
-<meta property="og:description" content="Tradução de fãs de Phantasy Star Online Ver.2 (Dreamcast) para português do Brasil, em produção: veja o que vai ser traduzido e acompanhe.">
+<meta property="og:description" content="Tradução de fãs de Phantasy Star Online Ver.2 (Dreamcast) para português do Brasil, com suporte a widescreen: download do patch e como aplicar.">
 <meta property="og:image" content="https://www.matrixoldgames.com.br/assets/mog-avatar.png">
 <meta name="theme-color" content="#0D1020">
 <link rel="icon" type="image/svg+xml" href="assets/mog-icone.svg">
@@ -28,59 +28,105 @@
 <section class="hero" style="padding-bottom:2.5rem"><div class="wrap duas-col">
   <div class="stack" style="gap:1.25rem">
     <a class="mono muted" href="traducoes.html" style="font-size:var(--s-0);text-decoration:none">← Traduções</a>
-    <div class="jogo-meta"><span class="tag tag--plat">Dreamcast</span><span class="tag">2001</span><span class="estado estado--andamento">em produção</span></div>
+    <div class="jogo-meta"><span class="tag tag--plat">Dreamcast</span><span class="tag">2001</span><span class="tag" data-resumo></span><span class="tag">16:9</span></div>
     <h1>Phantasy Star Online Ver.2 em <em>português</em></h1>
-    <p class="lead">Ragol espera por você. Com o Shenmue e o Shenmue II completos, a tradução do RPG online da SEGA começou: menus, itens, técnicas, quests offline e até o vídeo de abertura em português, com o mesmo cuidado de fontes e visual das traduções do Shenmue.</p>
-    <div class="btns"><a class="btn" href="#acompanhe">Acompanhar o andamento</a><a class="btn btn--ghost" href="shenmue2.html">Jogar o Shenmue II em português</a></div>
+    <p class="lead">Ragol em português: as 21 missões offline, as falas da Pioneer 2, os avisos da Rico, itens, técnicas, Word Select e menus. E o jogo ainda ganhou suporte de verdade a widescreen, com efeitos, títulos e menus ocupando a tela toda.</p>
+    <div class="btns"><a class="btn" href="patcher.html?jogo=pso2">Traduzir pelo navegador</a><a class="btn btn--ghost" href="#downloads">Baixar o patch</a></div>
   </div>
   <div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Ficha</strong><dl class="ficha" data-ficha></dl></div>
 </div></section>
 
-<section class="band band--panel"><div class="wrap duas-col">
+<section class="band" data-esconder-vazio="jornada" id="bastidores"><div class="wrap jornada" data-jornada></div></section>
+
+<section class="band band--panel" id="widescreen"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Diferencial</span><h2>Widescreen de verdade</h2></div>
+  <p class="muted" style="max-width:46ch;font-size:var(--s-1)">No PSO original em 16:9, vários efeitos ficavam presos na área 4:3 do centro. Nesta tradução, eles ocupam a tela inteira. Em 4:3, o jogo continua igual ao original.</p></div>
+  <div data-widescreen></div>
+  <div class="duas-col" style="margin-top:2.5rem">
+    <div class="stack">
+      <h3>O que passou a ocupar a tela toda</h3>
+      <ul class="lista-check">
+        <li>Escurecimento das conversas, cenas e transições</li>
+        <li>Faixas pretas de cinema nas cenas</li>
+        <li>Tela de título, logos da SEGA e da Sonic Team e fundo dos menus</li>
+        <li>Faixas de título dos menus (Dificuldade, Modo, VMU, Opções) e a tela de discagem</li>
+      </ul>
+    </div>
+    <div class="stack">
+      <h3>Como ligar</h3>
+      <p class="muted">No Flycast, ative a opção <span class="mono">Widescreen</span>. No Dreamcast, use o código de widescreen num dispositivo de códigos:</p>
+      <div class="ws-codigo" data-widescreen-codigo></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" data-esconder-vazio="prints"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Antes e depois</span><h2>Veja a tradução no jogo</h2></div></div>
+  <div data-prints></div>
+</div></section>
+
+<section class="band band--panel"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Conteúdo</span><h2>O que está traduzido</h2></div></div>
+  <div class="traduzido" data-traduzido></div>
+</div></section>
+
+<section class="band" id="downloads"><div class="wrap duas-col">
   <div class="stack">
-    <span class="eyebrow">O plano</span>
-    <h2>O que vai ser traduzido</h2>
-    <ul class="lista-check">
-      <li>Menus, opções, telas do sistema e mensagens do jogo</li>
-      <li>Itens, armas, técnicas, nomes de inimigos e descrições</li>
-      <li>Quests offline: títulos, descrições e todas as falas</li>
-      <li>Word Select, as frases prontas para conversar com outros jogadores</li>
-      <li>Lojas e o avaliador de itens</li>
-      <li>Texturas com texto, revisadas uma a uma</li>
-      <li>Acentuação completa (á, é, ç, ã, õ etc.)</li>
-    </ul>
+    <span class="eyebrow">Downloads</span>
+    <h2>Patch de tradução</h2>
+    <p class="muted prose">Os arquivos são patches no formato .dcp. Eles não contêm o jogo: você aplica sobre a sua própria imagem do disco, versão <strong style="color:var(--fg)" data-versao-base></strong>, em GDI ou CUE/BIN (Redump), original e sem modificações. Com outra versão do jogo, o patch não funciona.</p>
+    <div class="downloads" data-downloads></div>
+    <p class="muted" style="font-size:var(--s-1)"><strong style="color:var(--fg)">Aplicar o patch</strong> traduz o seu jogo direto no navegador, sem instalar nada. <strong style="color:var(--fg)">Baixar .dcp</strong> é para quem prefere o Universal Dreamcast Patcher.</p>
   </div>
   <div class="stack">
-    <span class="eyebrow">Destaques</span>
-    <h2>Como vai ser</h2>
-    <ul class="lista-check">
-      <li>O português entra no lugar do <strong>inglês</strong>. Assim o jogo fica todo traduzido, sem menus em inglês misturados com o português.</li>
-      <li>O <strong>vídeo de abertura</strong> ganha os textos em português e uma leve melhora de imagem, dentro do limite que o Dreamcast consegue tocar.</li>
-      <li>A base é a versão americana, <strong>v1.004</strong>. A primeira etapa, menus e imagens, já está em andamento.</li>
+    <span class="eyebrow">Precisa de ajuda?</span>
+    <h3>Antes de baixar</h3>
+    <ul class="lista-check lista-obs">
+      <li>Confira se a sua imagem é a <strong data-versao-base></strong>, original e sem modificações.</li>
+      <li>Atualizando de uma versão anterior? Aplique a nova versão sobre a imagem original, não sobre a já traduzida.</li>
+      <li>Vai jogar online? A tradução funciona nos servidores privados, com o mesmo número de série e a mesma chave de acesso de sempre.</li>
     </ul>
   </div>
+</div></section>
+
+<section class="band band--panel" id="como-aplicar"><div class="wrap">
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Passo a passo</span><h2>Como aplicar o patch</h2></div><p class="muted" style="max-width:44ch;font-size:var(--s-1)">Dúvidas sobre o processo? Veja também o <a data-guia href="#" target="_blank" rel="noopener">guia</a>.</p></div>
+  <ol class="passos">
+    <li><h3>Baixe o patcher</h3><p class="muted">Instale o <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a>, que é gratuito, e abra o programa.</p></li>
+    <li><h3>Escolha o jogo original</h3><p class="muted">Em <span class="mono">Source Disc Image</span>, selecione o arquivo .gdi (ou .cue) do disco original, versão <span data-versao-base></span>.</p></li>
+    <li><h3>Escolha o patch</h3><p class="muted">Em <span class="mono">Patch File</span>, selecione <span class="mono">PSO_Ver2_PTBR_1.0.dcp</span>.</p></li>
+    <li><h3>Aplique e jogue</h3><p class="muted">Clique em <span class="mono">Apply Patch</span>. A imagem traduzida aparece na pasta de saída do programa. Funciona em <span data-compativel></span></p></li>
+  </ol>
 </div></section>
 
 <section class="band"><div class="wrap">
-  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Progresso</span><h2>Status</h2></div><p class="muted" style="max-width:40ch;font-size:var(--s-1)">Cada disco passa por três etapas antes de ser lançado.</p></div>
-  <div class="slots" data-slots></div>
+  <div class="section-head"><div class="stack" style="gap:.6rem"><span class="eyebrow">Antes de jogar</span><h2>Observações</h2></div></div>
+  <div class="prose" data-observacoes></div>
 </div></section>
 
-<section class="band band--panel" id="acompanhe"><div class="wrap section-head" style="margin-bottom:0">
-  <div class="stack" style="gap:.6rem"><span class="eyebrow">Acompanhe</span><h2>Prévias e lançamentos</h2>
-  <p class="muted" style="max-width:52ch">As primeiras telas traduzidas e a data de lançamento aparecem primeiro nas redes do projeto.</p></div>
-  <div class="btns">
-    <a class="btn btn--ghost" data-instagram href="#" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn btn--ghost" data-youtube href="#" target="_blank" rel="noopener">YouTube</a>
-    <a class="btn btn--ghost" data-facebook href="#" target="_blank" rel="noopener">Facebook</a>
+<section class="band band--panel"><div class="wrap duas-col">
+  <div class="stack">
+    <span class="eyebrow">Histórico</span>
+    <h2>Versões</h2>
+    <ul class="changelog" data-changelog></ul>
+  </div>
+  <div class="stack">
+    <span class="eyebrow">Créditos</span>
+    <dl class="ficha">
+      <dt>Tradução e arte</dt><dd>MatrixHK</dd>
+      <dt>Ferramentas</dt><dd>Ferramentas próprias de extração e reinserção de texto, <a data-ferramenta href="#" target="_blank" rel="noopener">patcher</a></dd>
+      <dt>Testes</dt><dd>Dreamcast com GDEMU e Flycast, em 4:3 e 16:9</dd>
+      <dt>Apoio</dt><dd>Obrigado a todos os <a href="apoiadores.html">apoiadores</a> do projeto</dd>
+    </dl>
+    <p class="aviso-legal">Encontrou um erro de texto ou um travamento? Mande um print com a versão do patch e onde aconteceu para <a data-email href="#"></a> ou pelo <a data-instagram href="#">Instagram</a>.</p>
   </div>
 </div></section>
 
-<section class="band"><div class="wrap duas-col">
+<section class="band band--panel"><div class="wrap duas-col">
   <div class="stack">
     <span class="eyebrow">Apoie</span>
-    <h2>Ajude o PSO a chegar mais rápido</h2>
-    <p class="muted prose">As traduções são e continuam gratuitas. As doações ajudam a manter o tempo, as ferramentas e o hardware de teste.</p>
+    <h2>Curtiu? Apoie as próximas traduções</h2>
+    <p class="muted prose">A tradução é e continua gratuita. As doações ajudam a manter o tempo, as ferramentas e o hardware de teste dos próximos jogos.</p>
   </div>
   <div class="painel"><strong style="font-family:var(--f-display);font-size:var(--s-3)">Doe por Pix ou itch.io</strong><div class="btns"><a class="btn" href="apoie.html">Quero apoiar</a><a class="btn btn--ghost" href="apoiadores.html">Ver apoiadores</a></div></div>
 </div></section>
