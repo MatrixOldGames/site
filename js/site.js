@@ -267,14 +267,6 @@
     el.innerHTML = topo + outros.map(cardJogo).join("");
   });
 
-  /* ---------- botão "baixar" do hero ---------- */
-  $$("[data-baixar-ultimo]").forEach(function (el) {
-    var j = D.traducoes[0]; if (!j) return;
-    var d = ultimoLancado(j);
-    el.href = j.pagina + "#downloads";
-    el.textContent = d ? "Baixar " + j.titulo + " · " + d.nome : "Ver " + j.titulo;
-  });
-
   /* ---------- catálogo ---------- */
   $$("[data-catalogo]").forEach(function (el) {
     var plats = [];
