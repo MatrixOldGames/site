@@ -32,6 +32,12 @@
 
   var estado = { arquivos: null, faixas: null, patches: null, ocupado: false };
   function atual() { return opcoes[+sel.value]; }
+  // métricas: "patcher-<etapa>/<jogo>/<disco>"
+  function evento(etapa, detalhe) {
+    var o = atual(), f = window.mogEvento;
+    if (!f || !o) return;
+    f("patcher-" + etapa + "/" + o.jogo.id + "/" + window.mogSlug(o.disco.nome), o.jogo.titulo + " · " + o.disco.nome + " v" + o.disco.versao + (detalhe ? " · " + detalhe : ""));
+  }
 
   /* ---------- etapas / mensagens ---------- */
   var etapas = $("[data-p-etapas]"), barra = $("[data-p-barra]"), barraTxt = $("[data-p-barra-txt]"), msg = $("[data-p-msg]");
@@ -162,6 +168,7 @@
       await identificar(lista);
     } catch (e) {
       progresso(null); mensagem("erro", esc(e.message || String(e)));
+      evento("erro-arquivos", String(e && e.message || e).slice(0, 120));
     } finally {
       estado.ocupado = false; zona.classList.remove("ocupado");
     }
@@ -225,6 +232,7 @@
     mensagem("ok", trocou + "<strong>Tudo certo:</strong> " + esc(J.titulo) + " · " + esc(atual().disco.nome) + ", versão " + esc(base) + ". Agora é só gerar a versão traduzida.");
     btnGerar.disabled = false;
     btnGerar.focus();
+    evento("reconhecido");
   }
 
   /* ---------- relógio: tempo decorrido e estimativa ---------- */
@@ -260,6 +268,8 @@
     window.addEventListener("beforeunload", segurar);
     var total = cfg.faixas.reduce(function (s, f) { return s + (f.tamanhoFinal || f.tamanho); }, 0), feito = 0;
     var compacto = !!(chkCompacto && chkCompacto.checked), plano = compacto ? planoCompacto(cfg) : {};
+    var modo = (pasta ? "pasta" : "zip") + (compacto ? " · compacta" : " · completa");
+    evento("inicio", modo);
     var saidaDe = function (f) { return plano[f.nome] || f.nome; };
     var linhas = cfg.faixas.map(function (f) { return { nome: saidaDe(f), estado: "fila", txt: f.patch ? "traduzir" : plano[f.nome] ? "converter" : "copiar" }; });
     linhas.push({ nome: "disc.gdi", estado: "fila", txt: "criar" });
@@ -306,10 +316,12 @@
       progresso(1, "Pronto em " + mmss((Date.now() - relogio.inicio) / 1000));
       mensagem("", "");
       concluir(cfg, destinoPasta ? null : resultados, pacote);
+      evento("concluido", modo + " · " + Math.round((Date.now() - relogio.inicio) / 60000) + " min");
     } catch (e) {
       progresso(null);
       mensagem("erro", esc(e && e.message ? e.message : String(e)) + (e && (e.codigo === "checksum" || e.codigo === "compacto") ? "" : " Se o problema continuar, use o patch .dcp na página do jogo."));
       btnGerar.disabled = false;
+      evento("erro-geracao", modo + " · " + String(e && e.message || e).slice(0, 120));
     } finally {
       estado.ocupado = false; raiz.classList.remove("p-trabalhando");
       window.removeEventListener("beforeunload", segurar);

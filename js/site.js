@@ -3,6 +3,29 @@
 (function () {
   "use strict";
   var D = window.MOG || { traducoes: [], apoio: {}, contato: {} };
+
+  /* ---------- métricas (GoatCounter: sem cookies, sem dados pessoais) ----------
+     mogEvento("patcher-concluido/shenmue2/disco-1", "detalhe") vira um evento no painel do GoatCounter.
+     O script do contador carrega de forma assíncrona; se ainda não chegou, tenta de novo por alguns segundos. */
+  window.mogEvento = function (caminho, titulo, tentativa) {
+    try {
+      var gc = window.goatcounter;
+      if (gc && typeof gc.count === "function") { gc.count({ path: caminho, title: String(titulo || caminho).slice(0, 200), event: true }); return; }
+      if ((tentativa || 0) < 10) setTimeout(function () { window.mogEvento(caminho, titulo, (tentativa || 0) + 1); }, 1000);
+    } catch (e) { /* métricas nunca atrapalham o site */ }
+  };
+  var slug = function (t) { return String(t || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); };
+  window.mogSlug = slug;
+  // cliques em downloads e doações, em qualquer página
+  document.addEventListener("click", function (ev) {
+    var a = ev.target.closest("a[href], [data-copiar]"); if (!a) return;
+    var jogo = document.body.getAttribute("data-jogo") || "geral", h = a.getAttribute("href") || "";
+    if (a.hasAttribute("data-baixar")) return; // esse botão só abre a janela de doação; o download conta no botão de dentro dela
+    if (/\/releases\/download\//.test(h)) window.mogEvento("download-dcp/" + slug(h.split("/").pop().replace(/\.dcp$/i, "")), "Download do .dcp: " + h.split("/").pop());
+    else if (/drive\.google\.com/.test(h)) window.mogEvento("download-espelho/" + jogo, "Download pelo espelho (Google Drive)");
+    else if (/itch\.io/.test(h)) window.mogEvento("doacao-itch/" + jogo, "Clique em doar pelo itch.io");
+    else if (/^pix-/.test(a.getAttribute("data-copiar") || "")) window.mogEvento("doacao-pix-copiar/" + jogo, "Copiou a chave ou o código Pix");
+  }, true);
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
   var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
