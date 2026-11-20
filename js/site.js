@@ -248,7 +248,7 @@
   function cardJogo(t) {
     var d = t.discos.filter(function (x) { return estadoDisco(x) === "andamento"; })[0] || t.discos[0];
     var e = estadoJogo(t), olho, linha;
-    if (e === "ok") { olho = "Tradução completa"; linha = resumoJogo(t); }
+    if (e === "ok") { olho = t.dublado ? "Traduzido e dublado" : "Tradução completa"; linha = resumoJogo(t); }
     else if (ultimoLancado(t)) { olho = "Lançamento parcial"; linha = resumoJogo(t); }
     else { olho = e === "pendente" ? "Em breve" : "Em produção"; linha = t.chamada ? esc(t.chamada) : esc(d.nome) + ": " + (estadoDisco(d) === "andamento" ? "em andamento" : "na fila"); }
     return '<a class="proximo' + (e === "ok" ? " proximo--ok" : "") + '" href="' + esc(t.pagina) + '">' + (t.capa ? '<img src="' + esc(t.capa) + '" alt="" loading="lazy">' : "") +
@@ -270,9 +270,9 @@
       topo = '<div class="destaque-completo">' +
         '<a class="dc-capa" href="' + esc(j.pagina) + '" aria-label="' + esc(j.titulo) + '">' +
           (j.capa ? '<img src="' + esc(j.capa) + '" alt="Capa da tradução de ' + esc(j.titulo) + '" width="1200" height="750">' : '<span class="titulo-capa">' + esc(j.titulo) + "</span>") +
-          '<span class="dc-selo">100% em português</span></a>' +
+          '<span class="dc-selo">' + (j.dublado ? "Traduzido e dublado" : "100% em português") + '</span></a>' +
         '<div class="stack dc-texto">' +
-          '<span class="eyebrow">Tradução completa</span>' +
+          '<span class="eyebrow">' + (j.dublado ? "Tradução e dublagem completas" : "Tradução completa") + '</span>' +
           "<h2>" + esc(j.titulo) + "</h2>" +
           '<div class="jogo-meta"><span class="tag tag--plat">' + esc(j.plataforma) + '</span><span class="tag">' + esc(j.ano) + '</span><span class="tag">' + (n > 1 ? n + " discos" : "1 disco") + (v && v.versao ? " · v" + esc(v.versao) : "") + "</span></div>" +
           '<p class="muted">' + esc(j.resumo) + "</p>" +

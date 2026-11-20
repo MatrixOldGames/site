@@ -402,3 +402,8 @@ div.prose { display: grid; gap: 1em; }
 .galeria--wide .g-minis button { width: 112px; aspect-ratio: 16 / 9; }
 .codigo { margin: 0; font-family: var(--f-mono); font-size: var(--s-2); line-height: 1.6; color: var(--yellow); background: var(--bg); border: 1px solid var(--line); padding: .8rem 1rem; overflow-x: auto; white-space: pre; }
 .ws-codigo { display: grid; gap: .75rem; justify-items: start; }
+
+/* dublagem */
+.tag--dub { background: var(--green); color: #07160D; border-color: var(--green); }
+.dublagem { border-top: 3px solid var(--green); }
+.dublagem .eyebrow { color: var(--green); }

@@ -416,7 +416,6 @@ window.MOG = {
       ano: 2001,
       tradutor: "MatrixHK",
       capa: "assets/jogos/pso2/pso2-capa.jpg",
-      destaque: true,    // aparece em destaque na página inicial (só um jogo por vez)
       resumo: "Ragol em português: missões offline, falas da Pioneer 2, itens, Word Select e menus traduzidos, e o jogo funcionando de verdade em widescreen.",
       chamada: "",   // texto curto opcional para o card da página inicial
       base: { regiao: "USA (NTSC-U)", versao: "v1.004", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
@@ -524,19 +523,130 @@ window.MOG = {
       ano: 2000,
       tradutor: "MatrixHK",
       capa: "assets/jogos/grandia2/grandia2-capa.jpg",
-      resumo: "O clássico RPG da Game Arts em português: diálogos da história, menus, itens, golpes e magias. Tradução em andamento.",
-      chamada: "",
+      destaque: true,    // aparece em destaque na página inicial (só um jogo por vez)
+      dublado: true,     // tem dublagem em PT-BR (aparece no destaque e nos cards)
+      resumo: "Traduzido e dublado: a primeira tradução da Matrix Old Games com vozes em português. Toda a história, menus, itens e batalhas em PT-BR, e o jogo em widescreen.",
+      chamada: "",   // texto curto opcional para o card da página inicial
       base: { regiao: "USA (NTSC-U)", versao: "v1.001", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
       itch: "",
       ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
       compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
+      jornada: {
+        titulo: "O caminho até aqui",
+        intro: "Em 15 dias, da primeira análise do disco ao teste final no Dreamcast, Ryudo, Elena e Millenia aprenderam a falar português. E não só nas legendas: pela primeira vez numa tradução da Matrix Old Games, o jogo inteiro ganhou vozes no nosso idioma. Cada cena da história, cada grito de batalha e cada golpe especial agora soam em PT-BR, e a aventura ainda passou a ocupar a tela inteira em widescreen.",
+        numeros: [
+          ["230 mil", "palavras traduzidas"],
+          ["254", "cenários com todas as falas, de Carbo ao Espaço Negro"],
+          ["900+", "falas dubladas, com 27 vozes diferentes"],
+          ["6", "vídeos em CG com vozes em português"],
+          ["85", "gritos de golpes especiais dublados"],
+          ["517", "itens, golpes, magias e habilidades com nome e descrição em português"],
+          ["212", "inimigos e ataques traduzidos"],
+          ["30+", "imagens recriadas: título, mapa-múndi, minigames, batalha, créditos e a tela final"],
+          ["7.700", "imagens revisadas, uma a uma, em busca de texto"],
+          ["288", "arquivos do jogo alterados"],
+          ["16:9", "widescreen: logos, título, transições e telas pretas de ponta a ponta"],
+          ["15", "dias, da análise do disco à versão 1.0"]
+        ],
+        nota: "",
+        texto: [
+          "Feito por fã, para fãs. Boa jornada, Geohound!"
+        ]
+      },
+      // seção "widescreen" da página: galeria 16:9 (sem código: no Flycast basta ativar a opção Widescreen)
+      widescreen: {
+        prints: [
+          { antes: "assets/jogos/grandia2/grandia2-ws-01-en.jpg", depois: "assets/jogos/grandia2/grandia2-ws-01-pt.jpg", mini: "assets/jogos/grandia2/grandia2-ws-01-mini.jpg", legenda: "Logo da Game Arts em tela cheia" },
+          { antes: "assets/jogos/grandia2/grandia2-ws-02-en.jpg", depois: "assets/jogos/grandia2/grandia2-ws-02-pt.jpg", mini: "assets/jogos/grandia2/grandia2-ws-02-mini.jpg", legenda: "Tela de título de ponta a ponta" },
+          { antes: "assets/jogos/grandia2/grandia2-ws-03-en.jpg", depois: "assets/jogos/grandia2/grandia2-ws-03-pt.jpg", mini: "assets/jogos/grandia2/grandia2-ws-03-mini.jpg", legenda: "Transições cobrem a tela inteira" },
+          { antes: "assets/jogos/grandia2/grandia2-ws-04-en.jpg", depois: "assets/jogos/grandia2/grandia2-ws-04-pt.jpg", mini: "assets/jogos/grandia2/grandia2-ws-04-mini.jpg", legenda: "Telas escuras sem faixas laterais" }
+        ]
+      },
+      traduzido: {
+        "GD-ROM": [
+          "Todas as falas da história, NPCs, lojas, placas e nomes de lugares",
+          "Tela de título, menus de campo, status, equipamentos, táticas, opções, salvar/carregar e mensagens do VMU",
+          "Itens, equipamentos, golpes, magias, habilidades e suas descrições",
+          "Batalha: comandos, barra de IP (ESPERA / AÇÃO), resultados, tutorial e nomes dos inimigos e dos ataques",
+          "Imagens com texto: mapa-múndi, minigames (nozes e queda de braço), \"Um... ano depois\", \"Fim\", \"Carregando...\" e créditos da abertura",
+          "Dublagem: todas as cenas faladas da história, falas de batalha, vitória e fuga, gritos dos golpes especiais e os vídeos em CG com fala",
+          "Acentuação completa, capa do disco para o GDEMU e tela do VMU com o selo PT-BR"
+        ]
+      },
+      observacoes: [
+        "Aplique sempre sobre a imagem ORIGINAL. Aplicar sobre uma imagem já modificada pode dar erro ou travar o jogo.",
+        "Nomes próprios ficaram em inglês, como no original (Ryudo, Elena, Millenia, Granas, Valmar, Geohound, Granacliffs, Skyway...). Lugares, itens, golpes e magias foram traduzidos.",
+        "Algumas siglas de status ficaram em inglês (HP, MP, SP, ATK, DEF, MOV...), assim como o COM da barra de IP.",
+        "A canção da Elena, os rosnados de monstros, os sons sem idioma e o vídeo CG04 (só gritos) mantêm o áudio original.",
+        "Os créditos finais do jogo ficam em inglês.",
+        "Widescreen: no Flycast, ative a opção Widescreen do emulador. No Dreamcast, o jogo continua em 4:3 normalmente. Numa cena do começo do jogo, o céu pintado de fundo é uma imagem 4:3, e em 16:9 as laterais repetem a própria pintura.",
+        "A tela \"Produced by or under license from SEGA\" é do console e fica em inglês em todas as versões oficiais.",
+        "As vozes em português foram criadas para este projeto."
+      ],
       discos: [
-        { nome: "GD-ROM", versao: "", etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
+        // patcher online: só a versão mais recente (bloco gerado a partir do resumo.json do mog_gerar_patch.py)
+        {
+          nome: "GD-ROM", versao: "1.0",
+          etapas: { menus: "ok", dialogos: "ok", testes: "ok" },
+          download: "https://github.com/MatrixOldGames/traducoes/releases/download/grandia2_v1.0/GRANDIA2_PTBR_1.0.dcp",
+          espelho: "",
+          patcher: {
+            pasta: "Grandia II PT-BR",
+            gdi: "5\n1 0 4 2352 track01.bin 0\n2 756 0 2352 track02.raw 0\n3 45000 4 2352 track03.bin 0\n4 50043 0 2352 track04.raw 0\n5 50644 4 2352 track05.bin 0\n",
+            faixas: [
+              { nome: "track01.bin", tamanho: 1425312, md5: "cf71233b825358b1a7f4037aee98987c", patch: "patches/grandia2/disco1-v1.0/track01.xdelta", tamanhoFinal: 1425312 },
+              { nome: "track02.raw", tamanho: 1237152 },
+              { nome: "track03.bin", tamanho: 11456592, patch: "patches/grandia2/disco1-v1.0/track03.xdelta", tamanhoFinal: 11508336 },
+              { nome: "track04.raw", tamanho: 1060752 },
+              { nome: "track05.bin", tamanho: 1172537856, patch: ["patches/grandia2/disco1-v1.0/track05.xdelta.parte1", "patches/grandia2/disco1-v1.0/track05.xdelta.parte2", "patches/grandia2/disco1-v1.0/track05.xdelta.parte3", "patches/grandia2/disco1-v1.0/track05.xdelta.parte4", "patches/grandia2/disco1-v1.0/track05.xdelta.parte5", "patches/grandia2/disco1-v1.0/track05.xdelta.parte6"], tamanhoFinal: 1172486112 }
+            ]
+          }
+        }
+      ],
+      prints: [
+        { antes: "assets/jogos/grandia2/grandia2-01-en.jpg", depois: "assets/jogos/grandia2/grandia2-01-pt.jpg", mini: "assets/jogos/grandia2/grandia2-01-mini.jpg", legenda: "Tela de título" },
+        { antes: "assets/jogos/grandia2/grandia2-02-en.jpg", depois: "assets/jogos/grandia2/grandia2-02-pt.jpg", mini: "assets/jogos/grandia2/grandia2-02-mini.jpg", legenda: "Ryudo, legendado e dublado" },
+        { antes: "assets/jogos/grandia2/grandia2-03-en.jpg", depois: "assets/jogos/grandia2/grandia2-03-pt.jpg", mini: "assets/jogos/grandia2/grandia2-03-mini.jpg", legenda: "Diálogos da história" },
+        { antes: "assets/jogos/grandia2/grandia2-04-en.jpg", depois: "assets/jogos/grandia2/grandia2-04-pt.jpg", mini: "assets/jogos/grandia2/grandia2-04-mini.jpg", legenda: "Itens e descrições" },
+        { antes: "assets/jogos/grandia2/grandia2-05-en.jpg", depois: "assets/jogos/grandia2/grandia2-05-pt.jpg", mini: "assets/jogos/grandia2/grandia2-05-mini.jpg", legenda: "Opções" },
+        { antes: "assets/jogos/grandia2/grandia2-06-en.jpg", depois: "assets/jogos/grandia2/grandia2-06-pt.jpg", mini: "assets/jogos/grandia2/grandia2-06-mini.jpg", legenda: "Status e equipamentos" },
+        { antes: "assets/jogos/grandia2/grandia2-07-en.jpg", depois: "assets/jogos/grandia2/grandia2-07-pt.jpg", mini: "assets/jogos/grandia2/grandia2-07-mini.jpg", legenda: "Salvar no VMU" },
+        { antes: "assets/jogos/grandia2/grandia2-08-en.jpg", depois: "assets/jogos/grandia2/grandia2-08-pt.jpg", mini: "assets/jogos/grandia2/grandia2-08-mini.jpg", legenda: "Resultado da batalha" }
+      ],
+      changelog: [
+        { versao: "1.0", data: "20/11/2026", notas: [
+          "Primeira versão: todas as falas da história, NPCs, lojas, placas, menus, itens, golpes, magias, habilidades e batalha em português",
+          "Dublagem completa em PT-BR: cenas da história, falas e gritos de batalha e os vídeos em CG com fala, com 27 vozes",
+          "Imagens com texto recriadas: título, mapa-múndi, minigames, batalha, créditos da abertura e a tela final",
+          "Widescreen (16:9): logos, tela de título, transições e telas pretas preenchem a tela toda",
+          "Capa do GDEMU e tela do VMU com o selo PT-BR"
+        ] }
+      ]
+    },
+    {
+      id: "skies",
+      pagina: "skies.html",
+      titulo: "Skies of Arcadia",
+      plataforma: "Dreamcast",
+      ano: 2000,
+      tradutor: "MatrixHK",
+      capa: "assets/jogos/skies/skies-capa.jpg",
+      resumo: "A aventura dos piratas do céu em português: história, menus, itens e batalhas. Tradução em andamento.",
+      chamada: "",
+      base: { regiao: "USA (NTSC-U)", versao: "v1.002", formato: "GDI ou CUE/BIN (Redump), original e sem modificações", hash: "" },
+      itch: "",
+      ferramenta: { nome: "Universal Dreamcast Patcher", url: "https://github.com/DerekPascarella/UniversalDreamcastPatcher" },
+      guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
+      compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
+      discos: [
+        { nome: "Disco 1", versao: "", etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
+        { nome: "Disco 2", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
       changelog: []
     }
+
 
   ]
 };
