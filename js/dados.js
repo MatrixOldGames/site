@@ -26,6 +26,7 @@ window.MOG = {
   // apoiadores: aparecem na página "Apoiadores". "nota" é opcional (canal, grupo, apelido)
   apoiadores: [
     { nome: "Adriano Andrade dos Santos" },
+    { nome: "Alexandre Cristiano Gonçalves" },
     { nome: "André Oliveira da Cruz" },
     { nome: "Dan Carvalho" },
     { nome: "Davi Damasceno Vieira Rosa" },
