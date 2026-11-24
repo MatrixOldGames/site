@@ -642,7 +642,7 @@ window.MOG = {
       guia: { nome: "guia de patches do ConsoleMods", url: "https://consolemods.org/wiki/Dreamcast:Applying_ROM_Patches" },
       compativel: "Dreamcast com GDEMU, MODE ou USB-GDROM, e emuladores como Flycast e Redream.",
       discos: [
-        { nome: "Disco 1", versao: "", etapas: { menus: "andamento", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" },
+        { nome: "Disco 1", versao: "", etapas: { menus: "ok", dialogos: "andamento", testes: "pendente" }, download: "", espelho: "" },
         { nome: "Disco 2", versao: "", etapas: { menus: "pendente", dialogos: "pendente", testes: "pendente" }, download: "", espelho: "" }
       ],
       prints: [],
