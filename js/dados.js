@@ -34,6 +34,7 @@ window.MOG = {
     { nome: "Gustavo de Abreu Pinheiro" },
     { nome: "Marcelo Pereira da Silva" },
     { nome: "Pablo Rodrigues Machado" },
+	{ nome: "Oscar Fabiano Gerhardt Lotti" },
     { nome: "Romulo Gonçalves da Silva Andrade" },
     { nome: "Ricardo Ravi", nota: "Dreamcast Nostalgia" },
     { nome: "Thiago Usley Silva de Oliveira" },
